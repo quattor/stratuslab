@@ -13,6 +13,7 @@
 
   <modules>
     <module>one</module>
+    <module>ncm-oned</module>
   </modules>
 
   <build>
