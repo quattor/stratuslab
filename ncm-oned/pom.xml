@@ -85,6 +85,30 @@
 
       <plugin>
 	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>exec-maven-plugin</artifactId>
+	<executions>
+
+	  <execution>
+	    <id>pod2man</id>
+	    <phase>compile</phase>
+	    <goals>
+              <goal>exec</goal>
+	    </goals>
+	    <configuration>
+	      <executable>pod2man</executable>
+	      <workingDirectory>${project.build.directory}/output</workingDirectory>
+	      <arguments>
+	        <argument>--section=8</argument>
+		<argument>${COMP}.pod</argument>
+		<argument>${COMP}.8</argument>
+	      </arguments>
+	    </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
 	<artifactId>rpm-maven-plugin</artifactId>
 	<configuration>
 	  <summary>ncm-oned</summary>
@@ -105,15 +129,47 @@ This provides a Quattor Configuration Module for the OpenNebula daemon
  	  <mappings>
 
 	    <mapping>
-	      <directory>/usr/bin</directory>
+	      <directory>/usr/share/doc/pan-templates/namespaces/components/${artifactId}</directory>
+	      <filemode>644</filemode>
+	      <username>root</username>
+	      <groupname>root</groupname>
+	      <documentation>true</documentation>
+	      <sources>
+		<source>
+		  <location>target/output/</location>
+		  <includes>
+		    <include>*.pan</include>
+		  </includes>
+		</source>
+	      </sources>
+	    </mapping>
+
+	    <mapping>
+	      <directory>/usr/lib/perl/NCM/Component/${COMP}</directory>
 	      <filemode>755</filemode>
 	      <username>root</username>
 	      <groupname>root</groupname>
 	      <sources>
 		<source>
-		  <location>target/one-install/bin</location>
+		  <location>target/output/</location>
 		  <includes>
-		    <include>**/*</include>
+		    <include>*.pm</include>
+		  </includes>
+		</source>
+	      </sources>
+	    </mapping>
+
+	    <mapping>
+	      <directory>/usr/share/man/man8</directory>
+	      <filemode>644</filemode>
+	      <username>root</username>
+	      <groupname>root</groupname>
+	      <documentation>true</documentation>
+	      <sources>
+		<source>
+		  <location>target/output/</location>
+		  <includes>
+		    <include>*.8</include>
 		  </includes>
 		</source>
 	      </sources>
