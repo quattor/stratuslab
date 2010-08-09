@@ -1,0 +1,162 @@
+################################################################################
+#
+# VERSION:    @VERSION@, @DATE@
+# AUTHOR:     @AUTHOR@
+# MAINTAINER: @MAINTAINER@
+# LICENSE:    @LICENSE@
+#
+################################################################################
+# Coding style: emulate <TAB> characters with 4 spaces, thanks!
+################################################################################
+
+=pod
+
+=head1 DESCRIPTION
+
+The I<@COMP@> component manages the configuration of an 
+OpenNebula server.
+
+=head1 CONFIGURATION PARAMETERS
+
+The base path for all of the configuration parameters is
+    /software/components/@COMP@.  The following sections describe the
+    elements that are permitted directly below this base path.  With
+    further parameters described in each section.  Each parameter is
+    marked as optional (O) or required (R).  Required parameters may
+    also have a default value given like this (R 300), meaning a
+    required parameter with a default value of 300.
+
+=head2 location (R '/srv/cloud/one')
+
+This string defines the root of the OpenNebula installation.  This
+    must be consistent with the package used to install OpenNebula. 
+
+=head2 daemon
+
+This is an nlist that provides general parameters for the OpenNebula
+    daemon. 
+
+=over 4
+
+=item * HOST_MONITORING_INTERVAL (R 600): Time in seconds between
+    monitoring probes of the hosts. 
+
+=item * VM_POLLING_INTERVAL (R 600): Time in seconds between
+    monitoring probes of the virtual machines.  (Use 0 to disable VM
+    monitoring.) 
+
+=item * VM_DIR (R): Remote path to store the VM images.  It must be
+    shared between all hosts to perform life migrations.
+
+=item * PORT (R 2633): XMLRPC port for the server.
+
+=item * VNC_BASE_PORT (R 5000): Virtual network controller ports for
+    VMs are set to this value plus the VMID (VM identifier).
+
+=item * DEBUG_LEVEL (R 3): Level for filtering logging message.
+    ERROR=0, WARNING=1, INFO=2, and DEBUG=3.
+
+=back
+
+=head2 db
+
+This nlist contains the configuration parameters for the database.
+
+=over 4
+
+=item * 
+
+=item * backend (R sqlite): Database to use.  Must be 'sqlite' or
+ 'mysql'.
+=item * server (O): MySQL host name.  Required if MySQL is used.
+
+=item * user (O): MySQL user name.  Required if MySQL is used.
+
+=item * passwd (O): MySQL password.  Required if MySQL is used.
+
+=item * db_name (O): MySQL database name.  Required if MySQL is used.
+
+=back 
+
+=head2 network
+
+This nlist contains parameters related to the network configuration. 
+
+=over 4
+
+=item * NETWORK_SIZE (R 254): The default size of virtual networks.
+
+=item * MAC_PREFIX (R '02:00'): The default MAC prefix to be used to
+    create auto-generated MAC addresses.
+
+=back
+
+=head2 image_repos
+
+This nlist contains parameters related to the image repository.
+
+=over 4
+
+=item * IMAGE_REPOSITORY_PATH (R): Location of the image repository.
+
+=item * DEFAULT_IMAGE_TYPE (R 'OS'): This can take the following
+    values: OS=image file hold operating system, CDROM=image file with
+    CDROM, DATABLOCK=image file with datablock, always created emtpy.
+
+=item * DEFAULT_DEVICE_PREFIX (R 'hd'): Can be set to the following
+    values: hd=IDE prefix, sd=SCSI prefix, xvd=XEN Virtual Disk,
+    vd=KVM Virtual Disk. 
+
+=back
+
+=head2 mads
+
+This nlist holds the definitions of MADs (plug-ins).  The key provides
+    the name of the MAD.  The values are all nlists with the following
+    parameters.  Not all parameters are valid with all types of MADs. 
+
+=over 4
+
+=item * manager (R): The type of the driver.  The values can be: IM,
+    VM, TM, HM, or AUTHM.  NOTE: One one instance of the HM and AUTHM
+    drivers should be defined.  This constraint is not currently
+    enforced by the schema.
+
+=item * executable (R): Path of the driver executable.
+
+=item * arguments (R): Arguments for the driver executable.
+
+=item * default (O): Required for manager='VM'.  A file containing the
+    default values and configuration parameters.
+
+=item * type (O): Required for manager='VM'.  The supported driver
+    type: xen, kvm, or xml. 
+
+=back
+
+=head2 hooks
+
+This nlist holds the definitions of hook scripts to execute at various
+    points in the virtual machine lifecycle.  The key provides the
+    name of the hook.  The values are all nlists with the following
+    parameters. 
+
+=over 4
+
+=item * on (R): The stage at which the hook script should be
+    executed. This can take the following values: CREATE, RUNNING,
+    SHUTDOWN, STOP, or DONE. 
+
+=item * command (R): Use an absolute path for the hook script
+    location.
+
+=item * arguments (R): For the hook script.  You can access VM
+    template variables with $ATTR.  For example, you can use $VMID. 
+
+=item * remote (R 'NO'):  Whether the hook is executed on the host
+    running the VM.  The default ('NO') is to run the script on the
+    OpenNebula server.
+
+=back
+
+=cut
