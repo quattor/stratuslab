@@ -16,8 +16,8 @@ type structure_daemon = {
     'HOST_MONITORING_INTERVAL' : long(1..) = 600
     'VM_POLLING_INTERVAL' : long(0..) = 600
     'VM_DIR' : string
-    'PORT' : port = 2633
-    'VNC_BASE_PORT' : port = 5000
+    'PORT' : type_port = 2633
+    'VNC_BASE_PORT' : type_port = 5000
     'DEBUG_LEVEL' : long(0..3) = 3
 };
 
@@ -30,10 +30,10 @@ type structure_db = {
 } with {
     SELF['backend'] != 'mysql' ||
       (
-        defined(SELF['server']) &&
-        defined(SELF['user']) &&
-        defined(SELF['passwd']) &&
-        defined(SELF['db_name'])
+        is_defined(SELF['server']) &&
+        is_defined(SELF['user']) &&
+        is_defined(SELF['passwd']) &&
+        is_defined(SELF['db_name'])
       )
 };
 
@@ -51,17 +51,17 @@ type structure_image_repos = {
 type structure_mad = {
     'manager' : string with match(SELF, 'IM|VM|TM|HM|AUTHM')
     'executable' : string
-    'arguments' : string
+    'arguments' ? string
     'default' ? string
     'type' ? string with match(SELF, 'xen|kvm|xml')
 } with {
     (SELF['manager'] == 'VM' && 
-     defined(SELF['default']) &&
-     defined(SELF['type']))
+     is_defined(SELF['default']) &&
+     is_defined(SELF['type']))
     ||
     (SELF['manager'] != 'VM' && 
-     !defined(SELF['default']) &&
-     !defined(SELF['type']))
+     !is_defined(SELF['default']) &&
+     !is_defined(SELF['type']))
 };
 
 type structure_hook = {
