@@ -63,7 +63,7 @@ sub writeMad {
     my (%pairs) = %{$_[0]};
     my $name = $_[1];
 
-    my $label = $pairs{'type'} . '_MAD';
+    my $label = $pairs{'manager'} . '_MAD';
 
     my @entries;
     push @entries, '    name = ' . $name;

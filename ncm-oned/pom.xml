@@ -148,10 +148,11 @@ This provides a Quattor Configuration Module for the OpenNebula daemon
 	    </mapping>
 
 	    <mapping>
-	      <directory>/usr/lib/perl/NCM/Component/${COMP}</directory>
+	      <directory>/usr/lib/perl/NCM/Component</directory>
 	      <filemode>755</filemode>
 	      <username>root</username>
 	      <groupname>root</groupname>
+	      <directoryIncluded>false</directoryIncluded>
 	      <sources>
 		<source>
 		  <location>target/output/</location>
