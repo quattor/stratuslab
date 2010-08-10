@@ -6,8 +6,6 @@
 # LICENSE:    @LICENSE@
 #
 ################################################################################
-# Coding style: emulate <TAB> characters with 4 spaces, thanks!
-################################################################################
 declaration template components/@COMP@/schema;
 
 include {'quattor/schema'};

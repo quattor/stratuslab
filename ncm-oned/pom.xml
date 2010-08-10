@@ -52,10 +52,6 @@
 
 	<configuration>
 	  <encoding>UTF-8</encoding>
-	  <delimiters>
-	    <delimiter>${*}</delimiter>
-	    <delimiter>@</delimiter>
-	  </delimiters>
 	</configuration>
 	
 	<executions>
@@ -68,7 +64,6 @@
 
 	    <configuration>
 	      <delimiters>
-		<delimiter>${*}</delimiter>
 		<delimiter>@</delimiter>
 	      </delimiters>
 	      <outputDirectory>${project.build.directory}/output</outputDirectory>
