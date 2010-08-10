@@ -37,7 +37,7 @@ sub writeKeyValuePairs {
     my @entries;
     foreach my $k (sort keys %pairs) {
         my $v = quoteValue($pairs{$k});
-        push @entries, $k . ' = ' . $v;
+        push @entries, $k . '=' . $v;
     }
 
     $_[1] .= join("\n", @entries) . "\n";
@@ -50,12 +50,12 @@ sub writeDatabaseParams {
     my @entries;
     foreach my $k (sort keys %pairs) {
         my $v = quoteValue($pairs{$k});
-        push @entries, '    ' . $k . ' = ' . $v;
+        push @entries, $k . '=' . $v;
     }
 
-    $_[1] .= "DB =\n  [\n";
-    $_[1] .= join(",\n", @entries);
-    $_[1] .= "\n  ]\n";
+    $_[1] .= "DB=[ ";
+    $_[1] .= join(",\n    ", @entries);
+    $_[1] .= " ]\n";
 }
 
 # Write a single MAD definition.  
@@ -66,17 +66,17 @@ sub writeMad {
     my $label = $pairs{'manager'} . '_MAD';
 
     my @entries;
-    push @entries, '    name = ' . $name;
+    push @entries, 'name="' . $name . '"';
     foreach my $k (sort keys %pairs) {
-        if ($k ne 'type') {
+        if ($k ne 'manager') {
             my $v = quoteValue($pairs{$k});
-            push @entries, '    ' . $k . ' = ' . $v;
+            push @entries, $k . '=' . $v;
         }
     }
 
-    $_[2] .= $label . " =\n  [\n";
-    $_[2] .= join(",\n", @entries);
-    $_[2] .= "\n  ]\n\n";
+    $_[2] .= $label . "=[ ";
+    $_[2] .= join(",\n    ", @entries);
+    $_[2] .= " ]\n\n";
 }
 
 # Process a hash of MAD definitions.
@@ -96,15 +96,15 @@ sub writeHook {
     my $name = $_[1];
 
     my @entries;
-    push @entries, '    name = ' . $name;
+    push @entries, 'name="' . $name . '"';
     foreach my $k (sort keys %pairs) {
         my $v = quoteValue($pairs{$k});
-        push @entries, '    ' . $k . ' = ' . $v;
+        push @entries, $k . '=' . $v;
     }
 
-    $_[2] .= "VM_HOOK =\n  [\n";
-    $_[2] .= join(",\n", @entries);
-    $_[2] .= "\n  ]\n\n";
+    $_[2] .= "VM_HOOK=[ ";
+    $_[2] .= join(",\n    ", @entries);
+    $_[2] .= " ]\n\n";
 }
 
 # Process a hash of hook definitions.
