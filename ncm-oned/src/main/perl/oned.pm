@@ -15,7 +15,9 @@ use NCM::Component;
 use EDG::WP4::CCM::Property;
 use NCM::Check;
 use FileHandle;
+use File::Basename;
 
+use CAF::FileWriter;
 use LC::File qw (makedir);
 
 use constant PATH => '/software/components/@COMP@';
@@ -123,10 +125,13 @@ sub Configure {
 
     my $t = $config->getElement(PATH)->getTree;
 
-    # First retrieve the installation location and determine
-    # configuration file location.
-    my $location = $t->{'location'};
-    my $file = $location . '/etc/oned.conf';
+    # First retrieve the configuration file location.
+    my $oned_config = $t->{'oned_config'};
+    my $config_dir = basename($oned_config);
+    if (!makedir($config_dir, 0755)) {
+        $self->error("Failed to create configuration directory: $config_dir");
+        return;
+    }
 
     # Accumulate the configuration in a string.
     my $contents = 
@@ -161,9 +166,9 @@ sub Configure {
     processHooks(\%pairs, $contents);
 
     # Write out the contents of the configuration file.
-    open(FH, ">" . $file);
-    print FH $contents;
-    close(FH);
+    my $fh = CAF::FileWriter->open("$oned_config");
+    print $fh $contents;
+    $fh->close();
 
     return 1;
 }

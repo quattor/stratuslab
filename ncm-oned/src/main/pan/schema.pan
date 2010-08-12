@@ -73,7 +73,7 @@ type structure_hook = {
 
 type structure_component_@COMP@ = {
     include structure_component
-    'location' : string = '/srv/cloud/one'
+    'oned_config' : string = '/etc/one/oned.conf'
     'daemon' : structure_daemon = nlist()
     'db' : structure_db = nlist()
     'network' : structure_one_network = nlist()
