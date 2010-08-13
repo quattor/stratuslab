@@ -18,6 +18,7 @@ use FileHandle;
 use File::Basename;
 
 use CAF::FileWriter;
+use CAF::Process;
 use LC::File qw (makedir);
 
 use constant PATH => '/software/components/@COMP@';
@@ -120,6 +121,11 @@ sub processHooks {
 
 }
 
+# Restart the process.
+sub restartDaemon {
+    CAF::Process->new([qw(/etc/init.d/oned restart)], log => $self)->run();
+}
+
 sub Configure {
     my ($self, $config) = @_;
 
@@ -168,7 +174,10 @@ sub Configure {
     # Write out the contents of the configuration file.
     my $fh = CAF::FileWriter->open("$oned_config");
     print $fh $contents;
-    $fh->close();
+    my $config_changed = $fh->close();
+
+    # If configuration has changed restart the service.
+    restartDaemon() if ($config_changed);
 
     return 1;
 }
