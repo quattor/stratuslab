@@ -18,7 +18,7 @@ use FileHandle;
 use File::Basename;
 
 use CAF::FileWriter;
-use CAF::Process
+use CAF::Process;
 use LC::File qw (makedir);
 
 use constant PATH => '/software/components/@COMP@';
