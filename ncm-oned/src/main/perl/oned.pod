@@ -26,10 +26,9 @@ The base path for all of the configuration parameters is
     also have a default value given like this (R 300), meaning a
     required parameter with a default value of 300.
 
-=head2 location (R '/srv/cloud/one')
+=head2 oned_config (R '/etc/one/oned.conf')
 
-This string defines the root of the OpenNebula installation.  This
-    must be consistent with the package used to install OpenNebula. 
+This string defines the location of the oned configuration file.
 
 =head2 daemon
 
