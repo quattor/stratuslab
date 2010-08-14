@@ -27,23 +27,41 @@ use constant COMPONENT_NAME => '@COMP@';
 our @ISA = qw (NCM::Component);
 our $EC = LC::Exception::Context->new->will_store_all;
 
-# If the value isn't a number, then quotes are added.
+# Mark what values are not quoted.
+our %unquoted = (
+    'listen_tls' => 1,
+    'listen_tcp' => 1,
+    'mdns_adv' => 1,
+    'tls_no_verify_certificate' => 1,
+    'max_clients' => 1,
+    'min_workers' => 1,
+    'max_workers' => 1,
+    'max_requests' => 1,
+    'max_client_requests' => 1,
+    'log_level' => 1
+);
+
+
+# If the value isn't listed in unquoted hash, quote it.
 sub quoteValue {
-    my ($v) = @_;
-    return (($v =~ /^\d*$/) ? $v :  '"' . $v . '"');    
+    my ($k, $v) = @_;
+    return (($unquoted{$k}) ? $v :  '"' . $v . '"');
 }
 
 # Write out hash as sequence of key/value pairs.
 sub writeKeyValuePairs {
-    my (%pairs) = %{$_[0]};
+    my ($href) = $_[0];
 
-    my @entries;
-    foreach my $k (sort keys %pairs) {
-        my $v = quoteValue($pairs{$k});
-        push @entries, $k . '=' . $v;
+    if ($href) {
+	my %pairs = %{$href};
+	my @entries;
+	foreach my $k (sort keys %pairs) {
+	    my $v = quoteValue($k, $pairs{$k});
+	    push @entries, $k . '=' . $v;
+	}
+	
+	$_[1] .= join("\n", @entries) . "\n";
     }
-
-    $_[1] .= join("\n", @entries) . "\n";
 }
 
 sub listToString {
@@ -52,48 +70,67 @@ sub listToString {
 
 # Write out the authorization parameters.
 sub writeAuthz {
-    my (%pairs) = %{$_[0]};
+    my ($href) = $_[0];
 
-    my $v = $pairs{'tls_no_verify_certificate'};
-    $_[1] .= 'tls_no_verify_certificate=' . $v . "\n" if defined($v);
+    if ($href) {
+	
+	my (%pairs) = %{$href};
 
-    my @entries = @pairs{'tls_allowed_dn_list'};
-    if (defined(@entries)) {
-	my $s = join(' ', @entries);
-	$_[1] .= 'tls_allowed_dn_list="' . $s . "\"\n";
-    }
+	my $k = 'tls_no_verify_certificate';
+	my $v = $pairs{$k};
+	$_[1] .= "$k=" . quoteValue($k, $v) . "\n" if defined($v);
 
-    @entries = @pairs{'sasl_allowed_username_list'};
-    if (defined(@entries)) {
-	my $s = join(' ', @entries);
-	$_[1] .= 'sasl_allowed_username_list="' . $s . "\"\n";
+	$k = 'tls_allowed_dn_list';
+	my $aref = $pairs{$k};
+	if ($aref) {
+	    my @entries = @{$aref};
+	    my $s = join(' ', @entries);
+	    $_[1] .= "$k=\"" . $s . "\"\n";
+	}
+
+	$k = 'sasl_allowed_username_list';
+	$aref = $pairs{$k};
+	if ($aref) {
+	    my @entries = @{$aref};
+	    my $s = join(' ', @entries);
+	    $_[1] .= "$k=\"" . $s . "\"\n";
+	}
     }
 
 }
 
 # Write out the logging parameters.
 sub writeLogging {
-    my (%pairs) = %{$_[0]};
+    my ($href) = $_[0];
 
-    my $v = $pairs{'log_level'};
-    $_[1] .= 'log_level=' . $v . "\n" if defined($v);
+    if ($href) {
+	my (%pairs) = %{$href};
 
-    my @entries = @pairs{'log_filter'};
-    if (defined(@entries)) {
-	my $s = join(' ', @entries);
-	$_[1] .= 'log_filter="' . $s . "\"\n";
+	my $k = 'log_level';
+	my $v = $pairs{$k};
+	$_[1] .= "$k=" . quoteValue($k, $v) . "\n" if defined($v);
+	
+	$k = 'log_filter';
+	my $aref = $pairs{$k};
+	if ($aref) {
+	    my @entries = @{$aref};
+	    my $s = join(' ', @entries);
+	    $_[1] .= "$k=\"" . $s . "\"\n";
+	}
+
+	$k = 'log_outputs';
+	$aref = $pairs{$k};
+	if ($aref) {
+	    my @entries = @{$aref};
+	    my $s = join(' ', @entries);
+	    $_[1] .= "$k=\"" . $s . "\"\n";
+	}
     }
-
-    @entries = @pairs{'log_outputs'};
-    if (defined(@entries)) {
-	my $s = join(' ', @entries);
-	$_[1] .= 'log_outputs="' . $s . "\"\n";
-    }
-
 }
 
 # Restart the process.
 sub restartDaemon {
+    my ($self) = @_;
     CAF::Process->new([qw(/etc/init.d/libvirtd restart)], log => $self)->run();
 }
 
@@ -118,51 +155,36 @@ sub Configure {
         " configuration module\n" . 
         "#\n";
 
-    my %pairs;
+    my $href;
 
     $contents .= "\n# networking parameters\n\n";
-    %pairs = %{$t->{'network'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeKeyValuePairs($t->{'network'}, $contents);
 
     $contents .= "\n# unix socket parameters\n\n";
-    %pairs = %{$t->{'socket'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeKeyValuePairs($t->{'socket'}, $contents);
 
     $contents .= "\n# authentication parameters\n\n";
-    %pairs = %{$t->{'authn'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
-
-    $contents .= "\n# networking parameters\n\n";
-    %pairs = %{$t->{'network'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeKeyValuePairs($t->{'authn'}, $contents);
 
     $contents .= "\n# TLS parameters\n\n";
-    %pairs = %{$t->{'tls'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeKeyValuePairs($t->{'tls'}, $contents);
 
     $contents .= "\n# authorization parameters\n\n";
-    %pairs = %{$t->{'authz'}};
-    writeAuthz(\%pairs, $contents) if (%pairs);
-
-    $contents .= "\n# authorization parameters\n\n";
-    %pairs = %{$t->{'authz'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeAuthz($t->{'authz'}, $contents);
 
     $contents .= "\n# processing control parameters\n\n";
-    %pairs = %{$t->{'processing'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeKeyValuePairs($t->{'processing'}, $contents);
 
     $contents .= "\n# logging parameters\n\n";
-    %pairs = %{$t->{'logging'}};
-    writeKeyValuePairs(\%pairs, $contents) if (%pairs);
+    writeLogging($t->{'logging'}, $contents);
 
     # Write out the contents of the configuration file.
-    my $fh = CAF::FileWriter->open("$oned_config");
+    my $fh = CAF::FileWriter->open("$libvirtd_config");
     print $fh $contents;
     my $config_changed = $fh->close();
 
     # If configuration has changed restart the service.
-    restartDaemon() if ($config_changed);
+    restartDaemon($self) if ($config_changed);
 
     return 1;
 }
