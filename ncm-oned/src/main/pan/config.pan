@@ -1,11 +1,6 @@
-################################################################################
-#
-# VERSION:    @VERSION@, @DATE@
-# AUTHOR:     @AUTHOR@
-# MAINTAINER: @MAINTAINER@
-# LICENSE:    @LICENSE@
-#
-################################################################################
+@BUILD_INFO@
+@LEGAL@
+
 unique template components/@COMP@/config;
 
 include {'components/@COMP@/schema'};
