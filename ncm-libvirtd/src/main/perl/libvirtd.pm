@@ -1,11 +1,5 @@
-################################################################################
-#
-# VERSION:    @VERSION@, @DATE@
-# AUTHOR:     @AUTHOR@
-# MAINTAINER: @MAINTAINER@
-# LICENSE:    @LICENSE@
-#
-################################################################################
+@BUILD_INFO@
+@LEGAL@
 
 package NCM::Component::@COMP@;
 
