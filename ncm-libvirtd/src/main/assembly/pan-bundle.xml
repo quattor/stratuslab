@@ -1,5 +1,5 @@
 <assembly>
-  <id>client-bundle</id>
+  <id>pan-bundle</id>
   
   <includeBaseDirectory>false</includeBaseDirectory>
   
@@ -9,8 +9,13 @@
   
   <fileSets>
     <fileSet>
-      <directory>target/pan</directory>
-      <outputDirectory>${artifactId}</outputDirectory>
+      <directory>target/output</directory>
+      <outputDirectory>components/${COMP}</outputDirectory>
+      <includes>
+	<include>*.pan</include>
+	<include>*.pm</include>
+	<include>*.html</include>
+      </includes>
     </fileSet>
   </fileSets>
   

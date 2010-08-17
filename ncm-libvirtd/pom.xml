@@ -105,6 +105,22 @@
 	      </arguments>
 	    </configuration>
           </execution>
+
+	  <execution>
+	    <id>pod2html</id>
+	    <phase>compile</phase>
+	    <goals>
+              <goal>exec</goal>
+	    </goals>
+	    <configuration>
+	      <executable>pod2html</executable>
+	      <workingDirectory>${project.build.directory}/output</workingDirectory>
+	      <arguments>
+		<argument>--infile=${COMP}.pod</argument>
+		<argument>--outfile=${COMP}.html</argument>
+	      </arguments>
+	    </configuration>
+          </execution>
         </executions>
       </plugin>
 
@@ -182,6 +198,29 @@ This provides a Quattor Configuration Module for the libvirtd daemon.
 	</configuration>
       </plugin>
 
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-assembly-plugin</artifactId>
+	<configuration>
+	  <descriptors>
+	    <descriptor>src/main/assembly/pan-bundle.xml</descriptor>
+	  </descriptors>
+	</configuration>
+	
+	<executions>
+	  
+	  <execution>
+	    <id>bundle</id>
+	    <goals>
+	      <goal>single</goal>
+	    </goals>
+	    <phase>package</phase>
+	  </execution>
+	  
+	</executions>
+	
+      </plugin>
+      
     </plugins>
   </build>
 
