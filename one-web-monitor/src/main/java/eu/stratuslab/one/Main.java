@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		if (args.length != 2) {
 			System.err.println("file and xslt names are required");
@@ -69,6 +69,8 @@ public class Main {
 			System.exit(1);
 		}
 
+		new Server(Protocol.HTTP, 8182, FirstServerResource.class).start();  
+ 
 	}
 
 }

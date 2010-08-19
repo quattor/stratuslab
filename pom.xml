@@ -19,9 +19,19 @@
     </repository>
   </distributionManagement>
 
+  <repositories>
+    <repository>  
+      <id>maven-restlet</id>  
+      <name>Public online Restlet repository</name>  
+      <url>http://maven.restlet.org</url>  
+    </repository>
+  </repositories>
+  
   <modules>
     <module>one</module>
     <module>ncm-oned</module>
+    <module>ncm-libvirtd</module>
+    <module>quattor-cloud-config</module>
   </modules>
 
   <build>
