@@ -9,7 +9,10 @@ include { 'machine-types/nfs' };
 '/software/components/accounts/groups/cloud/gid' = 9000;
 '/software/components/accounts/users/oneadmin' = nlist(
   'uid', 9000,
-  'groups', list('cloud')
+  'groups', list('cloud'),
+  'homeDir', '/home/oneadmin',
+  'createHome', false,
+  'createKeys', false
 );
 
 # Configure libvirtd.

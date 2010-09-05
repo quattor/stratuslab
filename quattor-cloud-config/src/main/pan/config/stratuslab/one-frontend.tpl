@@ -6,7 +6,7 @@ unique template config/stratuslab/one-frontend;
 '/software/packages'=pkg_repl('one','2.0-StratusLab.0.20100813.084828','x86_64');
 
 # StratusLab client commands.
-'/software/packages'=pkg_repl('stratuslab', '0.1-StratusLab.0.20100817.081132', 'noarch');
+'/software/packages'=pkg_repl('stratuslab', '0.1-StratusLab.0.20100819.151632', 'noarch');
 
 # MySQL client is compiled into oned (even if not used directly).
 '/software/packages'=pkg_repl('mysql','5.0.77-4.el5_4.2','x86_64');

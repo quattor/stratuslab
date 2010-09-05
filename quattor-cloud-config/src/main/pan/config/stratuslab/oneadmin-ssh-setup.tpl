@@ -13,7 +13,7 @@ variable SSH_SETUP_SCRIPT =
   'ssh-keygen -f /home/oneadmin/.ssh/id_rsa -t rsa -N '''' -q; ' +
   'cp /home/oneadmin/.ssh/id_rsa.pub /home/oneadmin/.ssh/authorized_keys; ' + 
   'cp /home/oneadmin/.ssh/id_rsa.pub /home/oneadmin/.ssh/authorized_keys2; ' + 
-  'chown oneadmin:cloud /home/oneadmin/.ssh/*';
+  'chown -R oneadmin:cloud /home/oneadmin/.ssh';
 
 #
 # The trigger for the configuration is the ~/.ssh/config file.  Ensure that
