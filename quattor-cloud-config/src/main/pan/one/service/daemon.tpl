@@ -1,7 +1,7 @@
 ${BUILD_INFO}
 ${LEGAL}
 
-unique template config/stratuslab/one-daemon;
+unique template one/service/daemon;
 
 #
 # Start the OpenNebula daemon (oned) at boot. 
@@ -34,13 +34,14 @@ include { 'components/oned/config' };
 '/software/components/oned/mads/im_kvm' = nlist(
     'manager', 'IM',
     'executable', 'one_im_ssh',
-    'arguments', 'im_kvm/im_kvm.conf'
+    'arguments', 'kvm'
   );
 
 '/software/components/oned/mads/vmm_kvm' = nlist(
     'manager', 'VM',
-    'executable', 'one_vmm_kvm',
-    'default', 'vmm_kvm/vmm_kvm.conf',
+    'executable', 'one_vmm_ssh',
+    'arguments', 'kvm',
+    'default', 'vmm_ssh/vmm_ssh_kvm.conf',
     'type', 'kvm'
   );
 

@@ -1,0 +1,67 @@
+${BUILD_INFO}
+${LEGAL}
+
+unique template one/service/squid-host;
+
+variable CONTENTS = <<EOF;
+acl all src 0.0.0.0/0.0.0.0
+acl manager proto cache_object
+acl localhost src 127.0.0.1/255.255.255.255
+acl to_localhost dst 127.0.0.0/8
+acl SSL_ports port 443
+acl Safe_ports port 80		# http
+acl Safe_ports port 21		# ftp
+acl Safe_ports port 443		# https
+acl Safe_ports port 70		# gopher
+acl Safe_ports port 210		# wais
+acl Safe_ports port 1025-65535	# unregistered ports
+acl Safe_ports port 280		# http-mgmt
+acl Safe_ports port 488		# gss-http
+acl Safe_ports port 591		# filemaker
+acl Safe_ports port 777		# multiling http
+acl CONNECT method CONNECT
+
+http_access allow manager localhost
+http_access deny manager
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access allow localhost
+http_access deny all
+icp_access allow all
+http_port 3128
+
+hierarchy_stoplist cgi-bin ?
+
+cache_mem 4 GB
+cache_dir ufs /var/spool/squid 15000 16 256
+maximum_object_size 3 GB
+
+access_log /var/log/squid/access.log squid
+debug_options ALL,1
+acl QUERY urlpath_regex cgi-bin \?
+cache deny QUERY
+refresh_pattern ^ftp:		1440	20%	10080
+refresh_pattern ^gopher:	1440	0%	1440
+refresh_pattern .		0	20%	4320
+store_avg_object_size 2 GB
+acl apache rep_header Server ^Apache
+broken_vary_encoding allow apache
+coredump_dir /var/spool/squid
+EOF
+
+"/software/components/filecopy/services" =
+  npush(escape("/etc/squid/squid.conf"),
+        nlist("config",CONTENTS,
+              "owner","root",
+              "perms","0755",
+        ));
+
+
+include { 'components/chkconfig/config' };
+
+"/software/components/chkconfig/service/squid/on" = "";
+"/software/components/chkconfig/service/squid/startstop" = true;
+
+include { 'components/profile/config' };
+
+'/software/components/profile/env/http_proxy' = 'http://127.0.0.1:3128';

@@ -1,7 +1,7 @@
 ${BUILD_INFO}
 ${LEGAL}
 
-unique template config/stratuslab/oneadmin-ssh-setup;
+unique template one/service/oneadmin-ssh-setup;
 
 #
 # Use filecopy to get the oneadmin ssh keys into place.  This generates

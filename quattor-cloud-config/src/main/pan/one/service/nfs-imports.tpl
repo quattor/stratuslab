@@ -1,7 +1,7 @@
 ${BUILD_INFO}
 ${LEGAL}
 
-unique template config/stratuslab/one-nfs-imports;
+unique template one/service/nfs-imports;
 
 #
 # Import the image repository, VM state area, and oneadmin home.

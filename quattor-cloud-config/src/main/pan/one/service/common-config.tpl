@@ -1,7 +1,7 @@
 ${BUILD_INFO}
 ${LEGAL}
 
-unique template config/stratuslab/one-common-config;
+unique template one/service/common-config;
 
 include { 'machine-types/nfs' };
 
@@ -17,6 +17,7 @@ include { 'machine-types/nfs' };
 
 # Configure libvirtd.
 include {'components/libvirtd/config' };
+
 '/software/components/libvirtd/network/listen_tcp' = 1;
 '/software/components/libvirtd/socket/unix_sock_group' = 'cloud';
 '/software/components/libvirtd/socket/unix_sock_ro_perms' = '0777';
@@ -26,6 +27,7 @@ include {'components/libvirtd/config' };
 
 # Control various sysctl variables for the networking.
 include { 'components/sysctl/config' };
+
 '/software/components/sysctl/variables/net.ipv4.ip_forward' = '1';
 '/software/components/sysctl/variables/net.bridge.bridge-nf-call-ip6tables' = '0';
 '/software/components/sysctl/variables/net.bridge.bridge-nf-call-iptables' = '0';

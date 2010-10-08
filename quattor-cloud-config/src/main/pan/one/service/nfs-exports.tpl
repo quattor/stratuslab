@@ -1,7 +1,7 @@
 ${BUILD_INFO}
 ${LEGAL}
 
-unique template config/stratuslab/one-nfs-exports;
+unique template one/service/nfs-exports;
 
 #
 # Start the NFS daemons at boot. 
