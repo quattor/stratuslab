@@ -19,9 +19,9 @@ use LC::File qw (makedir);
 our $VERSION = q{@VERSION@};
 
 use Readonly;
-Readonly::Scalar $EMPTY => q{};
-Readonly::Scalar $PATH => '/software/components/@COMP@';
-Readonly::Scalar $COMPONENT_NAME => '@COMP@';
+Readonly::Scalar our $EMPTY => q{};
+Readonly::Scalar our $PATH => '/software/components/@COMP@';
+Readonly::Scalar our $COMPONENT_NAME => '@COMP@';
 
 use base qw (NCM::Component);
 
@@ -145,6 +145,7 @@ sub processHooks {
 
 # Restart the process.
 sub restartDaemon {
+    my ($self) = @_;
     CAF::Process->new([qw(/etc/init.d/oned restart)], log => $self)->run();
     return;
 }
@@ -199,7 +200,7 @@ sub Configure {
 
     # If configuration has changed restart the service.
     if ($config_changed) {
-	restartDaemon();
+	$self->restartDaemon();
     }
 
     return 1;
