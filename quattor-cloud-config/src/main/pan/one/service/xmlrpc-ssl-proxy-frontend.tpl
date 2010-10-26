@@ -1,7 +1,32 @@
-${BUILD_INFO}
-${LEGAL}
+# ${BUILD_INFO}
+#
+# Created as part of the StratusLab project (http://stratuslab.eu)
+#
+# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 unique template one/service/xmlrpc-ssl-proxy-frontend;
+
+# 
+# Ensure that Apache is started on the server. 
+#
+include { 'components/chkconfig/config' };
+
+'/software/components/chkconfig/service/httpd/on' = '';
+'/software/components/chkconfig/service/httpd/startstop' = true;
+
 
 # Apache reverse proxy for XMLRPC
 variable CONTENTS = <<EOF;
@@ -33,30 +58,9 @@ CustomLog logs/ssl_request_log \
 </VirtualHost>
 EOF
 
-"/software/components/filecopy/services" =
-  npush(escape("/etc/httpd/conf.d/proxy_xmlrpc.conf"),
-        nlist("config",CONTENTS,
-              "owner","root",
-              "perms","0644",
+'/software/components/filecopy/services' =
+  npush(escape('/etc/httpd/conf.d/proxy_xmlrpc.conf'),
+        nlist('config',CONTENTS,
+              'owner','root',
+              'perms','0644',
         ));
-
-
-include { 'components/iptables/config' };
-
-# Inbound port(s).
-
-#"/software/components/iptables/filter/rules" = push(
-#  nlist("command", "-A",
-#        "chain", "input",
-#        "protocol", "tcp",
-#	"source", "127.0.0.1",
-#        "dst_port", "2633",
-#        "target", "accept"));
-
-#"/software/components/iptables/filter/rules" = push(
-#  nlist("command", "-A",
-#        "chain", "input",
-#        "protocol", "tcp",
-#        "dst_port", "2633",
-#        "target", "drop"));
-
