@@ -11,6 +11,11 @@
   <name>StratusLab Packaging</name>
   <url>http://stratuslab.eu</url>
 
+  <scm>
+    <connection>scm:git:https://code.stratuslab.eu/git/eu.stratuslab.pkgs.git</connection>
+    <developerConnection>scm:git:https://code.stratuslab.eu/git/eu.stratuslab.pkgs.git</developerConnection>
+  </scm>
+
   <distributionManagement>
     <repository>
       <id>stratuslab.snapshots</id>
