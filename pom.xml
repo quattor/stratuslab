@@ -38,7 +38,6 @@
   </repositories>
   
   <modules>
-    <module>one</module>
     <module>ncm-oned</module>
     <module>ncm-libvirtd</module>
     <module>quattor-cloud-config</module>
