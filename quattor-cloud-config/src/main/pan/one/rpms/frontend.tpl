@@ -25,11 +25,11 @@ unique template one/rpms/frontend;
 include { 'stratuslab-benchmarks' };
 
 # StratusLab web monitor.
-'/software/packages' = pkg_repl('stratuslab-web-monitor', '1.0-1', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-web-monitor', '1.1-1', 'noarch');
 
 # StratusLab client commands.
-'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', '1.0-1', 'noarch');
-'/software/packages' = pkg_repl('stratuslab-cli-user', '1.0-1', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', '1.1-1', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-user', '1.1-1', 'noarch');
 
 # MySQL client is compiled into oned (even if not used directly).
 '/software/packages' = pkg_repl('mysql','5.0.77-4.el5_4.2','x86_64');
