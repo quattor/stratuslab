@@ -1,4 +1,4 @@
-# ${BUILD_INFO} 
+# ${BUILD_INFO}  
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -19,30 +19,32 @@
 
 unique template one/service/parameters;
 
+include { if_exists('one/service/site_parameters') };
+
 #
 # Full hostname of NFS server, usually OpenNebula front-end.
 #
-variable ONE_NFS_SERVER = 'onehost-172.lal.in2p3.fr';
+variable ONE_NFS_SERVER ?= error('ONE_NFS_SERVER must be defined');
 
 #
 # An NFS wildcard that includes all of the OpenNebula nodes.
 #
-variable ONE_NFS_WILDCARD = '134.158.73.0/24';
+variable ONE_NFS_WILDCARD ?= error('ONE_NFS_WILDCARD must be defined');
 
 #
 # Monitoring internal in seconds.  Increase this value for
 # a production system.
 #
-variable ONE_MONITOR_INTERVAL = 30;
+variable ONE_MONITOR_INTERVAL ?= 30;
 
 #
 # VM polling interval in seconds.  Increase this value for
 # a production system.
 #
-variable ONE_POLLING_INTERVAL = 30;
+variable ONE_POLLING_INTERVAL ?= 30;
 
 #
 # Ganglia variables
 #
-variable GANGLIA_MASTER = '134.158.73.172';
-variable GANGLIA_CLUSTER_NAME = 'StratusLab';
+variable GANGLIA_MASTER ?= error('GANGLIA_MASTER must be defined');
+variable GANGLIA_CLUSTER_NAME ?= 'StratusLab';
