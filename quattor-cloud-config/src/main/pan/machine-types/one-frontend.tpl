@@ -68,7 +68,8 @@ include { 'one/rpms/devel' };
 include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
-include { 'one/service/xmlrpc-ssl-proxy-frontend' };
+# Authentication proxy
+include { 'one/service/authn-proxy' };
 
 # Add firewall.
 include { 'one/service/iptables-bridging' };
