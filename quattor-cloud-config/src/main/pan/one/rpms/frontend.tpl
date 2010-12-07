@@ -19,7 +19,7 @@
 
 unique template one/rpms/frontend;
 
-'/software/packages' = pkg_repl('one-2.0-StratusLab','0.1.0-1','x86_64');
+'/software/packages' = pkg_repl('one-2.0-StratusLab','0.1.1-0.20101205.060111','x86_64');
 
 # Include the benchmarks.
 include { 'stratuslab-benchmarks' };
