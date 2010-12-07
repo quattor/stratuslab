@@ -25,6 +25,11 @@ unique template one/service/authn-proxy;
 include { 'common/security/cas' };
 include { 'common/security/crl' };
 
+#
+# Include the necessary rpms. 
+#
+include { 'one/rpms/authn-proxy' };
+
 # 
 # Ensure that jetty servlet container is started
 #
