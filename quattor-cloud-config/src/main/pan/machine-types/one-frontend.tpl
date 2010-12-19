@@ -32,6 +32,11 @@ include { 'machine-types/nfs' };
 include { 'rpms/web_server' };
 
 #
+# Specifically delete this module.  It runs on port 8443
+# and conflicts with the StratusLab authentication proxy.
+'/software/packages'=pkg_del('mod_nss');
+
+#
 # Define the parameters for the OpenNebula setup.
 # **CHANGE** the values in this file for your setup.
 #
@@ -70,6 +75,9 @@ include { 'config/os/git' };
 
 # Authentication proxy
 include { 'one/service/authn-proxy' };
+
+# Add private interface
+include { 'one/service/private-network' };
 
 # Add firewall.
 include { 'one/service/iptables-bridging' };

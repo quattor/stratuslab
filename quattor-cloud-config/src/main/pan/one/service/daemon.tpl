@@ -67,6 +67,12 @@ include { 'components/oned/config' };
     'arguments', 'tm_nfs/tm_nfs.conf'
   );
 
+'/software/components/oned/mads/tm_ssh' = nlist(
+    'manager', 'TM',
+    'executable', 'one_tm',
+    'arguments', 'tm_ssh/tm_ssh.conf'
+  );
+
 '/software/components/oned/mads/hm' = nlist(
     'manager', 'HM',
     'executable', 'one_hm'

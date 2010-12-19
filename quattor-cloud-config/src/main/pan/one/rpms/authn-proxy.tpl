@@ -19,7 +19,7 @@
 
 unique template one/rpms/authn-proxy;
 
-'/software/packages' = pkg_repl('jetty-rpm','0.0.1-SNAPSHOT20101207080032','noarch');
+'/software/packages' = pkg_repl('stratuslab-cloud-proxy','${stratuslab.cloud.proxy.version}','noarch');
 
 # Fetch CRL script is required to keep CRLs up-to-date.
 '/software/packages' = pkg_repl('fetch-crl','2.7.0-2','noarch');

@@ -19,17 +19,17 @@
 
 unique template one/rpms/frontend;
 
-'/software/packages' = pkg_repl('one-2.0-StratusLab','0.1.1-0.20101205.060111','x86_64');
+'/software/packages' = pkg_repl('one-2.0-StratusLab','${stratuslab.one.version}','x86_64');
 
 # Include the benchmarks.
 include { 'stratuslab-benchmarks' };
 
 # StratusLab web monitor.
-'/software/packages' = pkg_repl('stratuslab-web-monitor', '1.2-SNAPSHOT20101207152545', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-web-monitor', '${stratuslab.web.monitor.version}', 'noarch');
 
 # StratusLab client commands.
-'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', '1.2-SNAPSHOT20101207152744', 'noarch');
-'/software/packages' = pkg_repl('stratuslab-cli-user', '1.2-SNAPSHOT20101207152641', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', '${stratuslab.cli.sysadmin.version}', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-user', '${stratuslab.cli.user.version}', 'noarch');
 
 # MySQL client is compiled into oned (even if not used directly).
 '/software/packages' = pkg_repl('mysql','5.0.77-4.el5_4.2','x86_64');
