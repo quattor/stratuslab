@@ -84,11 +84,11 @@
 
     <maven.build.timestamp.format>yyyyMMdd.HHmm.ss</maven.build.timestamp.format>
 
-    <stratuslab.cloud.proxy.version>0.0.1-SNAPSHOT20101219033848</stratuslab.cloud.proxy.version>
+    <stratuslab.cloud.proxy.version>0.0.7-1</stratuslab.cloud.proxy.version>
     <stratuslab.one.version>0.1.0-1</stratuslab.one.version>
-    <stratuslab.web.monitor.version>1.2-SNAPSHOT20101207152545</stratuslab.web.monitor.version>
-    <stratuslab.cli.sysadmin.version>1.2-SNAPSHOT20101207152744</stratuslab.cli.sysadmin.version>
-    <stratuslab.cli.user.version>1.2-SNAPSHOT20101207152641</stratuslab.cli.user.version>
+    <stratuslab.web.monitor.version>1.4-1</stratuslab.web.monitor.version>
+    <stratuslab.cli.sysadmin.version>1.4-1</stratuslab.cli.sysadmin.version>
+    <stratuslab.cli.user.version>1.4-1</stratuslab.cli.user.version>
 
     <BUILD_INFO>
 #
