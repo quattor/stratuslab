@@ -109,7 +109,7 @@ This nlist holds the definitions of MADs (plug-ins).  The key provides
 =over 4
 
 =item * manager (R): The type of the driver.  The values can be: IM,
-    VM, TM, HM, or AUTHM.  NOTE: One one instance of the HM and AUTHM
+    VM, TM, HM, or AUTH.  NOTE: Only one instance of the HM and AUTH
     drivers should be defined.  This constraint is not currently
     enforced by the schema.
 

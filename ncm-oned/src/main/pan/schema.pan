@@ -44,7 +44,7 @@ type structure_image_repos = {
 };
 
 type structure_mad = {
-    'manager' : string with match(SELF, 'IM|VM|TM|HM|AUTHM')
+    'manager' : string with match(SELF, 'IM|VM|TM|HM|AUTH')
     'executable' : string
     'arguments' ? string
     'default' ? string
