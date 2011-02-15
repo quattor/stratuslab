@@ -13,7 +13,7 @@ type structure_daemon = {
     'VM_DIR' : string
     'PORT' : type_port = 2633
     'VNC_BASE_PORT' : type_port = 5000
-    'DEBUG_LEVEL' : long(0..3) = 3
+    'DEBUG_LEVEL' : long(0..3) = 2
 };
 
 type structure_db = {
