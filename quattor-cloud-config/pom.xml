@@ -8,7 +8,6 @@
   <packaging>pom</packaging>
   <version>0.1.3-SNAPSHOT</version>
   <name>Quattor Configuration for StratusLab Cloud</name>
-  <url>http://stratuslab.eu</url>
 
   <parent>
     <groupId>eu.stratuslab.pkgs</groupId>
