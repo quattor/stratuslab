@@ -17,31 +17,6 @@
 # limitations under the License.
 #
 
-unique template ganglia/config;
+unique template one/rpms/iscsi-initiator;
 
-include { if (exists('monitoring/ganglia/config')) {
-	null;
-} else {
-	'ganglia/service/variables';
-} };
-
-include { if (exists('monitoring/ganglia/config')) {
-	'monitoring/ganglia/config';
-} else {
-	if ((DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_WEB_SERVER)||(FULL_HOSTNAME == GANGLIA_WEB_SERVER)) {
-	 	'ganglia/service/frontend';
-  	} else {
-		'ganglia/service/host';
-  	};
-
-} };
-
-#include { 'monitoring/ganglia/config' };
-
-#include {
-#  if  (DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_MASTER) {
-#    'ganglia/service/frontend';
-#  } else {
-#    'ganglia/service/host';
-#  };
-#};
+'/software/packages' = pkg_repl('open-iscsi','2.0-871','x86_64');

@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,18 +19,6 @@
 
 unique template ganglia/rpms/frontend;
 
-variable GANGLIA_VERSION_NUM ?= '3.1.7-1';
-
-'/software/packages' = {
-  pkg_repl('ganglia-gmetad', GANGLIA_VERSION_NUM, 'x86_64');
-  pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'x86_64');
-  pkg_repl('ganglia-web', GANGLIA_VERSION_NUM, 'noarch');
-  #pkg_repl('ganglia', GANGLIA_VERSION_NUM, 'x86_64');
-  pkg_repl('libganglia-3_1_0', GANGLIA_VERSION_NUM, 'x86_64');
-
-  pkg_repl('libconfuse', '2.6-2.el5.rf', 'x86_64');
-  pkg_repl('php-gd', '5.1.6-27.el5', 'x86_64');
-  pkg_repl('rrdtool', '1.3.8-2.el5.rf', 'x86_64');
-  pkg_repl('perl-rrdtool', '1.3.8-2.el5.rf', 'x86_64');
-};
+variable GANGLIA_ARCH ?= 'x86_64';
+include { 'monitoring/ganglia/rpms/'+GANGLIA_ARCH+'/frontend' };
 

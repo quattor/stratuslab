@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,6 +76,11 @@ include { 'components/oned/config' };
 '/software/components/oned/mads/hm' = nlist(
     'manager', 'HM',
     'executable', 'one_hm'
+  );
+
+'/software/components/oned/mads/auth' = nlist(
+    'manager', 'AUTH',
+    'executable', 'one_external_authn_mad'
   );
 
 '/software/components/oned/hooks/image' = nlist(

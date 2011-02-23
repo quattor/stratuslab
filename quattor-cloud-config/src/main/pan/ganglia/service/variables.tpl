@@ -17,31 +17,12 @@
 # limitations under the License.
 #
 
-unique template ganglia/config;
+unique template ganglia/service/variables;
 
-include { if (exists('monitoring/ganglia/config')) {
-	null;
-} else {
-	'ganglia/service/variables';
-} };
+variable GANGLIA_VERSION_NUM ?= '3.1.7-1';
 
-include { if (exists('monitoring/ganglia/config')) {
-	'monitoring/ganglia/config';
-} else {
-	if ((DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_WEB_SERVER)||(FULL_HOSTNAME == GANGLIA_WEB_SERVER)) {
-	 	'ganglia/service/frontend';
-  	} else {
-		'ganglia/service/host';
-  	};
+variable GANGLIA_MASTER ?= undef;
+variable GANGLIA_CLUSTER_NAME ?= undef;
+variable GANGLIA_WEB_SERVER ?= GANGLIA_MASTER;
 
-} };
-
-#include { 'monitoring/ganglia/config' };
-
-#include {
-#  if  (DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_MASTER) {
-#    'ganglia/service/frontend';
-#  } else {
-#    'ganglia/service/host';
-#  };
-#};
+variable GANGLIA_METADATA_INTERVAL ?= '15';

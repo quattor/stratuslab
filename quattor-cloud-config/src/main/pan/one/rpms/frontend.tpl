@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,9 @@
 unique template one/rpms/frontend;
 
 '/software/packages' = pkg_repl('one-2.0-StratusLab','${stratuslab.one.version}','x86_64');
+'/software/packages' = pkg_repl('rubygems','1.3.1-1.el5','noarch');
+'/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
+'/software/packages' = pkg_repl('rubygem-sqlite3-ruby','1.2.4-1.el5','x86_64');
 
 # Include the benchmarks.
 include { 'stratuslab-benchmarks' };

@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,11 +32,6 @@ include { 'machine-types/nfs' };
 include { 'rpms/web_server' };
 
 #
-# Specifically delete this module.  It runs on port 8443
-# and conflicts with the StratusLab authentication proxy.
-'/software/packages'=pkg_del('mod_nss');
-
-#
 # Define the parameters for the OpenNebula setup.
 # **CHANGE** the values in this file for your setup.
 #
@@ -46,6 +41,11 @@ include { 'one/service/parameters' };
 # Setup oneadmin account, libvirtd, and networking
 #
 include { 'one/service/common-config' };
+
+#
+# Ganglia for the monitoring of machines and hosts
+#
+include { 'ganglia/config' };
 
 #
 # Define the three areas to be exported to all nodes.
@@ -85,4 +85,3 @@ include { 'one/service/iptables-frontend' };
 
 include { 'config/os/updates' };
 
-include { 'ganglia/config' };

@@ -17,31 +17,14 @@
 # limitations under the License.
 #
 
-unique template ganglia/config;
+unique template ganglia/rpms/x86_64/frontend;
 
-include { if (exists('monitoring/ganglia/config')) {
-	null;
-} else {
-	'ganglia/service/variables';
-} };
 
-include { if (exists('monitoring/ganglia/config')) {
-	'monitoring/ganglia/config';
-} else {
-	if ((DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_WEB_SERVER)||(FULL_HOSTNAME == GANGLIA_WEB_SERVER)) {
-	 	'ganglia/service/frontend';
-  	} else {
-		'ganglia/service/host';
-  	};
+'/software/packages' = {
+  pkg_repl('ganglia-gmetad', GANGLIA_VERSION_NUM, 'x86_64');
+  pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'x86_64');
+  pkg_repl('ganglia-web', GANGLIA_VERSION_NUM, 'noarch');
+  pkg_repl('libganglia-3_1_0', GANGLIA_VERSION_NUM, 'x86_64');
+};
 
-} };
-
-#include { 'monitoring/ganglia/config' };
-
-#include {
-#  if  (DB_IP[escape(FULL_HOSTNAME)] == GANGLIA_MASTER) {
-#    'ganglia/service/frontend';
-#  } else {
-#    'ganglia/service/host';
-#  };
-#};
+include { 'config/ganglia/frontend' };

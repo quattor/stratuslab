@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,10 @@ globals {
   host_dmax = 0 /*secs */
   cleanup_threshold = 300 /*secs */
   gexec = no
-  send_metadata_interval = 0 /*secs */
+EOF
+
+variable CONTENTS = CONTENTS + '  send_metadata_interval = '+GANGLIA_METADATA_INTERVAL+"\n";
+variable CONTENTS = CONTENTS + <<EOF;
 }
 
 cluster {
@@ -324,11 +327,14 @@ collection_group {
 
 EOF
 
+variable GMOND_RESTART ?= '/etc/init.d/gmond stop; sleep 1; /etc/init.d/gmond start;';
+
 '/software/components/filecopy/services' =
   npush(escape('/etc/ganglia/gmond.conf'),
         nlist('config', CONTENTS,
               'owner', 'root',
               'perms', '0644',
+	      'restart', GMOND_RESTART,
         ));
 
 include { 'components/chkconfig/config' };

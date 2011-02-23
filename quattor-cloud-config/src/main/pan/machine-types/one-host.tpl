@@ -2,7 +2,7 @@
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
-# Copyright (c) 2010, Centre Nationale de la Recherche Scientifique
+# Copyright (c) 2010-2011, Centre National de la Recherche Scientifique
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +35,11 @@ include { 'one/service/parameters' };
 include { 'one/service/common-config' };
 
 #
+# Ganglia for the monitoring of machines and hosts
+#
+include { 'ganglia/config' };
+
+#
 # Import the common areas from the OpenNebula server.
 #
 include { 'one/service/nfs-imports' };
@@ -50,5 +55,4 @@ include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
 include { 'config/os/updates' };
-include { 'ganglia/config' };
 
