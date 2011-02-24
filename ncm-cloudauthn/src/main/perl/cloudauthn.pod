@@ -1,0 +1,25 @@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
+
+=head1 NAME
+
+ncm-cloudauthn: Authentication Config. for StratusLab Cloud
+
+=head1 DESCRIPTION
+
+cloudauthn
+
+=head1 RESOURCES
+
+=head2 /software/components/cloudauthn
+
+The configuration information for the component.  Each field should
+be described in this section. 
+
+=head1 AUTHOR
+
+${author-info}
+
+=cut
