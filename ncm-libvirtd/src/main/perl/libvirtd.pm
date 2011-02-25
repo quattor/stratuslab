@@ -1,7 +1,9 @@
-@BUILD_INFO@
-@LEGAL@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
 
-package NCM::Component::@COMP@;
+package NCM::Component::libvirtd;
 
 use strict;
 use warnings;
@@ -15,12 +17,13 @@ use CAF::FileWriter;
 use CAF::Process;
 use LC::File qw (makedir);
 
-our $VERSION = q{@VERSION@};
+our $VERSION = q{${version}};
 
 use Readonly;
 Readonly::Scalar my $SPACE => q{ };
-Readonly::Scalar my $PATH => '/software/components/@COMP@';
-Readonly::Scalar my $COMPONENT_NAME => '@COMP@';
+Readonly::Scalar my $PATH => '/software/components/libvirtd';
+Readonly::Scalar my $COMPONENT_NAME => 'libvirtd';
+Readonly::Scalar my $RESTART => '/etc/init.d/libvirtd restart';
 
 use base qw (NCM::Component);
 
@@ -140,7 +143,7 @@ sub writeLogging {
 # Restart the process.
 sub restartDaemon {
     my ($self) = @_;
-    CAF::Process->new([qw(/etc/init.d/libvirtd restart)], log => $self)->run();
+    CAF::Process->new([$RESTART], log => $self)->run();
     return;
 }
 

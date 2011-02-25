@@ -1,7 +1,9 @@
-@BUILD_INFO@
-@LEGAL@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
 
-declaration template components/@COMP@/schema;
+declaration template components/oned/schema;
 
 include {'quattor/schema'};
 
@@ -66,7 +68,7 @@ type structure_hook = {
     'remote' : string = 'NO' with match(SELF, 'YES|NO')
 };
 
-type structure_component_@COMP@ = {
+type structure_component_oned = {
     include structure_component
     'oned_config' : string = '/etc/one/oned.conf'
     'daemon' : structure_daemon = nlist()
@@ -77,4 +79,4 @@ type structure_component_@COMP@ = {
     'hooks' : structure_hook{}
 };
 
-bind '/software/components/@COMP@' = structure_component_@COMP@;
+bind '/software/components/oned' = structure_component_oned;

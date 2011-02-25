@@ -1,8 +1,9 @@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
 
-@BUILD_INFO@
-@LEGAL@
-
-package NCM::Component::@COMP@;
+package NCM::Component::oned;
 
 use strict;
 use warnings;
@@ -16,12 +17,13 @@ use CAF::FileWriter;
 use CAF::Process;
 use LC::File qw (makedir);
 
-our $VERSION = q{@VERSION@};
+our $VERSION = q{${version}};
 
 use Readonly;
 Readonly::Scalar our $EMPTY => q{};
-Readonly::Scalar our $PATH => '/software/components/@COMP@';
-Readonly::Scalar our $COMPONENT_NAME => '@COMP@';
+Readonly::Scalar our $PATH => '/software/components/oned';
+Readonly::Scalar our $COMPONENT_NAME => 'oned';
+Readonly::Scalar our $RESTART => '/etc/init.d/oned restart';
 
 use base qw (NCM::Component);
 
@@ -146,7 +148,7 @@ sub processHooks {
 # Restart the process.
 sub restartDaemon {
     my ($self) = @_;
-    CAF::Process->new([qw(/etc/init.d/oned restart)], log => $self)->run();
+    CAF::Process->new([$RESTART], log => $self)->run();
     return;
 }
 

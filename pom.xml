@@ -60,6 +60,13 @@ StratusLab cloud.
     </repository>
   </repositories>
   
+  <pluginRepositories>
+    <pluginRepository>
+      <id>quattor-releases</id>
+      <url>http://lapp-repo01.in2p3.fr:8081/nexus/content/repositories/releases/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <distributionManagement>
     <repository>
       <id>stratuslab.releases</id>

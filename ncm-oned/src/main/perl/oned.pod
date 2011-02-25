@@ -1,17 +1,19 @@
-@BUILD_INFO@
-@LEGAL@
+# ${license-info}
+# ${developer-info}
+# ${author-info}
+# ${build-info}
 
 =pod
 
 =head1 DESCRIPTION
 
-The I<@COMP@> component manages the configuration of an 
+The I<oned> component manages the configuration of an 
 OpenNebula server.
 
 =head1 CONFIGURATION PARAMETERS
 
 The base path for all of the configuration parameters is
-    /software/components/@COMP@.  The following sections describe the
+    /software/components/oned.  The following sections describe the
     elements that are permitted directly below this base path.  With
     further parameters described in each section.  Each parameter is
     marked as optional (O) or required (R).  Required parameters may
