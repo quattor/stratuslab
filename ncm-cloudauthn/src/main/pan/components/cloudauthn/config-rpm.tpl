@@ -11,6 +11,6 @@ include { 'components/cloudauthn/config-common' };
 prefix '/software/components/cloudauthn';
 
 # Install Quattor configuration module via RPM package.
-'/software/packages' = pkg_repl('ncm-cloudauthn','0.1-SNAPSHOT-1','noarch');
+'/software/packages' = pkg_repl('ncm-cloudauthn','${no-snapshot-version}-${RELEASE}','noarch');
 'dependencies/pre' ?= list('spma');
 
