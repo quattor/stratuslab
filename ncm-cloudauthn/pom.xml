@@ -36,7 +36,7 @@
     <license>
       <name>Apache 2 License</name>
       <url>http://www.opensource.org/licenses/apache2.0</url>
-      <comments>Copyright (c) Responsible Organization</comments>
+      <comments>Copyright (c) Centre National de la Recherche Scientifique</comments>
     </license>
   </licenses>
 
@@ -49,17 +49,10 @@
 
   <contributors>
     <contributor>
-      <name>Jane SMITH</name>
-      <email>smith@example.com</email>
+      <name>Gabriel TEZIER</name>
+      <email>tezier@lal.in2p3.fr</email>
       <roles>
-	<role>author</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Joe DOE</name>
-      <email>doe@example.org</email>
-      <roles>
-	<role>author</role>
+	<role>contributor</role>
       </roles>
     </contributor>
   </contributors>

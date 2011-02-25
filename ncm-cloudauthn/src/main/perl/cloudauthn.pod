@@ -9,14 +9,57 @@ ncm-cloudauthn: Authentication Config. for StratusLab Cloud
 
 =head1 DESCRIPTION
 
-cloudauthn
+This module handles the configuration for the StratusLab
+authentication proxy.  Three files are managed in the
+/opt/jetty-7/etc/login directory: login.conf, login-pswd.conf, and
+login-cert.conf. 
 
 =head1 RESOURCES
 
-=head2 /software/components/cloudauthn
+All paths are prefixed with /software/components/cloudauthn/config. 
 
-The configuration information for the component.  Each field should
-be described in this section. 
+=head2 users_by_pswd/<username>
+
+Information for a particular authorized user.
+
+=head3 password
+
+The plain text, MD5 hashed, or crypted password.  For the MD5 hashed
+or crypted passwords use entries like:
+"MD5:3c7f506040bffb0aada69cfd5b101f4b" or "CRYPT:mex9p3FrDbbSc".
+
+=head3 groups
+
+List of groups for the user.  The default is to include a single group
+'cloud-access'. 
+
+=head2 users_by_cert/<dn>
+
+Information for a particular authorized user by certificate.  The DN
+of the user must be escaped. 
+
+=head3 groups
+
+List of groups for the user.  The default is to include a single group
+'cloud-access'. 
+
+=head2 jaas/<entry_name>/login_modules/<n>
+
+A list of the login modules for a particular JAAS entry.  
+
+=head3 name
+
+The class name of the login module to use.
+
+=head3 flag
+
+The flag for the login module.  It must be one of the following
+values: 'required', 'requisite', 'sufficient', 'optional'.  See the
+JAAS specifications for the meaning of each. 
+
+=head3 options
+
+A hash containing the options for the login module.
 
 =head1 AUTHOR
 
