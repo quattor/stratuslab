@@ -27,8 +27,8 @@ use Readonly;
 
 Readonly::Scalar my $PATH => '/software/components/cloudauthn';
 
-Readonly::Scalar my $PSWD_FILE => '/opt/jetty-7/etc/login/login-pswd.conf';
-Readonly::Scalar my $CERT_FILE => '/opt/jetty-7/etc/login/login-cert.conf';
+Readonly::Scalar my $PSWD_FILE => '/opt/jetty-7/etc/login/login-pswd.properties';
+Readonly::Scalar my $CERT_FILE => '/opt/jetty-7/etc/login/login-cert.properties';
 Readonly::Scalar my $JAAS_FILE => '/opt/jetty-7/etc/login/login.conf';
 
 Readonly::Scalar my $RESTART => '/etc/init.d/jetty restart';
