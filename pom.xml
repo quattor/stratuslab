@@ -19,10 +19,10 @@ StratusLab cloud.
   <packaging>pom</packaging>
 
   <modules>
-    <module>ncm-oned</module>
+    <module>ncm-cloudauthn</module>
     <module>ncm-libvirtd</module>
+    <module>ncm-oned</module>
     <module>quattor-cloud-config</module>
-    <module>cloudauthn</module>
   </modules>
 
   <licenses>
