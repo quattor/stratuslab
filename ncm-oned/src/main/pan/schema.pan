@@ -10,7 +10,7 @@ include {'pan/types'};
 type structure_daemon = {
     'HOST_MONITORING_INTERVAL' : long(1..) = 600
     'VM_POLLING_INTERVAL' : long(0..) = 600
-    'VM_DIR' : string
+    'VM_DIR' ? string
     'PORT' : type_port = 2633
     'VNC_BASE_PORT' : type_port = 5000
     'DEBUG_LEVEL' : long(0..3) = 2
@@ -38,7 +38,7 @@ type structure_one_network = {
 };
 
 type structure_image_repos = {
-    'IMAGE_REPOSITORY_PATH' : string
+    'IMAGE_REPOSITORY_PATH' ? string
     'DEFAULT_IMAGE_TYPE' : string = 'OS' with match(SELF, 'OS|CDROM|DATABLOCK')
     'DEFAULT_DEVICE_PREFIX' : string = 'hd' with match(SELF, 'hd|sd|xvd|vd')
 };
