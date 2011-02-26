@@ -52,21 +52,6 @@ StratusLab cloud.
     <developerConnection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-quattor.git</developerConnection>
   </scm>
 
-  <repositories>
-    <repository>  
-      <id>maven-restlet</id>  
-      <name>Public online Restlet repository</name>  
-      <url>http://maven.restlet.org</url>  
-    </repository>
-  </repositories>
-  
-  <pluginRepositories>
-    <pluginRepository>
-      <id>quattor-releases</id>
-      <url>http://lapp-repo01.in2p3.fr:8081/nexus/content/repositories/releases/</url>
-    </pluginRepository>
-  </pluginRepositories>
-
   <distributionManagement>
     <repository>
       <id>stratuslab.releases</id>
