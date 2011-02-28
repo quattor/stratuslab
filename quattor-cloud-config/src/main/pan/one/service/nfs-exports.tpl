@@ -37,8 +37,7 @@ variable ONE_NFS_FLAGS =
   ONE_NFS_WILDCARD + '(async,no_subtree_check,rw,no_root_squash)' + "\n";
 
 variable ONE_NFS_EXPORT_CONTENTS =
-'/var/lib/one/images ' + ONE_NFS_FLAGS +
-'/var/lib/one/vms ' + ONE_NFS_FLAGS + 
+'/var/lib/one ' + ONE_NFS_FLAGS +
 '/home/oneadmin ' + ONE_NFS_FLAGS;
 
 '/software/components/filecopy/services/{/etc/exports}' = nlist(

@@ -19,8 +19,10 @@
 
 template stratuslab-benchmarks;
 
+include { 'stratuslab-package-versions' };
+
 # StratusLab benchmarks.
-'/software/packages' = pkg_repl('stratuslab-benchmarks', '1.0-1', 'x86_64');
+'/software/packages' = pkg_repl('stratuslab-benchmarks', STRATUSLAB_BENCHMARKS_VERSION, 'x86_64');
 
 # Initial dependencies.
 '/software/packages' = pkg_repl('openmpi', '1.4-4.el5', 'i386');

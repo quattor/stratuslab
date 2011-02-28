@@ -38,12 +38,8 @@ variable STRATUSLAB_NFS_MOUNT_POINT = '/stratuslab_mnt';
 '/software/components/autofs/maps/stratuslab/enabled' = true;
 '/software/components/autofs/maps/stratuslab/preserve' = false;
 
-'/software/components/autofs/maps/stratuslab/entries/images' = 
-  nlist('location', ONE_NFS_SERVER + ':/var/lib/one/images',
-        'options', '');
-  
-'/software/components/autofs/maps/stratuslab/entries/vms' = 
-  nlist('location', ONE_NFS_SERVER + ':/var/lib/one/vms',
+'/software/components/autofs/maps/stratuslab/entries/onevar' = 
+  nlist('location', ONE_NFS_SERVER + ':/var/lib/one',
         'options', '');
   
 '/software/components/autofs/maps/stratuslab/entries/oneadmin' = 
@@ -63,15 +59,8 @@ include { 'components/accounts/config' };
 include { 'components/symlink/config' };
 
 '/software/components/symlink/links' = append(
-  nlist('name', '/var/lib/one/images',
-        'target', STRATUSLAB_NFS_MOUNT_POINT + '/images',
-        'exists', false,
-        'replace', nlist('all','yes'))
-);
-
-'/software/components/symlink/links' = append(
-  nlist('name', '/var/lib/one/vms',
-        'target', STRATUSLAB_NFS_MOUNT_POINT + '/vms',
+  nlist('name', '/var/lib/one',
+        'target', STRATUSLAB_NFS_MOUNT_POINT + '/onevar',
         'exists', false,
         'replace', nlist('all','yes'))
 );

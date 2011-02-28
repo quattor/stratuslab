@@ -38,12 +38,6 @@ include { 'components/oned/config' };
 '/software/components/oned/daemon/VM_POLLING_INTERVAL' = ONE_POLLING_INTERVAL;
 
 #
-# Change the default locations of the image and VM directories.
-#
-'/software/components/oned/daemon/VM_DIR' = '/var/lib/one/vms';
-'/software/components/oned/image_repos/IMAGE_REPOSITORY_PATH' = '/var/lib/one/images';
-
-#
 # Define all of the standard plug-ins for OpenNebula. 
 # Assumes that KVM is being used on the site.
 #

@@ -19,7 +19,15 @@
 
 unique template one/rpms/frontend;
 
-'/software/packages' = pkg_repl('one-2.0-StratusLab','${stratuslab.one.version}','x86_64');
+include { 'stratuslab-package-versions' };
+
+#
+# OpenNebula and its dependencies. 
+#
+'/software/packages' = pkg_repl('one-2.0-StratusLab', STRATUSLAB_ONE_VERSION, 'x86_64');
+
+'/software/packages' = pkg_repl('quarantine-cleanup', STRATUSLAB_QUARANTINE_CLEANUP_VERSION, 'noarch');
+
 '/software/packages' = pkg_repl('rubygems','1.3.1-1.el5','noarch');
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 '/software/packages' = pkg_repl('rubygem-sqlite3-ruby','1.2.4-1.el5','x86_64');
@@ -28,11 +36,11 @@ unique template one/rpms/frontend;
 include { 'stratuslab-benchmarks' };
 
 # StratusLab web monitor.
-'/software/packages' = pkg_repl('stratuslab-web-monitor', '${stratuslab.web.monitor.version}', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-web-monitor', STRATUSLAB_WEB_MONITOR_VERSION, 'noarch');
 
 # StratusLab client commands.
-'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', '${stratuslab.cli.sysadmin.version}', 'noarch');
-'/software/packages' = pkg_repl('stratuslab-cli-user', '${stratuslab.cli.user.version}', 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', STRATUSLAB_CLI_VERSION, 'noarch');
+'/software/packages' = pkg_repl('stratuslab-cli-user', STRATUSLAB_CLI_VERSION, 'noarch');
 
 # MySQL client is compiled into oned (even if not used directly).
 '/software/packages' = pkg_repl('mysql','5.0.77-4.el5_4.2','x86_64');
@@ -42,3 +50,4 @@ include { 'stratuslab-benchmarks' };
 
 # Readonly module for components.
 '/software/packages' = pkg_repl('perl-Readonly', '1.03-1.2.el5.rf', 'noarch');
+

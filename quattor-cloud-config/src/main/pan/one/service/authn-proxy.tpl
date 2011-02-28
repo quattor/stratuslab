@@ -38,3 +38,59 @@ include { 'components/chkconfig/config' };
 '/software/components/chkconfig/service/jetty/on' = '';
 '/software/components/chkconfig/service/jetty/startstop' = true;
 
+#
+# Configure the users.
+#
+include { 'components/cloudauthn/config' };
+
+prefix '/software/components/cloudauthn/config';
+
+#
+# Configuration for grid certificate and VOMS proxy authn.
+#
+'jaas/stratuslab-cert/login_modules/0' = 
+  nlist(
+    'name', 'eu.stratuslab.authn.CertLoginModule', 
+    'flag', 'requisite',
+    'options', nlist('file', '${jetty.home}/etc/login/login-cert.properties')
+  );
+
+#
+# Configuration for username/password authn. from a file.
+#
+'jaas/stratuslab-pswd/login_modules/0' = 
+  nlist(
+    'name', 'org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule', 
+    'flag', 'sufficient',
+    'options', nlist('file', '${jetty.home}/etc/login/login-pswd.properties')
+  );
+
+#
+# Add something like this to allow authn. via an LDAP server. 
+#  
+#'jaas/stratuslab-pswd/login_modules/1' = 
+#  nlist(
+#    'name', 'org.eclipse.jetty.plus.jaas.spi.LdapLoginModule', 
+#    'flag', 'sufficient',
+#    'options',
+#    nlist(
+#      'debug', 'true',
+#      'contextFactory', 'com.sun.jndi.ldap.LdapCtxFactory',
+#      'hostname', 'ldap.example.org',
+#      'port', '389',
+#      'bindDn', 'cn=admin,ou=daemons,o=example',
+#      'bindPassword', 'somepassword',
+#      'authenticationMethod', 'simple',
+#      'forceBindingLogin', 'true',
+#      'userBaseDn', 'ou=people,o=example',
+#      'userRdnAttribute', 'uid',
+#      'userIdAttribute', 'uid',
+#      'userPasswordAttribute', 'userPassword',
+#      'userObjectClass', 'inetOrgPerson',
+#      'roleBaseDn', 'ou=groups,o=example',
+#      'roleNameAttribute', 'cn',
+#      'roleMemberAttribute', 'uniqueMember',
+#      'roleObjectClass', 'groupOfUniqueNames')
+#  );
+  
+

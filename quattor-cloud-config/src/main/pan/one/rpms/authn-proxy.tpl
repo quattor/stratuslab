@@ -19,7 +19,16 @@
 
 unique template one/rpms/authn-proxy;
 
-'/software/packages' = pkg_repl('stratuslab-cloud-proxy','${stratuslab.cloud.proxy.version}','noarch');
+include { 'stratuslab-package-versions' };
 
+'/software/packages' = pkg_repl('stratuslab-cloud-proxy', STRATUSLAB_AUTHN_PROXY_VERSION, 'noarch');
+
+#
+# Configuration module for the proxy.
+#
+'/software/packages' = pkg_repl('ncm-cloudauthn', '0.1-1', 'noarch');
+
+#
 # Fetch CRL script is required to keep CRLs up-to-date.
+#
 '/software/packages' = pkg_repl('fetch-crl','2.7.0-2','noarch');
