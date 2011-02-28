@@ -120,7 +120,7 @@ sub format_jaas_file_contents {
 	    $contents .= "\n";
 	}
 
-	$contents .= "}\n\n";
+	$contents .= "};\n\n";
     }
 
     return $contents;
