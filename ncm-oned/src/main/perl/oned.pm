@@ -145,6 +145,93 @@ sub processHooks {
     return $contents;
 }
 
+# Extract VM IDs from onehost list command.
+sub get_vm_ids {
+    my ($self) = @_;
+
+    my @vmids; 
+
+#    my $proc = CAF::Process->new([qw(su - oneadmin)], log => $self, verbose => 1);
+#    $proc->pushargs("--command");
+#    $proc->pushargs("'/usr/bin/onehost list'");
+#    $proc->execute();
+#    my $output = $proc->output();
+
+    my $output = `su - oneadmin --command "onehost list"`;
+
+    my @lines = split("^", $output);
+    foreach my $line (@lines) {
+	my ($dummy, $id) = split("\\s+", $line);
+	if ($id =~ "\\d+") {
+	    push(@vmids, $id);
+	}
+    }
+
+    return \@vmids;
+}
+
+
+# Extract VM info from onehost show command given an ID.
+sub get_vm_info {
+    my ($self, $id) = @_;
+
+    my %info;
+
+#    my $proc = CAF::Process->new([qw(su - oneadmin)], log => $self, verbose => 1);
+#    $proc->pushargs("--command=\"onehost show $id\"");
+#    my $output = $proc->output();
+
+    my $output = `su - oneadmin --command "onehost show $id"`;
+
+    my @lines = split("^", $output);
+    foreach my $line (@lines) {
+	chomp($line);
+	if ($line =~ m/.*:.*/) {
+	    my ($key, $value) = split("\\s*:\\s*", $line);
+	    $info{$key} = $value;
+	}
+    }
+
+    return \%info;
+}
+
+# Given list of VM IDs, generate a list of host names.
+sub get_vm_hosts {
+    my ($self, $vmids_ref) = @_;
+
+    my %hosts;
+
+    foreach my $id (@$vmids_ref) {	
+
+	my $info = $self->get_vm_info($id);
+	if ($info->{'NAME'}) {
+	    my $hostname = $info->{'NAME'};
+	    $hosts{$hostname} = $id;
+	}	
+
+    }
+
+    return \%hosts;
+}
+
+
+# Create a new host.
+sub create_host {
+
+    my ($self, $hostname, $host_info) = @_;
+
+    my $im_mad = $host_info->{'im_mad'};
+    my $tm_mad = $host_info->{'tm_mad'};
+    my $vm_mad = $host_info->{'vm_mad'};
+
+    $self->info("creating new host: $hostname");
+    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad'";
+    my $output = `$cmd`;
+
+    return;
+}
+
+
 # Restart the process.
 sub restartDaemon {
     my ($self) = @_;
@@ -205,6 +292,21 @@ sub Configure {
 	$self->restartDaemon();
     }
 
+    # With the daemon restarted now look after the hosts.
+    my $vmids_ref = $self->get_vm_ids();
+    my $existing_hosts = $self->get_vm_hosts(\@$vmids_ref);
+
+    # Get hosts that should exist from the configuration.
+    my $desired_hosts = $t->{'hosts'};
+
+    # Create the hosts which don't exist yet.  Don't touch 
+    # ones that already exist. 
+    foreach my $desired_host (keys %$desired_hosts) {
+	if (!defined($existing_hosts->{$desired_host})) {
+	    $self->create_host($desired_host, $desired_hosts->{$desired_host});
+	}
+    }
+    
     return 1;
 }
 
