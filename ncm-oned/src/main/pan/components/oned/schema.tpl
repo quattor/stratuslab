@@ -68,6 +68,13 @@ type structure_hook = {
     'remote' : string = 'NO' with match(SELF, 'YES|NO')
 };
 
+type structure_one_host = {
+    'enabled' : boolean = true
+    'im_mad' : string = 'im_kvm'
+    'tm_mad' : string = 'tm_nfs' 
+    'vm_mad' : string = 'vmm_kvm'
+};
+
 type structure_component_oned = {
     include structure_component
     'oned_config' : string = '/etc/one/oned.conf'
@@ -77,6 +84,7 @@ type structure_component_oned = {
     'image_repos' : structure_image_repos = nlist()
     'mads' : structure_mad{}
     'hooks' : structure_hook{}
+    'hosts' : structure_one_host{}
 };
 
 bind '/software/components/oned' = structure_component_oned;
