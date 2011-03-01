@@ -63,6 +63,11 @@ include { 'one/service/oneadmin-ssh-setup' };
 include { 'one/service/daemon' };
 
 # 
+# Setup the OpenNebula networking.
+#
+include { 'one/service/onevnet-config' };
+
+# 
 # Include the packages (RPMs) for this node.
 #
 include { 'one/rpms/frontend' };
