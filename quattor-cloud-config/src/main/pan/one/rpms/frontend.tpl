@@ -24,7 +24,7 @@ include { 'stratuslab-package-versions' };
 #
 # OpenNebula and its dependencies. 
 #
-'/software/packages' = pkg_repl('one-2.0-StratusLab', STRATUSLAB_ONE_VERSION, 'x86_64');
+'/software/packages' = pkg_repl('one-2.2-StratusLab', STRATUSLAB_ONE_VERSION, 'x86_64');
 
 '/software/packages' = pkg_repl('quarantine-cleanup', STRATUSLAB_QUARANTINE_CLEANUP_VERSION, 'noarch');
 
