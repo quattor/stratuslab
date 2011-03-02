@@ -232,6 +232,50 @@ sub create_host {
 }
 
 
+# Extract the existing OpenNebula networks. 
+sub get_existing_vnets {
+    my ($self) = @_;
+
+    my %info;
+
+#    my $proc = CAF::Process->new([qw(su - oneadmin)], log => $self, verbose => 1);
+#    $proc->pushargs("--command=\"onehost show $id\"");
+#    my $output = $proc->output();
+
+    my $output = `su - oneadmin --command "onevnet list"`;
+
+    my @lines = split("^", $output);
+    foreach my $line (@lines) {
+	chomp($line);
+	my ($dummy, $dummy, $dummy, $vnet_name) = split("\\s+", $line);
+	$info{$vnet_name} = 1;
+    }
+
+    return \%info;
+}
+
+
+# Create a new OpenNebula vnet.
+sub create_vnet {
+    my ($self, $name, $contents) = @_;
+
+#    my $proc = CAF::Process->new([qw(su - oneadmin)], log => $self, verbose => 1);
+#    $proc->pushargs("--command=\"onehost show $id\"");
+#    my $output = $proc->output();
+
+    my $fname = "/home/oneadmin/$name.net";
+
+    # Write out the contents of the configuration file.
+    my $fh = CAF::FileWriter->open($fname);
+    print $fh $contents;
+    $fh->close();
+
+    my $output = `su - oneadmin --command "onevnet create $fname"`;
+
+    return;
+}
+
+
 # Restart the process.
 sub restartDaemon {
     my ($self) = @_;
@@ -306,7 +350,21 @@ sub Configure {
 	    $self->create_host($desired_host, $desired_hosts->{$desired_host});
 	}
     }
+
+    # Also configure the networks.
+    my $desired_vnets = $t->{'vnets'};
+
+    # Get the existing networks.
+    my $existing_vnets = $self->get_existing_vnets();
     
+    # Create the nvets which don't exist yet.  Don't touch 
+    # ones that already exist. 
+    foreach my $desired_vnet (keys %$desired_vnets) {
+	if (!defined($existing_vnets->{$desired_vnet})) {
+	    $self->create_vnet($desired_vnet, $desired_vnets->{$desired_vnet});
+	}
+    }
+
     return 1;
 }
 

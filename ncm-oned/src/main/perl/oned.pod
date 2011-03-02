@@ -152,4 +152,27 @@ This nlist holds the definitions of hook scripts to execute at various
 
 =back
 
+=head2 hosts
+
+An nlist with the information for each host.  
+
+=over 4
+
+=item * enabled (R true): Is the host enabled?
+
+=item * im_mad (R 'im_kvm'): information manager name
+
+=item * tm_mad (R 'tm_nfs'): transfer manager name
+
+=item * vm_mad (R 'vmm_kvm'): virtual machine manager name 
+
+=back
+
+=head2 vnets
+
+The configuration information for each of the virtual networks to
+configure.  The three allowed childred are 'private', 'local', and
+'public'.  The value of each is a string with the virtual network
+configuration. 
+
 =cut

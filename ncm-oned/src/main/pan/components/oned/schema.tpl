@@ -75,6 +75,12 @@ type structure_one_host = {
     'vm_mad' : string = 'vmm_kvm'
 };
 
+type structure_one_vnet = {
+    'private' : string
+    'local' : string
+    'public' : string
+};
+
 type structure_component_oned = {
     include structure_component
     'oned_config' : string = '/etc/one/oned.conf'
@@ -85,6 +91,7 @@ type structure_component_oned = {
     'mads' : structure_mad{}
     'hooks' : structure_hook{}
     'hosts' : structure_one_host{}
+    'vnets' : structure_one_vnet
 };
 
 bind '/software/components/oned' = structure_component_oned;
