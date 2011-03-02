@@ -247,7 +247,7 @@ sub get_existing_vnets {
     my @lines = split("^", $output);
     foreach my $line (@lines) {
 	chomp($line);
-	my ($dummy, $dummy, $dummy, $vnet_name) = split("\\s+", $line);
+	my ($d1, $d2, $d3, $vnet_name) = split("\\s+", $line);
 	$info{$vnet_name} = 1;
     }
 
