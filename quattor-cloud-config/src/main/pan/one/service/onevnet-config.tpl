@@ -19,28 +19,10 @@
 
 unique template one/service/onevnet-config;
 
-include { 'components/filecopy/config' };
+include { 'components/oned/config' };
 
-'/software/components/filecopy/services/{/home/oneadmin/private.net}' =
-  nlist('config', STRATUSLAB_PRIVATE_NETWORK_CONFIG,
-        'owner', 'root',
-        'perms', '0644',
-        'restart', 'su - oneadmin -c "onevnet create /home/oneadmin/private.net"',
-       );
+prefix '/software/components/oned/vnets';
 
-'/software/components/filecopy/services/{/home/oneadmin/local.net}' =
-  nlist('config', STRATUSLAB_LOCAL_NETWORK_CONFIG,
-        'owner', 'root',
-        'perms', '0644',
-        'restart', 'su - oneadmin -c "onevnet create /home/oneadmin/local.net"',
-       );
-
-'/software/components/filecopy/services/{/home/oneadmin/public.net}' =
-  nlist('config', STRATUSLAB_PUBLIC_NETWORK_CONFIG,
-        'owner', 'root',
-        'perms', '0644',
-        'restart', 'su - oneadmin -c "onevnet create /home/oneadmin/public.net"',
-       );
-
-
-
+'private' = STRATUSLAB_PRIVATE_NETWORK_CONFIG;
+'local' = STRATUSLAB_LOCAL_NETWORK_CONFIG;
+'public' = STRATUSLAB_PUBLIC_NETWORK_CONFIG;
