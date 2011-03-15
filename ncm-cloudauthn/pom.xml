@@ -6,7 +6,7 @@
   <artifactId>cloudauthn</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.5</version>
+  <version>1.6-SNAPSHOT</version>
   <name>authentication proxy configuration</name>
 
   <distributionManagement>
