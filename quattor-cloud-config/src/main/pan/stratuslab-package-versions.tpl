@@ -20,7 +20,7 @@
 unique template stratuslab-package-versions;
 
 variable STRATUSLAB_BENCHMARKS_VERSION ?= '1.2-1';
-variable STRATUSLAB_ONE_VERSION ?= '0.1.2-1';
+variable STRATUSLAB_ONE_VERSION ?= '0.1.3-1';
 variable STRATUSLAB_QUARANTINE_CLEANUP_VERSION ?= '0.1.2-1';
 variable STRATUSLAB_SYSADMIN_CLI_VERSION ?= '1.5-1';
 variable STRATUSLAB_USER_CLI_VERSION ?= '1.5-1';
