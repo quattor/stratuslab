@@ -9,8 +9,25 @@
   <artifactId>ganglia</artifactId>
 
   <packaging>pom</packaging>
-  <version>0.1</version>
+  <version>1.0</version>
   <name>Ganglia components</name>
+
+  <distributionManagement>
+    <repository>
+      <id>stratuslab.releases</id>
+      <name>Releases</name>
+      <url>http://repo.stratuslab.eu:8081/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>stratuslab.snapshots</id>
+      <name>Snapshots</name>
+      <url>http://repo.stratuslab.eu:8081/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <site>
+      <id>hudson.webserver</id>
+      <url>scp://hudson.stratuslab.eu/var/www/quattor</url>
+    </site>
+  </distributionManagement>
 
   <repositories>
     <repository>
