@@ -119,8 +119,7 @@ type client_ganglia = {
 
 type component_ganglia = {
     include structure_component
-#    'version'         : string 
-#    'package'         : string 
+    'package'         : string 
     'daemon'          ? daemon_ganglia
     'client'          ? client_ganglia
 };
