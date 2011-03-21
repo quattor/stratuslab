@@ -31,6 +31,13 @@ include { 'components/autofs/config' };
 
 variable STRATUSLAB_NFS_MOUNT_POINT = '/stratuslab_mnt';
 
+variable ONE_NFS_SERVER_VAR ?= ONE_NFS_SERVER;
+variable ONE_NFS_SERVER_HOME ?= ONE_NFS_SERVER;
+
+variable ONE_NFS_SERVER_VARDIR ?= '/var/lib/one';
+variable ONE_NFS_SERVER_HOMEDIR ?= '/home/oneadmin';
+
+
 '/software/components/autofs/maps/stratuslab/mapname' = '/etc/auto.stratuslab';
 '/software/components/autofs/maps/stratuslab/type' = 'file';
 '/software/components/autofs/maps/stratuslab/options' = '-rw,intr,noatime,hard';
@@ -38,12 +45,12 @@ variable STRATUSLAB_NFS_MOUNT_POINT = '/stratuslab_mnt';
 '/software/components/autofs/maps/stratuslab/enabled' = true;
 '/software/components/autofs/maps/stratuslab/preserve' = false;
 
-'/software/components/autofs/maps/stratuslab/entries/onevar' = 
-  nlist('location', ONE_NFS_SERVER + ':/var/lib/one',
+'/software/components/autofs/maps/stratuslab/entries/onevar' =
+  nlist('location', ONE_NFS_SERVER_VAR + ':' + ONE_NFS_SERVER_VARDIR,
         'options', '');
   
 '/software/components/autofs/maps/stratuslab/entries/oneadmin' = 
-   nlist('location', ONE_NFS_SERVER + ':/home/oneadmin',
+   nlist('location', ONE_NFS_SERVER_HOME + ':' + ONE_NFS_SERVER_HOMEDIR,
         'options', '');
 
 # Enable autofs as a service.
@@ -58,16 +65,23 @@ include { 'components/accounts/config' };
 # Define symlinks to actual mount point
 include { 'components/symlink/config' };
 
-'/software/components/symlink/links' = append(
-  nlist('name', '/var/lib/one',
-        'target', STRATUSLAB_NFS_MOUNT_POINT + '/onevar',
-        'exists', false,
-        'replace', nlist('all','yes'))
-);
+'/software/components/symlink/links' = if ( FULL_HOSTNAME != ONE_NFS_SERVER_VAR) {
+	append(
+  	nlist('name', '/var/lib/one',
+              'target', STRATUSLAB_NFS_MOUNT_POINT + '/onevar',
+              'exists', false,
+              'replace', nlist('all','yes'))
+	);
+	} else {
+		SELF;
+};
 
-'/software/components/symlink/links' = append(
-  nlist('name', '/home/oneadmin',
-        'target', STRATUSLAB_NFS_MOUNT_POINT + '/oneadmin',
-        'exists', false,
-        'replace', nlist('all','yes'))
-);
+'/software/components/symlink/links' =  if ( FULL_HOSTNAME != ONE_NFS_SERVER_HOME) {
+	append(
+  	nlist('name', '/home/oneadmin',
+              'target', STRATUSLAB_NFS_MOUNT_POINT + '/oneadmin',
+              'exists', false,
+              'replace', nlist('all','yes'))
+	); } else {
+		SELF;
+};

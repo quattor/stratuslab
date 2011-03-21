@@ -51,6 +51,7 @@ include { 'ganglia/config' };
 # Define the three areas to be exported to all nodes.
 #
 include { 'one/service/nfs-exports' };
+include { 'one/service/nfs-imports' };
 
 #
 # Setup the ssh keys and configuration for oneadmin account.
