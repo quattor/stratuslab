@@ -10,7 +10,7 @@ include { 'components/ganglia/schema' };
 # Set prefix to root of component configuration.
 prefix '/software/components/ganglia';
 
-'version' = '${no-snapshot-version}-${RELEASE}';
+#'version' = '${no-snapshot-version}-${RELEASE}';
 'package' = 'NCM::Component';
 
 'active' ?= true;
