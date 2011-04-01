@@ -20,6 +20,7 @@ StratusLab cloud.
 
   <modules>
     <module>ncm-cloudauthn</module>
+    <module>ncm-ganglia</module>
     <module>ncm-libvirtd</module>
     <module>ncm-oned</module>
     <module>quattor-cloud-config</module>
