@@ -24,7 +24,6 @@ StratusLab cloud.
     <module>ncm-libvirtd</module>
     <module>ncm-oned</module>
     <module>quattor-cloud-config</module>
-    <module>claudia</module>
   </modules>
 
   <licenses>
