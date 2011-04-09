@@ -31,6 +31,9 @@ This is an nlist that provides general parameters for the OpenNebula
 
 =over 4
 
+=item * MANAGER_TIMER: Frequency in seconds of OpenNebula core for
+    periodic events.  Other polling intervals must be longer.
+
 =item * HOST_MONITORING_INTERVAL (R 600): Time in seconds between
     monitoring probes of the hosts. 
 
@@ -48,6 +51,9 @@ This is an nlist that provides general parameters for the OpenNebula
 
 =item * DEBUG_LEVEL (R 3): Level for filtering logging message.
     ERROR=0, WARNING=1, INFO=2, and DEBUG=3.
+
+=item * SCRIPTS_REMOTE_DIR (R '/var/tmp/one'): Location for remote 
+    monitoring scripts.
 
 =back
 

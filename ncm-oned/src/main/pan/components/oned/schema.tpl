@@ -10,12 +10,14 @@ include {'quattor/schema'};
 include {'pan/types'};
 
 type structure_daemon = {
+    'MANAGER_TIMER' ? long(1..)
     'HOST_MONITORING_INTERVAL' : long(1..) = 600
     'VM_POLLING_INTERVAL' : long(0..) = 600
     'VM_DIR' ? string
     'PORT' : type_port = 2633
     'VNC_BASE_PORT' : type_port = 5000
     'DEBUG_LEVEL' : long(0..3) = 2
+    'SCRIPTS_REMOTE_DIR' : string = '/var/tmp/one'
 };
 
 type structure_db = {
