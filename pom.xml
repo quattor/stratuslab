@@ -19,6 +19,7 @@ StratusLab cloud.
   <packaging>pom</packaging>
 
   <modules>
+    <module>ncm-claudia</module>
     <module>ncm-cloudauthn</module>
     <module>ncm-ganglia</module>
     <module>ncm-libvirtd</module>
