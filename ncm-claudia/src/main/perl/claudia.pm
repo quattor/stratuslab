@@ -89,10 +89,12 @@ sub ConfigureSm {
 	
 	$contents .= "\n# VEEM Address.\n";
 	while ((my $k, my $v) = each(%{$sm_config->{'VEEM'}})) {
-		$contents .= $k." = ".$v."\n";
+		if ( $k eq 'ExtendedOCCI') {
+		  $contents .= $k." = ".bool_to_string($v)."\n";
+		} else {
+		  $contents .= $k." = ".$v."\n";
+		}
 	}
-
-	$contents .= "ExtendedOCCI = ".bool_to_string($sm_config->{'ExtendedOCCI'})."\n";
 
 	$contents .= "\n#Undeploy on server stop\n";
 	$contents .= "UndeployOnServerStop = ".bool_to_string($sm_config->{'UndeployOnServerStop'})."\n";
@@ -114,16 +116,20 @@ sub ConfigureSm {
 	$contents .= "\n# Network ranges available for Service Manager use\n";
 	foreach my $i (@{$sm_config->{'NetworkRanges'}}) {
 		$contents .= "[";
-		while ((my $k, my $v) = each(%{$sm_config->{'NetworkRanges'}})) {
-			$contents.= $k." = ".$v."\n";
+		while ((my $k, my $v) = each(%{$i})) {
+			if ( $k eq 'Public' ) {
+			 $contents.= $k." = ".bool_to_string($v)."; ";
+			} else {
+			 $contents.= $k." = ".$v."; ";
+			}
 		}
 		$contents .= "],";
 	}
 
-	$contents .= "\n#DomainName = ".$sm_config{'DomainName'}."\n";
+	$contents .= "\nDomainName = ".$sm_config->{'DomainName'}."\n";
 
 	$contents .= "\n#Setting the following to false disable the generation of <Entity> in OVF\n#Environments, which *violated DMTF DSP0243*\n";
-	$contents .= "OVFEnvEntityGen = ".bool_to_string($sm_config{'OVFEnvEntityGen'})."\n";
+	$contents .= "OVFEnvEntityGen = ".bool_to_string($sm_config->{'OVFEnvEntityGen'})."\n";
 
 	return $contents;
 };
