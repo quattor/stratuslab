@@ -26,7 +26,7 @@ include { 'components/mysql/config' };
 # ------------------------------------------------------------------------
 prefix '/software/components/mysql/servers/localhost';
 
-'adminuser' = 'root';
+'adminuser' = MYSQL_USER;
 'adminpwd' = MYSQL_PASSWORD;
 # ------------------------------------------------------------------------
 
@@ -34,12 +34,26 @@ prefix '/software/components/mysql/servers/localhost';
 prefix '/software/components/oned/db';
 
 'backend' = 'mysql';
-'server' = 'localhost';
-'user' = 'root';
+'server' = MYSQL_HOST;
+'user' = MYSQL_USER;
 'passwd' = MYSQL_PASSWORD;
-'db_name' = 'ONEDB'; 
+'db_name' = MYSQL_ONEDB; 
 # ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
+include { 'components/filecopy/config' };
 
+variable CONTENTS = 
+  format(file_contents('one/service/mysql-auth.conf'), 
+         MYSQL_USER, 
+         MYSQL_PASSWORD,
+         MYSQL_HOST, 
+         MYSQL_ONEDB, 
+         ONE_CPU_QUOTA, 
+         ONE_RAM_KB_QUOTA);
 
-
+'/software/components/filecopy/services/{/etc/one/auth/auth.conf}' =
+  nlist('config', CONTENTS,
+        'restart', 'service oned restart',
+        'perms', '0644');
+# ------------------------------------------------------------------------

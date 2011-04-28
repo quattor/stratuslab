@@ -31,6 +31,7 @@ include { 'stratuslab-package-versions' };
 '/software/packages' = pkg_repl('rubygems','1.3.1-1.el5','noarch');
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 '/software/packages' = pkg_repl('rubygem-sqlite3-ruby','1.2.4-1.el5','x86_64');
+'/software/packages' = pkg_repl('ruby-mysql','2.7.3-1.el5','x86_64');
 
 # Include the benchmarks.
 include { 'stratuslab-benchmarks' };
