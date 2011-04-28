@@ -19,10 +19,9 @@
 
 unique template ganglia/service/variables;
 
-variable GANGLIA_VERSION_NUM ?= '3.1.7-1';
+variable GANGLIA_GRIDNAME ?= 'StratusLab Ganglia';
+variable GANGLIA_DATA_SOURCES ?= nlist('DEFAULT','localhost');
 
 variable GANGLIA_MASTER ?= undef;
 variable GANGLIA_CLUSTER_NAME ?= undef;
 variable GANGLIA_WEB_SERVER ?= GANGLIA_MASTER;
-
-variable GANGLIA_METADATA_INTERVAL ?= '15';

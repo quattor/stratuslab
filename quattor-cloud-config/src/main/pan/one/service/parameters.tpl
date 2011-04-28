@@ -48,3 +48,8 @@ variable ONE_POLLING_INTERVAL ?= 30;
 #
 variable GANGLIA_MASTER ?= error('GANGLIA_MASTER must be defined');
 variable GANGLIA_CLUSTER_NAME ?= 'StratusLab';
+
+#
+# Backend variables
+#
+variable ONE_SQL_BACKEND ?= 'SQLite';

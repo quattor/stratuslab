@@ -1,4 +1,4 @@
-# ${BUILD_INFO}
+# ${BUILD_INFO}  
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -17,17 +17,29 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template one/service/mysql;
 
-include { 'components/ganglia/config' };
+include { 'common/mysql/server' };
 
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
+include { 'components/mysql/config' };
 
-include { 'components/chkconfig/config' };
+# ------------------------------------------------------------------------
+prefix '/software/components/mysql/servers/localhost';
 
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
+'adminuser' = 'root';
+'adminpwd' = MYSQL_PASSWORD;
+# ------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------
+prefix '/software/components/oned/db';
+
+'backend' = 'mysql';
+'server' = 'localhost';
+'user' = 'root';
+'passwd' = MYSQL_PASSWORD;
+'db_name' = 'ONEDB'; 
+# ------------------------------------------------------------------------
+
+
 
 

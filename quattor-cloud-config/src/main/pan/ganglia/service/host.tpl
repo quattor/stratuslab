@@ -19,5 +19,5 @@
 
 unique template ganglia/service/host;
 
-include { 'ganglia/rpms/host' };
 include { 'ganglia/service/gmond' };
+include { 'ganglia/rpms/host' };

@@ -17,17 +17,8 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template iscsi/rpms/target;
 
-include { 'components/ganglia/config' };
-
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
-
-include { 'components/chkconfig/config' };
-
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
-
-
+'/software/packages' = pkg_repl('iscsitarget','1.4.20.2-1','x86_64');
+'/software/packages' = pkg_repl('kmod-iscsitarget','1.4.20.2-1_2.6.18_194.32.1.el5','x86_64');
+'/software/packages' = pkg_repl('kmod-iscsitarget','1.4.20.2-1_2.6.18_238.1.1.el5','x86_64');

@@ -17,17 +17,23 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template marketplace/service/daemon;
 
-include { 'components/ganglia/config' };
+include { 'marketplace/rpms/daemon' };
 
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
-
+#
+# Activate the daemon at boot.
+#
 include { 'components/chkconfig/config' };
+'/software/components/chkconfig/service/marketplace/on'  = '';
 
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
+#
+# Write the configuration file with filecopy for the moment.
+#
+include { 'components/filecopy/config' };
+'/software/components/filecopy/services/{/etc/stratuslab/marketplace.cfg}' = 
+  nlist('config',file_contents('marketplace/service/daemon.cfg'),
+        'restart','service marketplace restart',
+        'perms','0644');
 
 

@@ -17,17 +17,8 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template marketplace/rpms/daemon;
 
-include { 'components/ganglia/config' };
+variable MARKETPLACE_VERSION ?= '0.0.6-0.20110419.135045';
 
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
-
-include { 'components/chkconfig/config' };
-
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
-
-
+'/software/packages'=pkg_repl('stratuslab-marketplace', MARKETPLACE_VERSION, 'noarch');

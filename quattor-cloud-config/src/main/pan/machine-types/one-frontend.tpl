@@ -58,22 +58,41 @@ include { 'one/service/nfs-imports' };
 #
 include { 'one/service/oneadmin-ssh-setup' };
 
-# 
+#
 # Setup the OpenNebula daemon itself.
 #
 include { 'one/service/daemon' };
 
-# 
+#
 # Setup the OpenNebula networking.
 #
 include { 'one/service/onevnet-config' };
 
-# 
+#
+# Setup mysql if we want use mysql backend
+#
+include {
+	if ( ONE_SQL_BACKEND == 'mysql' ) {
+		'one/service/mysql';
+	};
+};
+
+#
+# Setup claudia
+#
+include { 'claudia/service/daemon' };
+
+#
 # Include the packages (RPMs) for this node.
 #
 include { 'one/rpms/frontend' };
 include { 'one/rpms/node' };
 include { 'one/rpms/devel' };
+
+#
+# Include the packages (RPMs) for iscsi-target.
+#
+include { 'iscsi/rpms/target' };
 
 # Add git to the machine, but git-svn is not needed.
 include { 'config/os/git' };
@@ -90,4 +109,10 @@ include { 'one/service/iptables-bridging' };
 include { 'one/service/iptables-frontend' };
 
 include { 'config/os/updates' };
+
+# Add support for pxe
+include { 'one/service/pxe' };
+
+# Add configuration for tftp server
+include { 'one/service/tftp' };
 
