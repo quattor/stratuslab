@@ -126,6 +126,11 @@ sub ConfigureSm {
 		$contents .= "],";
 	}
 
+	$contents .= "\n# Mac Address\n";
+	foreach ((my $k, my $v) = each(%{$sm_config->{'NetworkMac'}})) {
+		$contents .= $k." = ".$v."\n";
+	}
+
 	$contents .= "\nDomainName = ".$sm_config->{'DomainName'}."\n";
 
 	$contents .= "\n#Setting the following to false disable the generation of <Entity> in OVF\n#Environments, which *violated DMTF DSP0243*\n";

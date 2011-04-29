@@ -7,6 +7,11 @@ declaration template components/claudia/schema;
 
 include { 'quattor/schema' };
 
+type network_mac_sm_claudia_config = {
+	'MacEnabled'     : boolean = false
+	'NetworkMacList' : string
+};
+
 type network_range_sm_claudia_config = {
 	'Network' ? string
 	'IP'      : string
@@ -78,6 +83,7 @@ type sm_claudia_config = {
    'SiteRoot' : string
 
    'NetworkRanges' : network_range_sm_claudia_config[] = list()
+   'NetworkMac'    : network_mac_sm_claudia_config = nlist()
 
    'DomainName'   : string = 'LocalDomain'
    'OVFEnvEntity' : boolean = true
