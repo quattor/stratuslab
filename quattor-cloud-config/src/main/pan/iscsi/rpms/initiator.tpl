@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-unique template one/rpms/iscsi-target;
+unique template iscsi/rpms/initiator;
 
-'/software/packages' = pkg_repl('iscsitarget','1.4.20.2-1','x86_64');
-'/software/packages' = pkg_repl('kmod-iscsitarget','1.4.20.2-1_2.6.18_194.32.1.el5','x86_64');
+'/software/packages' = pkg_repl('iscsi-initiator-utils','6.2.0.871-0.16.el5','x86_64');

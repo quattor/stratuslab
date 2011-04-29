@@ -48,3 +48,22 @@ variable ONE_POLLING_INTERVAL ?= 30;
 #
 variable GANGLIA_MASTER ?= error('GANGLIA_MASTER must be defined');
 variable GANGLIA_CLUSTER_NAME ?= 'StratusLab';
+
+#
+# Backend variables
+#
+variable ONE_SQL_BACKEND ?= 'SQLite';
+
+#
+# MySQL defaults.
+#
+variable MYSQL_USER ?= 'root';
+variable MYSQL_PASSWORD ?= undef;
+variable MYSQL_HOST ?= 'localhost';
+variable MYSQL_ONEDB ?= 'ONEDB';
+
+# 
+# Quotas
+#
+variable ONE_CPU_QUOTA ?= 20.0;
+variable ONE_RAM_KB_QUOTA ?= 41943040;

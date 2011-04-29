@@ -17,17 +17,12 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template claudia/rpms/daemon;
 
-include { 'components/ganglia/config' };
+variable CLAUDIA_VERSION ?= '0.1.4-0.20110418.072640';
 
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
-
-include { 'components/chkconfig/config' };
-
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
-
-
+'/software/packages'=pkg_repl('claudia-client-rpm',CLAUDIA_VERSION,'noarch');
+'/software/packages'=pkg_repl('clotho-rpm',CLAUDIA_VERSION,'noarch');
+'/software/packages'=pkg_repl('tcloud-server-rpm',CLAUDIA_VERSION,'noarch');
+'/software/packages'=pkg_repl('activemq','5.4.2-1.el5','x86_64');
+'/software/packages'=pkg_repl('activemq-client','5.4.2-1.el5','x86_64');

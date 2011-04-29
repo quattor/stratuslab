@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-unique template one/rpms/iscsi-initiator;
+unique template config/stratuslab/devel;
 
-'/software/packages' = pkg_repl('open-iscsi','2.0-871','x86_64');
+include { 'config/os/updates' };

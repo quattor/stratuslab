@@ -17,17 +17,6 @@
 # limitations under the License.
 #
 
-unique template ganglia/service/gmetad;
+unique template config/stratuslab/node;
 
-include { 'components/ganglia/config' };
-
-'/software/components/ganglia/daemon/config_file' = '/etc/ganglia/gmetad.conf';
-'/software/components/ganglia/daemon/gridname' = GANGLIA_GRIDNAME;
-'/software/components/ganglia/daemon/data_source' = GANGLIA_DATA_SOURCES;
-
-include { 'components/chkconfig/config' };
-
-'/software/components/chkconfig/service/gmetad/on' = '';
-'/software/components/chkconfig/service/gmetad/startstop' = true;
-
-
+include { 'config/os/updates' };
