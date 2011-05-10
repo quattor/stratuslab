@@ -31,7 +31,7 @@ Readonly::Scalar my $PSWD_FILE => '/opt/jetty-7/etc/login/login-pswd.properties'
 Readonly::Scalar my $CERT_FILE => '/opt/jetty-7/etc/login/login-cert.properties';
 Readonly::Scalar my $JAAS_FILE => '/opt/jetty-7/etc/login/login.conf';
 
-Readonly::Scalar my $RESTART => '/etc/init.d/jetty restart';
+Readonly::Scalar my $RESTART => '/etc/init.d/authn-proxy restart';
 
 our $EC=LC::Exception::Context->new->will_store_all;
 
