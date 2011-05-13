@@ -25,7 +25,7 @@ type wasup_sm_claudia_config = {
    'WASUPActive'   : boolean = true
    'WASUPHost'     : string  = 'localhost'
    'WASUPPort'     : long    = 7001
-   'WASUPPaht'     : string  = '/wasup'
+   'WASUPPath'     : string  = '/wasup'
    'WASUPLogin'    : string
    'WASUPPassword' : string
 

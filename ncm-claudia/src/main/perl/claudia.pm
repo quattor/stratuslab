@@ -115,7 +115,7 @@ sub ConfigureSm {
 
 	$contents .= "\n# Network ranges available for Service Manager use\n";
 	foreach my $i (@{$sm_config->{'NetworkRanges'}}) {
-		$contents .= "[";
+		$contents .= "NetworkRanges = [";
 		while ((my $k, my $v) = each(%{$i})) {
 			if ( $k eq 'Public' ) {
 			 $contents.= $k." = ".bool_to_string($v)."; ";
@@ -127,9 +127,11 @@ sub ConfigureSm {
 	}
 
 	$contents .= "\n# Mac Address\n";
-	foreach ((my $k, my $v) = each(%{$sm_config->{'NetworkMac'}})) {
-		$contents .= $k." = ".$v."\n";
-	}
+#	foreach ((my $k, my $v) = each(%{$sm_config->{'NetworkMac'}})) {
+#		$contents .= $k." = ".$v."\n";
+#	}
+	$contents .= " MacEnabled = ".$sm_config->{'NetworkMac'}->{'MacEnabled'}."\n";
+	$contents .= " NetworkMacList = ".$sm_config->{'NetworkMac'}->{'NetworkMacList'}."\n";
 
 	$contents .= "\nDomainName = ".$sm_config->{'DomainName'}."\n";
 
