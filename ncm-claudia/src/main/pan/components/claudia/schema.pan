@@ -69,7 +69,7 @@ type sm_claudia_config = {
    'config_file' : string = '/opt/claudia/conf/sm.properties'
    'java'        : java_sm_claudia_config  = nlist()
    'rest'        : rest_sm_claudia_config  = nlist()
-   'SMPI'        : smi_sm_claudia_config   = nlist() 
+   'SMI'         : smi_sm_claudia_config   = nlist() 
    'ImageServer' : image_sm_claudia_config = nlist()
    'VEEM'        : veem_sm_claudia_config  = nlist()
 
