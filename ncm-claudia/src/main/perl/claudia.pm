@@ -114,15 +114,28 @@ sub ConfigureSm {
 	$contents .= "SiteRoot = ".$sm_config->{'SiteRoot'}."\n";
 
 	$contents .= "\n# Network ranges available for Service Manager use\n";
+	$contents .= " NetworkRanges = ";
 	foreach my $i (@{$sm_config->{'NetworkRanges'}}) {
-		$contents .= "NetworkRanges = [";
-		while ((my $k, my $v) = each(%{$i})) {
-			if ( $k eq 'Public' ) {
-			 $contents.= $k." = ".bool_to_string($v)."; ";
-			} else {
-			 $contents.= $k." = ".$v."; ";
-			}
-		}
+		$contents .= "[";
+
+		# sm.properties NetworkRanges must be in a fixed order
+		# [IP:ip_value,Netmask:nmask_value,Gateway:gw_value,DNS:dns_value]
+
+		if ( exists ($i->{'Network'}) ) {
+			$contents .= "Network:".$i->{'Network'}.";";
+		};
+		$contents .= "IP:".$i->{'IP'}.";";
+		$contents .= "Netmask:".$i->{'Netmask'}.";";
+		$contents .= "Gateway:".$i->{'Gateway'}.";";
+		$contents .= "DNS:".$i->{"DNS"}.";";
+		$contents .= "Public:".bool_to_yesno($i->{'Public'});
+#		while ((my $k, my $v) = each(%{$i})) {
+#			if ( $k eq 'Public' ) {
+#			 $contents.= $k." : ".bool_to_string($v)."; ";
+#			} else {
+#			 $contents.= $k." : ".$v."; ";
+#			}
+#		}
 		$contents .= "],";
 	}
 
@@ -130,7 +143,7 @@ sub ConfigureSm {
 #	foreach ((my $k, my $v) = each(%{$sm_config->{'NetworkMac'}})) {
 #		$contents .= $k." = ".$v."\n";
 #	}
-	$contents .= " MacEnabled = ".$sm_config->{'NetworkMac'}->{'MacEnabled'}."\n";
+	$contents .= " MacEnabled = ".bool_to_string($sm_config->{'NetworkMac'}->{'MacEnabled'})."\n";
 	$contents .= " NetworkMacList = ".$sm_config->{'NetworkMac'}->{'NetworkMacList'}."\n";
 
 	$contents .= "\nDomainName = ".$sm_config->{'DomainName'}."\n";
@@ -139,6 +152,16 @@ sub ConfigureSm {
 	$contents .= "OVFEnvEntityGen = ".bool_to_string($sm_config->{'OVFEnvEntityGen'})."\n";
 
 	return $contents;
+};
+
+sub bool_to_yesno {
+	my ($bool) = @_;
+
+	if ($bool) {
+		return "yes";
+	} else {
+		return "no";
+	}
 };
 
 sub bool_to_string {
