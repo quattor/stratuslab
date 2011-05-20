@@ -21,5 +21,6 @@ unique template registration/rpms/daemon;
 
 variable STRATUSLAB_REGISTRATION_VERSION ?= '0.0.1-0.20110427.162415';
 
-'/software/packages'=pkg_repl('registration', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
+'/software/packages'=pkg_repl('stratuslab-registration', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
+'/software/packages'=pkg_repl('stratuslab-ldap-support', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
 '/software/packages'=pkg_repl('apacheds', '1.5.7-0', 'i386');

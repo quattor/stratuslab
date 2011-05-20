@@ -21,7 +21,16 @@ unique template registration/service/daemon;
 
 include { 'registration/rpms/daemon' };
 
+# 
+# Ensure that registration service is started.
 #
-# TODO: COMPLETE THIS CONFIGURATION
-#
+include { 'components/chkconfig/config' };
 
+'/software/components/chkconfig/service/registration/on' = '';
+'/software/components/chkconfig/service/registration/startstop' = true;
+
+#
+# Also the LDAP database.
+#
+'/software/components/chkconfig/service/registration-ldap/on' = '';
+'/software/components/chkconfig/service/registration-ldap/startstop' = true;
