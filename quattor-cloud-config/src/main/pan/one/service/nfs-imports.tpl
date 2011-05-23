@@ -1,5 +1,5 @@
 # ${BUILD_INFO}
-# 
+#
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
 # Copyright (c) 2010-2011, Centre National de la Recherche Scientifique

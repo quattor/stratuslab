@@ -1,4 +1,6 @@
-# ${BUILD_INFO}
+# #
+# quattor-cloud-config, 1.4, 20110303.1802.09
+#
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #

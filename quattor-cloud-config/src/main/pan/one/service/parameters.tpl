@@ -1,4 +1,4 @@
-# ${BUILD_INFO}  
+# ${BUILD_INFO}
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -49,6 +49,7 @@ variable ONE_POLLING_INTERVAL ?= 30;
 variable GANGLIA_MASTER ?= error('GANGLIA_MASTER must be defined');
 variable GANGLIA_CLUSTER_NAME ?= 'StratusLab';
 
+
 #
 # Backend variables
 #
@@ -67,3 +68,4 @@ variable MYSQL_ONEDB ?= 'ONEDB';
 #
 variable ONE_CPU_QUOTA ?= 20.0;
 variable ONE_RAM_KB_QUOTA ?= 41943040;
+

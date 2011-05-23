@@ -1,4 +1,4 @@
-# ${BUILD_INFO}  
+# ${BUILD_INFO}
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -139,6 +139,13 @@ EOF
         escape("/etc/dhcpd.conf"),
         nlist("config",DHCPD_CONF,
               "owner","root",
-              "perms","0644")
+              "group","root",
+              "perms","0644",
+              "restart","/usr/bin/killall -HUP dhcpd")
     );
+
+
+include { 'components/chkconfig/config' };
+"/software/components/chkconfig/service/dhcpd/on" = "";
+"/software/components/chkconfig/service/dhcpd/startstop" = true;
 

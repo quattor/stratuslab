@@ -25,6 +25,5 @@ include { 'ganglia/service/gmetad' };
 include { 'ganglia/rpms/frontend' };
 
 include { 'components/chkconfig/config' };
-
-'/software/components/chkconfig/service/httpd/on' = '';
-'/software/components/chkconfig/service/httpd/startstop' = true;
+"/software/components/chkconfig/service/httpd/on" = "";
+"/software/components/chkconfig/service/httpd/startstop" = true;
