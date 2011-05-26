@@ -35,7 +35,7 @@ include { 'one/service/parameters' };
 include { 'one/service/common-config' };
 
 #
-# Include script needed for pdisk service on host.
+# DEBUG DEBUG DEBUG DEBUG DEBUG
 #
 include { 'pdisk/service/host' };
 

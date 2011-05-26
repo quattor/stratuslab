@@ -1,4 +1,4 @@
-# ${BUILD_INFO}  
+# ${BUILD_INFO}
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -124,7 +124,7 @@ echo "BOOT         = "$BOOT                                         >> $LOGFILE
 #Check if we are in pxe mode
 
 #Check the third argument OS[BOOT] which indicate the booting methode of the VM.
-if [ $BOOT = "network" ]
+if [ "$BOOT" = "network" ]
 then
 {
   #If booting from the network then continue.
@@ -261,7 +261,7 @@ echo "BOOT         = "$BOOT                                         >> $LOGFILE
 #Check if we are in pxe mode
 
 #Check the third argument OS[BOOT] which indicate the booting methode of the VM.
-if [ $BOOT = "network" ]
+if [ "$BOOT" = "network" ]
 then
 {
   #If booting from the network then continue.

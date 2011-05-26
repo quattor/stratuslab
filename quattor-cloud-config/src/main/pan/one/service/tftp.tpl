@@ -1,4 +1,4 @@
-# ${BUILD_INFO}  
+# ${BUILD_INFO}
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #

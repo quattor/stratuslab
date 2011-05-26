@@ -34,3 +34,24 @@ include { 'components/chkconfig/config' };
 #
 '/software/components/chkconfig/service/registration-ldap/on' = '';
 '/software/components/chkconfig/service/registration-ldap/startstop' = true;
+
+#
+# Manage the registration configuration file.
+#
+include { 'components/filecopy/config' };
+
+variable STRATUSLAB_REGISTRATION_CONFIG ?= <<EOF;
+ldap.manager.password=changeme
+admin.email=admin@example.org
+mail.host=smtp.gmail.com
+mail.port=465
+mail.user=no-reply@example.org
+mail.password=xxxxxx
+mail.ssl=true
+mail.debug=true
+EOF
+
+'/software/components/filecopy/services/{/etc/stratuslab/registration.cfg}' =
+  nlist('config', STRATUSLAB_REGISTRATION_CONFIG,
+        'restart', 'service registration restart',
+        'perms', '0644');

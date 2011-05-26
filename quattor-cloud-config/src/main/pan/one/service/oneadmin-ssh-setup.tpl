@@ -25,7 +25,7 @@ unique template one/service/oneadmin-ssh-setup;
 # authorized key files.  
 #
 variable SSH_SETUP_SCRIPT = 
-  'rm -f /home/oneadmin/.ssh/id_rsa* /home/oneadmin/.ssh/authorized*; ' +
+  'rm -f /home/oneadmin/.ssh/id_rsa* /home/oneadmin/.ssh/authorized* /home/oneadmin/.ssh/known_hosts; ' +
   'ssh-keygen -f /home/oneadmin/.ssh/id_rsa -t rsa -N '''' -q; ' +
   'cp /home/oneadmin/.ssh/id_rsa.pub /home/oneadmin/.ssh/authorized_keys; ' + 
   'cp /home/oneadmin/.ssh/id_rsa.pub /home/oneadmin/.ssh/authorized_keys2; ' + 

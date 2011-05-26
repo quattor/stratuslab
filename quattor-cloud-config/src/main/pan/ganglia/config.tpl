@@ -19,6 +19,8 @@
 
 unique template ganglia/config;
 
+variable GANGLIA_GRIDNAME ?= 'Stratuslab';
+
 include { if (exists('monitoring/ganglia/config')) {
 	null;
 } else {
