@@ -3,7 +3,7 @@
 # ${author-info}
 # ${build-info}
 
-package NCM::Component::cloudauthn;
+package NCM::Component::one_proxy;
 
 use strict;
 use warnings;
@@ -25,7 +25,7 @@ use File::Path;
 
 use Readonly;
 
-Readonly::Scalar my $PATH => '/software/components/cloudauthn';
+Readonly::Scalar my $PATH => '/software/components/one_proxy';
 
 Readonly::Scalar my $PSWD_FILE => '/etc/stratuslab/one-proxy/login-pswd.properties';
 Readonly::Scalar my $CERT_FILE => '/etc/stratuslab/one-proxy/login-cert.properties';

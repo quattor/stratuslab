@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.quattor.cfg.module</groupId>
-  <artifactId>cloudauthn</artifactId>
+  <artifactId>one_proxy</artifactId>
 
   <packaging>pom</packaging>
   <version>1.6-SNAPSHOT</version>

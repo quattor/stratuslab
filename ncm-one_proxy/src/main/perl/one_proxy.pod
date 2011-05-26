@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-ncm-cloudauthn: Authentication Config. for StratusLab Cloud
+ncm-one_proxy: Authentication Config. for StratusLab Cloud
 
 =head1 DESCRIPTION
 
@@ -16,7 +16,7 @@ login-cert.conf.
 
 =head1 RESOURCES
 
-All paths are prefixed with /software/components/cloudauthn/config. 
+All paths are prefixed with /software/components/one_proxy/config. 
 
 =head2 users_by_pswd/<username>
 
