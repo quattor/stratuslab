@@ -26,7 +26,7 @@ include { 'stratuslab-package-versions' };
 #
 # Configuration module for the proxy.
 #
-'/software/packages' = pkg_repl('ncm-cloudauthn', '0.1-1', 'noarch');
+'/software/packages' = pkg_repl('ncm-one_proxy', '0.1-1', 'noarch');
 
 #
 # Fetch CRL script is required to keep CRLs up-to-date.

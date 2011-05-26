@@ -41,9 +41,9 @@ include { 'components/chkconfig/config' };
 #
 # Configure the users.
 #
-include { 'components/cloudauthn/config' };
+include { 'components/one_proxy/config' };
 
-prefix '/software/components/cloudauthn/config';
+prefix '/software/components/one_proxy/config';
 
 #
 # Configuration for grid certificate and VOMS proxy authn.
