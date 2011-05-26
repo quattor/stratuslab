@@ -27,9 +27,9 @@ use Readonly;
 
 Readonly::Scalar my $PATH => '/software/components/cloudauthn';
 
-Readonly::Scalar my $PSWD_FILE => '/opt/jetty-7/etc/login/login-pswd.properties';
-Readonly::Scalar my $CERT_FILE => '/opt/jetty-7/etc/login/login-cert.properties';
-Readonly::Scalar my $JAAS_FILE => '/opt/jetty-7/etc/login/login.conf';
+Readonly::Scalar my $PSWD_FILE => '/etc/stratuslab/one-proxy/login-pswd.properties';
+Readonly::Scalar my $CERT_FILE => '/etc/stratuslab/one-proxy/login-cert.properties';
+Readonly::Scalar my $JAAS_FILE => '/etc/stratuslab/one-proxy/login.conf';
 
 Readonly::Scalar my $RESTART => '/etc/init.d/authn-proxy restart';
 
