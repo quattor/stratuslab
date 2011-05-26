@@ -20,7 +20,7 @@ StratusLab cloud.
 
   <modules>
     <module>ncm-claudia</module>
-    <module>ncm-cloudauthn</module>
+    <module>ncm-one_proxy</module>
     <module>ncm-ganglia</module>
     <module>ncm-libvirtd</module>
     <module>ncm-oned</module>
