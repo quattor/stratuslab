@@ -82,3 +82,86 @@ include { 'components/oned/config' };
     'command', '/usr/share/one/hooks/image.rb',
     'arguments', '$VMID'
   );
+
+
+
+variable INITD_ONED = <<EOF;
+#!/bin/bash
+#
+# oned -- OpenNebula Daemon
+#
+# chkconfig: 2345 99 30
+# description: OpenNebula is a Virtual Infrastructure Manaager
+# processname: oned
+# config: /srv/cloud/one/etc/oned.conf
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+prog="oned"
+daemonexe="/usr/bin/oned"
+ctrlexe="/usr/bin/one"
+one_user="oneadmin"
+
+[ -x ${ctrlexe} ] || exit 0
+[ -x ${daemonexe} ] || exit 0
+
+start() {
+  # Start the OpenNebula daemon
+  echo -n $"Starting OpenNebula (${prog}): "
+  su - ${one_user} -c "${ctrlexe} start" 2>/dev/null 1>&2 && success || failure $"$prog start"
+  RETVAL=$?
+  echo
+  return $RETVAL
+}
+
+stop() {
+  # Stop the OpenNebula daemon
+  echo -n $"Shutting down OpenNebula (${prog}): "
+  su - ${one_user} -c "${ctrlexe} stop" 2>/dev/null 1>&2 && success || failure $"$prog start"
+  RETVAL=$?
+  echo
+  return $RETVAL
+}
+
+restart() {
+  stop
+  start
+}
+
+mystatus() {
+  status -p /var/run/one/oned.pid oned
+  status -p /var/run/one/sched.pid mm_sched
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  status)
+        mystatus
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit $?
+EOF
+
+#"/software/components/filecopy/services" = npush(
+#        escape("/etc/init.d/oned"),
+#        nlist("config",INITD_ONED,
+#                "owner","root",
+#                "group","root",
+#                "perms","0755",));
+##               "restart","service libvirtd restart"));

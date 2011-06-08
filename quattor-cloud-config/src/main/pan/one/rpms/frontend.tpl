@@ -47,7 +47,8 @@ include { 'stratuslab-benchmarks' };
 '/software/packages' = pkg_repl('mysql','5.0.77-4.el5_4.2','x86_64');
 
 # Must have mkisofs for creating context images.
-'/software/packages' = pkg_repl('mkisofs','2.01-10.7.el5','x86_64');
+#'/software/packages' = pkg_repl('mkisofs','2.01-10.7.el5','x86_64');
+'/software/packages' = pkg_repl('genisoimage','1.1.10-2.fc14','x86_64');
 
 # Readonly module for components.
 '/software/packages' = pkg_repl('perl-Readonly', '1.03-1.2.el5.rf', 'noarch');

@@ -19,7 +19,7 @@
 
 unique template claudia/rpms/daemon;
 
-variable CLAUDIA_VERSION ?= '0.1.4-0.20110418.072640';
+variable CLAUDIA_VERSION ?= '0.1.5-0.20110530.101914';
 
 '/software/packages'=pkg_repl('claudia-client-rpm',CLAUDIA_VERSION,'noarch');
 '/software/packages'=pkg_repl('clotho-rpm',CLAUDIA_VERSION,'noarch');

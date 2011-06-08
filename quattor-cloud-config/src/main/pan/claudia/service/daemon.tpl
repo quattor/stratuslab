@@ -27,6 +27,11 @@ include { 'components/claudia/config' };
 '/software/components/claudia/sm-config/WASUP/WASUPLogin'   = 'oneadmin';
 '/software/components/claudia/sm-config/WASUP/WASUPPassword' = 'secret';
 
+'/software/components/claudia/reportClient-config/SiteRoot' = 'lal.in2p3.fr';
+
+'/software/components/claudia/tcloud-config/onePassword' = '42d9d2622f862cd803d4395be2c1edd362213525';
+'/software/components/claudia/tcloud-config/oneSshKey'   = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsqnlWWWXssptEAupZZrNJlheOjysx/qgrXLiEVcikb9GSLacXWT89MCd8VcsNXR9dObSNmPrJcCbbEF0bGzZcyy0SCJ9NiaBaIri8Em59cI7XncpKUjuqbbql6D7VZwfYU3w4gqAljNoqqXA9EhL3uf36p0gcKG8LyRIumQomP5Ymoe+wLo05FkXPQAp4+Jiz9VD1WeUCkfbhy3vwKiZI95yMA/Jfge7x4KaOIJHGuSNu7UgDE6TNvETYtz7yR1ND4B5y79KjvfmfOHvk3MoXjhEdosYfowiqdB8Hqv3Aea5hINSOyZc/Javhn+OjXbyNQf3meEMDMnb+86MVGGXIQ== root@telefonica-1';
+
 include { 'components/accounts/config' };
 # Create the 'oneadmin' user and 'cloud' group for OpenNebula.
 '/software/components/accounts/groups/activemq/gid' = 9001;
