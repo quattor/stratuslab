@@ -66,3 +66,4 @@ include { 'stratuslab-package-versions' };
 #'/software/packages'= pkg_repl( 'numactl'       , '2.0.3-8.fc13'  , 'x86_64' );
 #'/software/packages'= pkg_repl( 'numactl'       , '2.0.3-8.fc13'  , 'x86_64' );
 
+include { 'config/stratuslab/benchmarks' };

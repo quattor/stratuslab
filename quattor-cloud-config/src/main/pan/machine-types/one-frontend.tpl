@@ -99,7 +99,7 @@ include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
 # Authentication proxy
-include { 'one/service/one_proxy' };
+include { 'one/service/authn-proxy' };
 
 # Add private interface
 include { 'one/service/private-network' };

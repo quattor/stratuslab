@@ -53,3 +53,4 @@ include { 'stratuslab-benchmarks' };
 # Readonly module for components.
 '/software/packages' = pkg_repl('perl-Readonly', '1.03-1.2.el5.rf', 'noarch');
 
+include { 'config/stratuslab/frontend' };

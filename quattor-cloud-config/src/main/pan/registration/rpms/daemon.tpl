@@ -24,3 +24,5 @@ variable STRATUSLAB_REGISTRATION_VERSION ?= '0.0.1-0.20110528.105846';
 '/software/packages'=pkg_repl('stratuslab-registration', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
 '/software/packages'=pkg_repl('stratuslab-ldap-support', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
 '/software/packages'=pkg_repl('apacheds', '1.5.7-0', 'i386');
+
+include { 'config/stratuslab/registration' };

@@ -136,7 +136,7 @@ variable DHCPD_CONF = DHCPD_CONF + <<EOF;
 EOF
 
 "/software/components/filecopy/services" = npush(
-        escape("/etc/dhcpd.conf"),
+        escape("/etc/dhcp/dhcpd.conf"),
         nlist("config",DHCPD_CONF,
               "owner","root",
               "group","root",
