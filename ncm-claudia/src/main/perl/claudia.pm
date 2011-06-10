@@ -193,8 +193,8 @@ sub ConfigureReportClient {
 		$contents .= "vmMonitor=all\n";
 	};
 
-	if (exists ($report_config->{'monitorName'})) {
-		$contents .= "monitorName=".$report_config->{'monitorName'}."\n";
+	if (exists ($report_config->{'MonitorName'})) {
+		$contents .= "MonitorName=".$report_config->{'MonitorName'}."\n";
 	} else {
 		$contents .= "Monitor=all\n";
 	};
