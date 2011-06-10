@@ -19,6 +19,8 @@
 
 unique template one/service/dhcpd;
 
+include { 'one/rpms/dhcpd' };
+
 include { 'components/filecopy/config' };
 
 variable ONE_DHCP_DOMAIN ?= 'localhost';
