@@ -22,4 +22,17 @@ unique template config/stratuslab/frontend;
 '/software/packages'=pkg_repl('xmlrpc-c-c++','1.23.03-1400.svn1979.fc14','x86_64');
 '/software/packages'=pkg_repl('xmlrpc-c-client++','1.23.03-1400.svn1979.fc14','x86_64');
 
+'/software/packages'=pkg_repl('rubygems','1.3.7-2.fc14','noarch');
+'/software/packages'=pkg_repl('rubygem-sqlite3-ruby','1.2.4-5.fc12','x86_64');
+'/software/packages'=pkg_repl('ruby-mysql','2.8.2-1.fc14','x86_64');
+
+# MySQL client is compiled into oned (even if not used directly).
+'/software/packages'=pkg_repl('mysql','5.1.51-2.fc14','x86_64');
+
+# Must have mkisofs for creating context images.
+'/software/packages' = pkg_repl('genisoimage','1.1.10-2.fc14','x86_64');
+
+# Readonly module for components.
+'/software/packages' = pkg_repl('perl-Readonly','1.03-13.fc14','noarch');
+
 include { 'config/os/updates' };

@@ -24,5 +24,7 @@ variable CLAUDIA_VERSION ?= '0.1.5-0.20110530.101914';
 '/software/packages'=pkg_repl('claudia-client-rpm',CLAUDIA_VERSION,'noarch');
 '/software/packages'=pkg_repl('clotho-rpm',CLAUDIA_VERSION,'noarch');
 '/software/packages'=pkg_repl('tcloud-server-rpm',CLAUDIA_VERSION,'noarch');
+
+# Not included in rhel5 and fedora14
 '/software/packages'=pkg_repl('activemq','5.4.2-1.el5','x86_64');
 '/software/packages'=pkg_repl('activemq-client','5.4.2-1.el5','x86_64');
