@@ -146,6 +146,8 @@ sub ConfigureSm {
 
 	$contents .= "\n# Network ranges available for Service Manager use\n";
 	$contents .= "NetworkRanges = ";
+	my $net_length = @{$sm_config->{'NetworkRanges'}};
+	my $net_i = 0;
 	foreach my $i (@{$sm_config->{'NetworkRanges'}}) {
 		$contents .= "[";
 
@@ -159,8 +161,12 @@ sub ConfigureSm {
 		$contents .= "Netmask:".$i->{'Netmask'}.";";
 		$contents .= "Gateway:".$i->{'Gateway'}.";";
 		$contents .= "DNS:".$i->{"DNS"}.";";
-		$contents .= "Public:".bool_to_yesno($i->{'Public'});
-		$contents .= "],";
+		$contents .= "Public:".bool_to_yesno($i->{'Public'}).";";
+		$contents .= "]";
+		$net_i++;
+		if ( $net_i != $net_length) {
+			$contents .= ",";	
+		}
 	}
 
 	$contents .= "\n# Mac Address\n";
@@ -190,13 +196,13 @@ sub ConfigureReportClient {
         if (exists ($report_config->{'vmMonName'})) {
 		$contents .= 'vmMonName='.$report_config->{'vmMonName'}."\n";
 	} else {
-		$contents .= "vmMonitor=all\n";
+		$contents .= "vmMonName=all\n";
 	};
 
 	if (exists ($report_config->{'MonitorName'})) {
 		$contents .= "MonitorName=".$report_config->{'MonitorName'}."\n";
 	} else {
-		$contents .= "Monitor=all\n";
+		$contents .= "MonitorName=all\n";
 	};
 
 	$contents .= 'restPath='.$report_config->{'restPath'}."\n";

@@ -128,7 +128,7 @@ type tcloud_claudia_config = {
      'oneUrl'             : string = 'http://localhost:2633/RPC2'
      'oneUser'            : string = 'OCCIServer'
      'onePassword'        : string
-     'oneEnvironmentPath' : string = '/home/claudia/tcloud/repository'
+     'oneEnvironmentPath' : string = '/opt/claudia/repository'
      'oneKernel'          : string = '/boot/vmlinuz-2.6.26-2-xen-amd64'
      'oneInitrd'          : string = '/boot/initrd.img-2.6.26-2-xen-amd64'
      'oneNetworkBridge'   : string = 'br0'
