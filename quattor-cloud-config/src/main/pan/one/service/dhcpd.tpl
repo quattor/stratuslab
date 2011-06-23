@@ -30,16 +30,16 @@ variable ONE_DHCPD_PUBLIC_COMMON ?= nlist('subnet','192.168.0.0',
 					 'router','127.0.0.1',
 					 'netmask', '255.255.255.0');
 
-variable ONE_DHCPD_PRIVATE_COMMON ?= nlist('subnet','172.17.16.0',
+variable ONE_DHCPD_LOCAL_COMMON ?= nlist('subnet','172.17.16.0',
 					  'router','127.0.0.1',
 					  'netmask', '255.255.255.0');
 
 #
-# ONE_DHCP_PUBLIC and ONE_DHCP_PRIVATE must be like nlist('machine-name',nlist('mac-address','value-of-mac-address','fixed-address','value-of-fixed-address'))
+# ONE_DHCP_PUBLIC and ONE_DHCP_LOCAL must be like nlist('machine-name',nlist('mac-address','value-of-mac-address','fixed-address','value-of-fixed-address'))
 #
 
 variable ONE_DHCP_PUBLIC ?= nlist();
-variable ONE_DHCP_PRIVATE ?= nlist();
+variable ONE_DHCP_LOCAL ?= nlist();
 
 variable DHCPD_CONF = <<EOF;
 # LAL main DHCP server configuration
@@ -94,12 +94,12 @@ variable DHCPD_CONF = DHCPD_CONF + <<EOF;
 group {
 EOF
 
-variable DHCPD_CONF = DHCPD_CONF + '        option routers '+ONE_DHCPD_PRIVATE_COMMON['router']+";\n";
-variable DHCPD_CONF = DHCPD_CONF + '        option subnet-mask '+ONE_DHCPD_PRIVATE_COMMON['netmask']+";\n";
+variable DHCPD_CONF = DHCPD_CONF + '        option routers '+ONE_DHCPD_LOCAL_COMMON['router']+";\n";
+variable DHCPD_CONF = DHCPD_CONF + '        option subnet-mask '+ONE_DHCPD_LOCAL_COMMON['netmask']+";\n";
 
-variable PRIVATE_CONF_STRING = {
+variable LOCAL_CONF_STRING = {
 	contents = '';
-	foreach (k;v;ONE_DHCP_PRIVATE) {
+	foreach (k;v;ONE_DHCP_LOCAL) {
 		contents = contents + 'host '+k+" {\n";
 		contents = contents + '    hardware ethernet '+v['mac-address']+";\n";
 		contents = contents + '    fixed-address '+v['fixed-address']+";\n";
@@ -108,7 +108,7 @@ variable PRIVATE_CONF_STRING = {
 	contents;
 };
 
-#variable DHCPD_CONF = DHCPD_CONF + PRIVATE_CONF_STRING;
+variable DHCPD_CONF = DHCPD_CONF + LOCAL_CONF_STRING;
 variable DHCPD_CONF = DHCPD_CONF + <<EOF;
 }
 EOF
@@ -120,8 +120,8 @@ EOF
 
 variable SHARED_NETWORK_STRING = {
 	contents = '';
-	contents = contents + 'subnet '+ONE_DHCPD_PRIVATE_COMMON['subnet']+' netmask '+ONE_DHCPD_PRIVATE_COMMON['netmask']+" {\n";
-	contents = contents + '        option routers '+ONE_DHCPD_PRIVATE_COMMON['router']+";\n";
+	contents = contents + 'subnet '+ONE_DHCPD_LOCAL_COMMON['subnet']+' netmask '+ONE_DHCPD_LOCAL_COMMON['netmask']+" {\n";
+	contents = contents + '        option routers '+ONE_DHCPD_LOCAL_COMMON['router']+";\n";
 	contents = contents + "}\n";
 	contents = contents + 'subnet '+ONE_DHCPD_PUBLIC_COMMON['subnet']+' netmask '+ONE_DHCPD_PUBLIC_COMMON['netmask']+" {\n";
 	contents = contents + '        option vendor-encapsulated-options 01:04:00:00:00:00:ff'+";\n";
@@ -150,4 +150,5 @@ EOF
 include { 'components/chkconfig/config' };
 "/software/components/chkconfig/service/dhcpd/on" = "";
 "/software/components/chkconfig/service/dhcpd/startstop" = true;
+
 

@@ -19,8 +19,9 @@
 
 unique template ganglia/rpms/i386/host;
 
+include { 'config/ganglia/host' };
+
 '/software/packages' = {
   pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'i386');
 };
 
-include { 'config/ganglia/host' };

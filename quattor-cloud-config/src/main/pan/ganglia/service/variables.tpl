@@ -19,6 +19,7 @@
 
 unique template ganglia/service/variables;
 
+variable GANGLIA_VERSION_NUM ?= '3.1.7-2.fc14';
 variable GANGLIA_GRIDNAME ?= 'StratusLab Ganglia';
 variable GANGLIA_DATA_SOURCES ?= nlist('DEFAULT','localhost');
 

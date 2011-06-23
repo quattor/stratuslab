@@ -19,6 +19,7 @@
 
 unique template ganglia/rpms/x86_64/frontend;
 
+include { 'config/ganglia/frontend' };
 
 '/software/packages' = {
   pkg_repl('ganglia-gmetad', GANGLIA_VERSION_NUM, 'x86_64');
@@ -27,4 +28,3 @@ unique template ganglia/rpms/x86_64/frontend;
   pkg_repl('libganglia-3_1_0', GANGLIA_VERSION_NUM, 'x86_64');
 };
 
-include { 'config/ganglia/frontend' };

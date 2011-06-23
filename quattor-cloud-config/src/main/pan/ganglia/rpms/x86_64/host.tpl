@@ -19,9 +19,10 @@
 
 unique template ganglia/rpms/x86_64/host;
 
+include { 'config/ganglia/host' };
+
 '/software/packages' = {
   pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'x86_64');
   pkg_repl('libganglia-3_1_0', GANGLIA_VERSION_NUM, 'x86_64');
 };
 
-include { 'config/ganglia/host' };
