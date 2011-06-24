@@ -23,14 +23,77 @@ include { 'claudia/rpms/daemon' };
 
 include { 'components/claudia/config' };
 
-'/software/components/claudia/sm-config/SiteRoot'      = 'lal.in2p3.fr';
-'/software/components/claudia/sm-config/WASUP/WASUPLogin'   = 'oneadmin';
-'/software/components/claudia/sm-config/WASUP/WASUPPassword' = 'secret';
+variable IP_CLAUDIA_PUBLIC_RANGE = {
+ip_claudia = '';
+foreach(k;v;ONE_NETWORK['public']['vms']) {
+        if (v['claudia'] != 'no') {
+         ip_claudia = ip_claudia+v['fixed-address']+"/";
+        };
+};
+ip_claudia;
+};
 
-'/software/components/claudia/reportClient-config/SiteRoot' = 'lal.in2p3.fr';
+variable MAC_CLAUDIA_PUBLIC_RANGE = {
+ip_claudia = '';
+foreach(k;v;ONE_NETWORK['public']['vms']) {
+        if (v['claudia'] != 'no') {
+         ip_claudia = ip_claudia+v['mac-address']+"/";
+        };
+};
+ip_claudia;
+};
 
-'/software/components/claudia/tcloud-config/onePassword' = '42d9d2622f862cd803d4395be2c1edd362213525';
-'/software/components/claudia/tcloud-config/oneSshKey'   = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsqnlWWWXssptEAupZZrNJlheOjysx/qgrXLiEVcikb9GSLacXWT89MCd8VcsNXR9dObSNmPrJcCbbEF0bGzZcyy0SCJ9NiaBaIri8Em59cI7XncpKUjuqbbql6D7VZwfYU3w4gqAljNoqqXA9EhL3uf36p0gcKG8LyRIumQomP5Ymoe+wLo05FkXPQAp4+Jiz9VD1WeUCkfbhy3vwKiZI95yMA/Jfge7x4KaOIJHGuSNu7UgDE6TNvETYtz7yR1ND4B5y79KjvfmfOHvk3MoXjhEdosYfowiqdB8Hqv3Aea5hINSOyZc/Javhn+OjXbyNQf3meEMDMnb+86MVGGXIQ== root@telefonica-1';
+
+variable STATIC_CLAUDIA = {
+ ip_claudia = '';
+foreach(k;v;ONE_NETWORK['public']['vms']) {
+        if (v['claudia'] == 'sta') {
+         ip_claudia = ip_claudia+v['fixed-address']+"/";
+        };
+};
+ ip_claudia;
+};
+
+variable IP_CLAUDIA_LOCAL_RANGE = {
+ip_claudia = '';
+foreach(k;v;ONE_NETWORK['local']['vms']) {
+        if (v['claudia'] != 'no') {
+         ip_claudia = ip_claudia+v['fixed-address']+"/";
+        };
+};
+ip_claudia;
+};
+
+prefix '/software/components/claudia';
+'sm-config/NetworkRanges/0' = nlist(
+                            'Network', ONE_NETWORK['public']['subnet'],
+                            'Netmask', ONE_NETWORK['public']['netmask'],
+                            'Gateway', ONE_NETWORK['public']['router'],
+                            'DNS',     ONE_NETWORK['nameserver'][0],
+                            'IP',      IP_CLAUDIA_PUBLIC_RANGE,
+                            'Public', true
+                        );
+
+'sm-config/NetworkRanges/1' = nlist(
+                         'Network', ONE_NETWORK['local']['subnet'],
+                         'Netmask', ONE_NETWORK['local']['netmask'],
+                         'Gateway', ONE_NETWORK['local']['router'],
+                         'DNS',     ONE_NETWORK['nameserver'][0],
+                         'IP',      IP_CLAUDIA_LOCAL_RANGE,
+                         'Public',  false
+                        );
+
+'sm-config/StaticIpList'   = STATIC_CLAUDIA;
+'sm-config/NetworkMac/NetworkMacList' = MAC_CLAUDIA_PUBLIC_RANGE;
+
+'sm-config/SiteRoot'      = ONE_NETWORK['domain'];
+'sm-config/WASUP/WASUPLogin'   = 'oneadmin';
+'sm-config/WASUP/WASUPPassword' = 'secret';
+
+'reportClient-config/SiteRoot' = ONE_NETWORK['domain'];
+
+'tcloud-config/onePassword' = '42d9d2622f862cd803d4395be2c1edd362213525';
+'tcloud-config/oneSshKey'   = 'ssh-rsa ';
 
 include { 'components/accounts/config' };
 # Create the 'oneadmin' user and 'cloud' group for OpenNebula.

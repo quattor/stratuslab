@@ -21,6 +21,62 @@ unique template one/service/onevnet-config;
 
 include { 'components/oned/config' };
 
+variable STRATUSLAB_PRIVATE_NETWORK_CONFIG = <<EOF;
+NAME=private
+PUBLIC=YES
+TYPE=RANGED
+BRIDGE=virbr0
+NETWORK_ADDRESS=192.168.122.2
+NETWORK_SIZE=252
+EOF
+
+variable STRATUSLAB_LOCAL_NETWORK_HEADER = <<EOF;
+NAME=local
+PUBLIC=YES
+TYPE=FIXED
+EOF
+
+variable STRATUSLAB_LOCAL_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['local']['interface']+"\n\n";
+
+variable STRATUSLAB_PUBLIC_NETWORK_HEADER = <<EOF;
+NAME=public
+PUBLIC=YES
+TYPE=FIXED
+EOF
+
+variable STRATUSLAB_PUBLIC_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['public']['interface']+"\n\n";
+
+variable STRATUSLAB_LOCAL_NETWORK_BODY = {
+        result = '';
+        foreach (k;v;ONE_NETWORK['local']['vms']){
+                if (v['claudia'] == 'no') {
+                        result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
+                };
+        };
+        result;
+};
+
+variable STRATUSLAB_LOCAL_NETWORK_CONFIG = STRATUSLAB_LOCAL_NETWORK_HEADER + STRATUSLAB_LOCAL_NETWORK_BRIDGE + STRATUSLAB_LOCAL_NETWORK_BODY;
+
+variable STRATUSLAB_PUBLIC_NETWORK_HEADER = <<EOF;
+NAME=public
+PUBLIC=YES
+TYPE=FIXED
+EOF
+
+variable STRATUSLAB_PUBLIC_NETWORK_BODY = {
+        result = '';
+        foreach (k;v;ONE_NETWORK['public']['vms']){
+                if (v['claudia'] == 'no') {
+                        result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
+                };
+        };
+        result;
+};
+
+variable STRATUSLAB_PUBLIC_NETWORK_CONFIG = STRATUSLAB_PUBLIC_NETWORK_HEADER + STRATUSLAB_PUBLIC_NETWORK_BRIDGE + STRATUSLAB_PUBLIC_NETWORK_BODY;
+
+
 prefix '/software/components/oned/vnets';
 
 'private' = STRATUSLAB_PRIVATE_NETWORK_CONFIG;

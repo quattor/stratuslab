@@ -23,16 +23,32 @@ include { 'one/rpms/dhcpd' };
 
 include { 'components/filecopy/config' };
 
-variable ONE_DHCP_DOMAIN ?= 'localhost';
-variable ONE_DHCP_NAMESERVER ?= list('127.0.0.1');
+variable ONE_DHCP_DOMAIN = ONE_NETWORK['domain'];
+variable ONE_DHCP_NAMESERVER = ONE_NETWORK['nameserver'];
+variable ONE_DHCPD_PUBLIC_COMMON  = nlist('subnet' ,ONE_NETWORK['public']['subnet'],
+                                          'router' ,ONE_NETWORK['public']['router'],
+                                          'netmask',ONE_NETWORK['public']['netmask'],
+                                    );
+variable ONE_DHCPD_LOCAL_COMMON = nlist('subnet' ,ONE_NETWORK['local']['subnet'],
+                                        'router' ,ONE_NETWORK['local']['router'],
+                                        'netmask',ONE_NETWORK['local']['netmask'],
+                                    );
 
-variable ONE_DHCPD_PUBLIC_COMMON ?= nlist('subnet','192.168.0.0',
-					 'router','127.0.0.1',
-					 'netmask', '255.255.255.0');
+variable ONE_DHCP_PUBLIC = {
+        net = nlist();
+        foreach(k;v;ONE_NETWORK['public']['vms']) {
+                net[k]=v;
+        };
+        net;
+};
 
-variable ONE_DHCPD_LOCAL_COMMON ?= nlist('subnet','172.17.16.0',
-					  'router','127.0.0.1',
-					  'netmask', '255.255.255.0');
+variable ONE_DHCP_LOCAL = {
+        net = nlist();
+        foreach(k;v;ONE_NETWORK['local']['vms']) {
+                net[k]=v;
+        };
+        net;
+};
 
 #
 # ONE_DHCP_PUBLIC and ONE_DHCP_LOCAL must be like nlist('machine-name',nlist('mac-address','value-of-mac-address','fixed-address','value-of-fixed-address'))
