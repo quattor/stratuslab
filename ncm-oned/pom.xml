@@ -6,7 +6,7 @@
   <artifactId>oned</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.6</version>
+  <version>1.7-SNAPSHOT</version>
   <name>oned configuration</name>
 
   <distributionManagement>
