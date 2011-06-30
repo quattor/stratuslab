@@ -32,4 +32,4 @@ include { 'stratuslab-package-versions' };
 #
 # Fetch CRL script is required to keep CRLs up-to-date.
 #
-'/software/packages' = pkg_repl('fetch-crl','2.7.0-2','noarch');
+'/software/packages' = pkg_repl('fetch-crl','3.0.5-1.fc14','noarch');

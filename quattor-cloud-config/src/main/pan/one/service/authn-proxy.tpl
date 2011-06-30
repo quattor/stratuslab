@@ -38,6 +38,14 @@ include { 'components/chkconfig/config' };
 '/software/components/chkconfig/service/one-proxy/on' = '';
 '/software/components/chkconfig/service/one-proxy/startstop' = true;
 
+
+include { 'components/chkconfig/config' };
+"/software/components/chkconfig/service/fetch-crl-boot/on" = "2345";
+"/software/components/chkconfig/service/fetch-crl-boot/startstop" = true;
+"/software/components/chkconfig/service/fetch-crl-cron/on" = "2345";
+"/software/components/chkconfig/service/fetch-crl-cron/startstop" = true;
+
+
 #
 # Configure the users.
 #
