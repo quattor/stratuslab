@@ -19,7 +19,13 @@
 
 unique template one/rpms/frontend;
 
-include { 'stratuslab-package-versions' };
+include { 'default/stratuslab/package-versions' };
+
+variable STRATUSLAB_ONE_VERSION                ?= error('STRATUSLAB_ONE_VERSION variable undefined');
+variable STRATUSLAB_QUARANTINE_CLEANUP_VERSION ?= error('STRATUSLAB_QUARANTINE_CLEANUP_VERSION variable undefined');
+variable STRATUSLAB_WEB_MONITOR_VERSION        ?= error('STRATUSLAB_WEB_MONITOR_VERSION variable undefined');
+variable STRATUSLAB_SYSADMIN_CLI_VERSION       ?= error('STRATUSLAB_SYSADMIN_CLI_VERSION variable undefined');
+variable STRATUSLAB_USER_CLI_VERSION           ?= error('STRATUSLAB_USER_CLI_VERSION variable undefined');
 
 #
 # OpenNebula and its dependencies. 
@@ -28,11 +34,13 @@ include { 'stratuslab-package-versions' };
 
 '/software/packages' = pkg_repl('quarantine-cleanup', STRATUSLAB_QUARANTINE_CLEANUP_VERSION, 'noarch');
 
+'/software/packages' = pkg_repl('rubygem-bunny','0.6.0-1.fc14','noarch');
+
 # Not included in rhel5 and fedora14
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 
 # Include the benchmarks.
-include { 'stratuslab-benchmarks' };
+include { 'machine-types/stratuslab-benchmarks' };
 
 # StratusLab web monitor.
 '/software/packages' = pkg_repl('stratuslab-web-monitor', STRATUSLAB_WEB_MONITOR_VERSION, 'noarch');

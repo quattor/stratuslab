@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-unique template stratuslab-srv;
+unique template machine-types/stratuslab-srv;
 
 '/software/packages' = pkg_repl('mailman', '2.1.9-4.el5', 'x86_64');
 '/software/packages' = pkg_del('sendmail', '8.13.8-8.el5', 'x86_64');

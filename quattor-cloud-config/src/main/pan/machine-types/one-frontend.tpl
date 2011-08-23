@@ -111,8 +111,8 @@ include { 'one/service/iptables-frontend' };
 include { 'config/os/updates' };
 
 # Add support for pxe
-include { 'one/service/pxe' };
+#include { 'one/service/pxe' };
 
 # Add configuration for tftp server
-include { 'one/service/tftp' };
+#include { 'one/service/tftp' };
 

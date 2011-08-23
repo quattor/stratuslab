@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-template stratuslab-benchmarks;
+template machine-types/stratuslab-benchmarks;
 
-include { 'stratuslab-package-versions' };
+include { 'default/stratuslab/package-versions' };
 
 # StratusLab benchmarks.
 '/software/packages' = pkg_repl('stratuslab-benchmarks',STRATUSLAB_BENCHMARKS_VERSION,'x86_64');

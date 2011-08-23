@@ -19,9 +19,10 @@
 
 unique template one/rpms/authn-proxy;
 
-include { 'stratuslab-package-versions' };
+include { 'default/stratuslab/package-versions' };
 
-#'/software/packages' = pkg_repl('stratuslab-cloud-proxy', STRATUSLAB_AUTHN_PROXY_VERSION, 'noarch');
+variable STRATUSLAB_AUTHN_PROXY_VERSION ?= error('STRATUSLAB_AUTHN_PROXY_VERSION variable undefined');
+
 '/software/packages' = pkg_repl('stratuslab-one-proxy', STRATUSLAB_AUTHN_PROXY_VERSION, 'noarch');
 
 #

@@ -19,6 +19,8 @@
 
 unique template pdisk/rpms/host;
 
-variable PDISK_VERSION ?= '0.0.1-0.20110526.112924';
+include { 'default/stratuslab/package-versions' };
+
+variable PDISK_VERSION ?= error('PDISK_VERSION variable undefined');
 
 '/software/packages'=pkg_repl('pdisk-host', PDISK_VERSION, 'noarch');

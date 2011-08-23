@@ -30,10 +30,18 @@ include { 'components/chkconfig/config' };
 #
 # Write the configuration file with filecopy for the moment.
 #
+#include { 'components/filecopy/config' };
+#'/software/components/filecopy/services/{/etc/stratuslab/pdisk.cfg}' = 
+#  nlist('config',file_contents('pdisk/service/daemon.cfg'),
+#        'restart','service pdisk restart',
+#        'perms','0644');
+
+#
+# Write the configuration file with filecopy for the moment.
+#
 include { 'components/filecopy/config' };
-'/software/components/filecopy/services/{/etc/stratuslab/pdisk.cfg}' = 
-  nlist('config',file_contents('pdisk/service/daemon.cfg'),
+'/software/components/filecopy/services/{/etc/stratuslab/storage/pdisk/login.conf}' =
+  nlist('config',file_contents('pdisk/service/login.conf'),
         'restart','service pdisk restart',
         'perms','0644');
-
 

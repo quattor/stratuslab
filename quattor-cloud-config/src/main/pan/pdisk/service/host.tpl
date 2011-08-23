@@ -31,9 +31,9 @@ include { 'components/sudo/config' };
 #tomcat  ALL=(GLEXEC_ACCOUNTS) NOPASSWD: GLEXEC_CMDS
 '/software/components/sudo/privilege_lines' = 
   append(
-    nlist('user', 'oneadmin',
-          'run_as', 'ALL',
-          'host', 'ALL',
+    nlist('user'   , 'oneadmin',
+          'run_as' , 'ALL',
+          'host'   , 'ALL',
           'options', 'NOPASSWD',
-          'cmd', '/usr/sbin/attach-persistent-disk.sh, /usr/sbin/detach-persistent-disk.sh'),
+          'cmd'    , '/sbin/iscsiadm, /usr/sbin/detach-persistent-disk.sh'),
   );
