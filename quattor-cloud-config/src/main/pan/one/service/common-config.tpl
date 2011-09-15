@@ -50,14 +50,17 @@ include { 'components/sysctl/config' };
 '/software/components/sysctl/variables/net.bridge.bridge-nf-call-arptables' = '0';
 
 # Setup the networking.
+include { 'components/network/config' };
+
 '/system/network/interfaces/br0' = nlist(
   'device', 'br0',
   'set_hwaddr', false,
   'type', 'Bridge',
   'bootproto', 'static',
   'onboot', 'yes',
-  'ip', DB_IP[escape(FULL_HOSTNAME)], 
-  'netmask', '255.255.254.0'  
+  'ip', NETWORK_PARAMS['ip'],
+  'netmask', NETWORK_PARAMS['netmask'],
+  'gateway', NETWORK_PARAMS['gateway'],
 );
 
 '/system/network/interfaces/eth0' = nlist(
