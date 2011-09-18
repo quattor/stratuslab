@@ -33,4 +33,4 @@ variable STRATUSLAB_CLOTHO_VERSION             ?= '0.1.7-1';
 variable STRATUSLAB_TCLOUD_SERVER_VERSION      ?= '0.1.7-1';
 
 variable MARKETPLACE_VERSION                   ?= '1.0.0-1';
-variable PDISK_VERSION                         ?= '1.0.0-1';
+variable PDISK_VERSION                         ?= '1.1-1';
