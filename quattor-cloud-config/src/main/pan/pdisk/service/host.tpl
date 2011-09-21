@@ -35,5 +35,5 @@ include { 'components/sudo/config' };
           'run_as' , 'ALL',
           'host'   , 'ALL',
           'options', 'NOPASSWD',
-          'cmd'    , '/sbin/iscsiadm, /usr/sbin/detach-persistent-disk.sh'),
+          'cmd'    , '/sbin/iscsiadm, /usr/sbin/detach-persistent-disk.sh, /usr/bin/virsh, /usr/sbin/attach-persistent-disk.sh'),
   );
