@@ -27,9 +27,9 @@ use Readonly;
 
 Readonly::Scalar my $PATH => '/software/components/one_proxy';
 
-Readonly::Scalar my $PSWD_FILE => '/etc/stratuslab/one-proxy/login-pswd.properties';
-Readonly::Scalar my $CERT_FILE => '/etc/stratuslab/one-proxy/login-cert.properties';
-Readonly::Scalar my $JAAS_FILE => '/etc/stratuslab/one-proxy/login.conf';
+Readonly::Scalar my $PSWD_FILE => '/etc/stratuslab/authn/login-pswd.properties';
+Readonly::Scalar my $CERT_FILE => '/etc/stratuslab/authn/login-cert.properties';
+Readonly::Scalar my $JAAS_FILE => '/etc/stratuslab/authn/login.conf';
 
 Readonly::Scalar my $RESTART => '/etc/init.d/authn-proxy restart';
 
