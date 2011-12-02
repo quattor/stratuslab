@@ -22,6 +22,20 @@ unique template one/service/parameters;
 include { if_exists('one/service/site_parameters') };
 
 #
+# OpenNebula user and group.
+#
+variable ONE_USER ?= 'oneadmin';
+variable ONE_USER_ID ?= 9000;
+variable ONE_GROUP ?= 'cloud';
+variable ONE_GROUP_ID ?= 9000;
+
+#
+# OpenNebula files and directories.
+#
+variable ONE_SERVICE ?= 'oned';
+variable ONE_HOOKS_DIR ?= '/usr/share/one/hooks/';
+
+#
 # Full hostname of NFS server, usually OpenNebula front-end.
 #
 variable ONE_NFS_SERVER ?= error('ONE_NFS_SERVER must be defined');

@@ -48,3 +48,49 @@ variable ONE_NFS_EXPORT_CONTENTS =
   'restart', 'service nfs restart'
 );
 
+#
+# Configure firewall for NFS services.
+#
+
+include { 'components/iptables/config' };
+
+# NFS ports must be defined explicitly.
+variable ONE_NFS_PORTS ?= nlist(
+  'tcp', list('111', '662', '875', '892', '2049', '32803'),
+  'udp', list('111', '662', '875', '892', '32769'),
+);
+variable ONE_NFS_CONF ?= '/etc/sysconfig/nfs';
+variable ONE_NFS_CONF_CONTENT ?= <<EOF;
+LOCKD_TCPPORT=32803
+LOCKD_UDPPORT=32769
+MOUNTD_PORT=892
+RQUOTAD_PORT=875
+STATD_PORT=662
+STATD_OUTGOING_PORT=2020
+EOF
+
+'/software/components/filecopy/services/' = npush(
+  escape(ONE_NFS_CONF), nlist(
+    'config', ONE_NFS_CONF_CONTENT,
+    'owner', 'root',
+    'group', 'root',
+    'perms', '0644',
+    'restart', 'service nfs restart; service rpcbind restart; service rpcsvcgssd restart'
+  ),
+);
+
+'/software/components/iptables/filter/rules' = {
+  foreach(proto; ports; ONE_NFS_PORTS) {
+    foreach(idx; port; ports) {
+      append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', proto,
+        'match', proto,
+        'dst_port', port,
+        'target', 'ACCEPT'
+      ));
+    };
+  };
+};
+

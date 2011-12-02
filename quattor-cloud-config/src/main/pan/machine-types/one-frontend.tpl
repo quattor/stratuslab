@@ -21,6 +21,16 @@ unique template machine-types/one-frontend;
 
 variable NEW_NETWORK_CONF ?= true;
 
+#
+# Define if StratusLab front-end is a virtualization node too.
+#
+variable IS_VIRTUALIZATION_NODE ?= false;
+
+#
+# Configure PAT on StratusLab front-end
+#
+variable ENABLE_PAT ?= false;
+
 variable FILESYSTEM_LAYOUT_CONFIG_SITE ?= "site/filesystems/glite";
 
 include { 'machine-types/nfs' };
@@ -38,9 +48,16 @@ include { 'rpms/web_server' };
 include { 'one/service/parameters' };
 
 #
-# Setup oneadmin account, libvirtd, and networking
+# Setup common and specific configurations.
 #
 include { 'one/service/common-config' };
+include {
+  if( IS_VIRTUALIZATION_NODE ) {
+    'one/service/node-config';
+  } else {
+    null;
+  };
+};
 
 #
 # Ganglia for the monitoring of machines and hosts
@@ -86,7 +103,13 @@ include { 'claudia/service/daemon' };
 # Include the packages (RPMs) for this node.
 #
 include { 'one/rpms/frontend' };
-include { 'one/rpms/node' };
+include {
+  if(IS_VIRTUALIZATION_NODE) {
+    'one/rpms/node';
+  } else {
+    null;
+  };
+};
 include { 'one/rpms/devel' };
 
 #
@@ -104,8 +127,23 @@ include { 'one/service/authn-proxy' };
 # Add private interface
 include { 'one/service/private-network' };
 
+# Configure port address translations
+include {
+  if(ENABLE_PAT) {
+    'one/service/pat';
+  } else {
+    null;
+  };
+};
+
 # Add firewall.
-include { 'one/service/iptables-bridging' };
+include {
+  if(IS_VIRTUALIZATION_NODE) {
+    'one/service/iptables-bridging';
+  } else {
+    null;
+  };
+};
 include { 'one/service/iptables-frontend' };
 
 include { 'config/os/updates' };

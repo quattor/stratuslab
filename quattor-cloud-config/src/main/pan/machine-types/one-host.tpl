@@ -33,6 +33,7 @@ include { 'one/service/parameters' };
 # Setup oneadmin account, libvirtd, and networking
 #
 include { 'one/service/common-config' };
+include { 'one/service/node-config' };
 
 #
 # DEBUG DEBUG DEBUG DEBUG DEBUG

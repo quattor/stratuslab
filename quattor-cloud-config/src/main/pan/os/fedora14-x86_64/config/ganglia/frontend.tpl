@@ -7,8 +7,8 @@ variable GANGLIA_VERSION_NUM ?= '3.1.7-2.fc14';
   pkg_repl('php-gd',    '5.3.6-1.fc14', 'x86_64');
   pkg_repl('php-common','5.3.6-1.fc14', 'x86_64');
   pkg_repl('rrdtool',   '1.4.4-1.fc14', 'x86_64');
-  pkg_repl('ruby',      '1.8.7.334-1.fc14','x86_64');
-  pkg_repl('ruby-libs', '1.8.7.334-1.fc14','x86_64');
+  pkg_repl('ruby',      '1.8.7.352-1.fc14','x86_64');
+  pkg_repl('ruby-libs', '1.8.7.352-1.fc14','x86_64');
 };
 
 '/software/packages'=pkg_repl('expat','2.0.1-10.fc13','x86_64');

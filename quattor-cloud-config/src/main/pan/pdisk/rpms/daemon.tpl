@@ -24,3 +24,4 @@ include { 'default/stratuslab/package-versions' };
 variable PDISK_VERSION ?= error('PDISK_VERSION variable undefined');
 
 '/software/packages'=pkg_repl('pdisk-server', PDISK_VERSION, 'noarch');
+'/software/packages'=pkg_repl('stratuslab-authn-config', STRATUSLAB_AUTHN_CONFIG ,'noarch');

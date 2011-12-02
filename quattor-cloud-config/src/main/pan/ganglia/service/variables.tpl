@@ -26,3 +26,8 @@ variable GANGLIA_DATA_SOURCES ?= nlist('DEFAULT','localhost');
 variable GANGLIA_MASTER ?= undef;
 variable GANGLIA_CLUSTER_NAME ?= undef;
 variable GANGLIA_WEB_SERVER ?= GANGLIA_MASTER;
+
+variable GANGLIA_GMETAD_XPORT ?= '8651';
+variable GANGLIA_GMETAD_IPORT ?= '8652';
+variable GANGLIA_GMOND_PORT ?= '8649';
+

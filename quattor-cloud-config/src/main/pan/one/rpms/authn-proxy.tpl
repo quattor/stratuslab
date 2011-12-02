@@ -24,7 +24,7 @@ include { 'default/stratuslab/package-versions' };
 variable STRATUSLAB_AUTHN_PROXY_VERSION ?= error('STRATUSLAB_AUTHN_PROXY_VERSION variable undefined');
 
 '/software/packages' = pkg_repl('stratuslab-one-proxy', STRATUSLAB_AUTHN_PROXY_VERSION, 'noarch');
-
+'/software/packages'=pkg_repl('stratuslab-authn-config', STRATUSLAB_AUTHN_CONFIG ,'noarch');
 #
 # Configuration module for the proxy.
 #

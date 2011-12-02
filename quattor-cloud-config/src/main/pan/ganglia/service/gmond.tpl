@@ -32,6 +32,27 @@ include { 'components/ganglia/config' };
 '/software/components/ganglia/client/udp_send_channel/host' = GANGLIA_MASTER;
 '/software/components/ganglia/client/globals/allow_extra_data' = true;
 
+include { 'components/iptables/config' };
+
+'/software/components/iptables/filter/rules' = {
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', GANGLIA_GMOND_PORT,
+        'target', 'ACCEPT'
+    ));
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'udp',
+        'match', 'udp',
+        'dst_port', GANGLIA_GMOND_PORT,
+        'target', 'ACCEPT'
+    ));
+};
+
 prefix '/software/components/ganglia/client';
 
 'modules/0/name' = 'core_metrics';

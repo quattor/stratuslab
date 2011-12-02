@@ -21,25 +21,58 @@ unique template one/service/iptables-frontend;
 
 include { 'components/iptables/config' };
 
-'/software/components/iptables/filter/preamble/input' = 'ACCEPT [0:0]';
-'/software/components/iptables/filter/preamble/forward' = 'ACCEPT [0:0]';
+# Use a secure policy by default for inbound connections. That's why following
+# filter rules should not target reject rules.
+'/software/components/iptables/filter/preamble/input' = 'DROP [0:0]';
+'/software/components/iptables/filter/preamble/forward' = 'DROP [0:0]';
 '/software/components/iptables/filter/preamble/output' = 'ACCEPT [0:0]';
 '/software/components/iptables/filter/epilogue' = 'COMMIT';
 
-'/software/components/iptables/filter/rules' = append(
-  nlist('command', '-A',
-        'chain', 'INPUT',
-        'protocol', 'tcp',
-        'match', 'tcp',
-        'source', '127.0.0.1',
-        'dst_port', '2633',
-        'target', 'accept'));
+'/software/components/iptables/filter/rules' = {
+# Common rules
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'match', 'state',
+    'state', 'RELATED,ESTABLISHED',
+    'target', 'ACCEPT',
+  ));
+# SSH port
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '22',
+    'target', 'ACCEPT',
+  ));
+# HTTP port (e.g. webmonitor/appliancesRepository)
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '80',
+    'target', 'ACCEPT',
+  ));
+# OpenNebula port
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'source', '127.0.0.1',
+    'dst_port', '2633',
+    'target', 'ACCEPT'
+  ));
+# StratusLab port
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '2634',
+    'target', 'ACCEPT',
+  ));
+};
 
-'/software/components/iptables/filter/rules' = append(
-  nlist('command', '-A',
-        'chain', 'INPUT',
-        'protocol', 'tcp',
-        'match', 'tcp',
-        'dst_port', '2633',
-        'target', 'reject',
-        'reject-with', 'icmp-port-unreachable'));

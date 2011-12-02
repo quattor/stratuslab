@@ -25,16 +25,20 @@ variable PRIVATE_NETMASK    ?= '255.255.255.0';
 variable PRIVATE_MASTER_INT ?= 'br0';
 variable PRIVATE_INT_NAME   ?= 'privlan';
 
-'/system/network/interfaces/br0/' = npush(
-  'aliases', nlist(
-		PRIVATE_INT_NAME, nlist(
-  				'ip'     , PRIVATE_IP,
-  				'netmask', PRIVATE_NETMASK,
-			),
-		),
-);
+'/system/network/interfaces/' = {
+    SELF[PRIVATE_MASTER_INT]['aliases'] = nlist(
+        PRIVATE_INT_NAME, nlist(
+            'ip', PRIVATE_IP,
+            'netmask', PRIVATE_NETMASK,
+        ),
+    );
+    SELF;
+};
 
 include { 'components/iptables/config' };
+
+'/software/components/iptables/nat/epilogue' = 'COMMIT';
+'/software/components/iptables/filter/epilogue' = 'COMMIT';
 
 # NAT private LAN interface
 '/software/components/iptables/nat/rules' = append(
@@ -57,4 +61,8 @@ include { 'components/iptables/config' };
                'source', PRIVATE_NET,
                'target', 'accept'));
 };
+
+# Enable IP forwarding
+include { 'components/sysctl/config' };
+'/software/components/sysctl/variables/net.ipv4.ip_forward' = '1';
 
