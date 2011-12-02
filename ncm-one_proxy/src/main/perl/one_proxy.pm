@@ -27,11 +27,11 @@ use Readonly;
 
 Readonly::Scalar my $PATH => '/software/components/one_proxy';
 
-Readonly::Scalar my $PSWD_FILE => '/etc/stratuslab/authn/login-pswd.properties';
-Readonly::Scalar my $CERT_FILE => '/etc/stratuslab/authn/login-cert.properties';
-Readonly::Scalar my $JAAS_FILE => '/etc/stratuslab/authn/login.conf';
+Readonly::Scalar my $PSWD_FILE => 'login-pswd.properties';
+Readonly::Scalar my $CERT_FILE => 'login-cert.properties';
+Readonly::Scalar my $JAAS_FILE => 'login.conf';
 
-Readonly::Scalar my $RESTART => '/etc/init.d/authn-proxy restart';
+Readonly::Scalar my $RESTART => '/etc/init.d/one-proxy restart';
 
 our $EC=LC::Exception::Context->new->will_store_all;
 
@@ -152,18 +152,19 @@ sub Configure {
     # Get full tree of configuration information for component.
     my $t = $config->getElement($PATH)->getTree();
     my $params = $t->{'config'};
+    my $config_dir = $t->{'dir'};
 
     # Create the password configuration file.
     my $contents = format_pswd_file_contents($params->{'users_by_pswd'});
-    my $pswd_changed = write_config_file($PSWD_FILE, $contents);
+    my $pswd_changed = write_config_file($config_dir."/".$PSWD_FILE, $contents);
 
     # Create the certificate authentication file.
     $contents = format_cert_file_contents($params->{'users_by_cert'});
-    my $cert_changed = write_config_file($CERT_FILE, $contents);
+    my $cert_changed = write_config_file($config_dir."/".$CERT_FILE, $contents);
 
     # Create the JAAS configuration file.
     $contents = format_jaas_file_contents($params->{'jaas'});
-    my $jaas_changed = write_config_file($JAAS_FILE, $contents);
+    my $jaas_changed = write_config_file($config_dir."/".$JAAS_FILE, $contents);
 
     # Restart the daemon if necessary.
     if ($pswd_changed || $cert_changed || $jaas_changed) {
