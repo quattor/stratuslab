@@ -22,9 +22,9 @@ unique template one/rpms/authn-proxy;
 include { 'default/stratuslab/package-versions' };
 
 variable STRATUSLAB_AUTHN_PROXY_VERSION ?= error('STRATUSLAB_AUTHN_PROXY_VERSION variable undefined');
+'/software/packages' = pkg_repl('stratuslab-one-proxy'   , STRATUSLAB_AUTHN_PROXY_VERSION , 'noarch');
+'/software/packages' = pkg_repl('stratuslab-authn-config', STRATUSLAB_AUTHN_CONFIG_VERSION, 'noarch');
 
-'/software/packages' = pkg_repl('stratuslab-one-proxy', STRATUSLAB_AUTHN_PROXY_VERSION, 'noarch');
-'/software/packages'=pkg_repl('stratuslab-authn-config', STRATUSLAB_AUTHN_CONFIG ,'noarch');
 #
 # Configuration module for the proxy.
 #
@@ -33,4 +33,5 @@ variable STRATUSLAB_AUTHN_PROXY_VERSION ?= error('STRATUSLAB_AUTHN_PROXY_VERSION
 #
 # Fetch CRL script is required to keep CRLs up-to-date.
 #
-'/software/packages' = pkg_repl('fetch-crl','3.0.5-1.fc14','noarch');
+variable FETCH_CRL_VERSION ?= error('FETCH_CRL_VERSION variable undefined');
+'/software/packages' = pkg_repl('fetch-crl',FETCH_CRL_VERSION,'noarch');

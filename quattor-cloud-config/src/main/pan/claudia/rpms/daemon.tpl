@@ -22,11 +22,11 @@ unique template claudia/rpms/daemon;
 include { 'default/stratuslab/package-versions' };
 
 variable STRATUSLAB_CLAUDIA_CLIENT_VERSION ?= error('STRATUSLAB_CLAUDIA_CLIENT_VERSION variable undefined');
-
 '/software/packages'=pkg_repl('claudia-client-rpm',STRATUSLAB_CLAUDIA_CLIENT_VERSION,'noarch');
-'/software/packages'=pkg_repl('clotho-rpm',STRATUSLAB_CLAUDIA_CLIENT_VERSION,'noarch');
-'/software/packages'=pkg_repl('tcloud-server-rpm',STRATUSLAB_CLAUDIA_CLIENT_VERSION,'noarch');
+'/software/packages'=pkg_repl('clotho-rpm'        ,STRATUSLAB_CLAUDIA_CLIENT_VERSION,'noarch');
+'/software/packages'=pkg_repl('tcloud-server-rpm' ,STRATUSLAB_CLAUDIA_CLIENT_VERSION,'noarch');
 
 # Not included in rhel5 and fedora14
-'/software/packages'=pkg_repl('activemq','5.4.2-1.el5','x86_64');
-'/software/packages'=pkg_repl('activemq-client','5.4.2-1.el5','x86_64');
+variable ACTIVEMQ_VERSION ?= error('ACTIVEMQ_VERSION variable undefined');
+'/software/packages'=pkg_repl('activemq'       ,ACTIVEMQ_VERSION,'x86_64');
+'/software/packages'=pkg_repl('activemq-client',ACTIVEMQ_VERSION,'x86_64');

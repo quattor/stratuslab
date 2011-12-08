@@ -20,9 +20,9 @@
 unique template registration/rpms/daemon;
 
 variable STRATUSLAB_REGISTRATION_VERSION ?= error('STRATUSLAB_REGISTRATION_VERSION variable undefined');
-
 '/software/packages'=pkg_repl('stratuslab-registration', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
 '/software/packages'=pkg_repl('stratuslab-ldap-support', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
-'/software/packages'=pkg_repl('apacheds', '1.5.7-0', 'i386');
+variable APACHEDS_VERSION ?= error('APACHEDS_VERSION variable undefined');
+'/software/packages'=pkg_repl('apacheds', APACHEDS_VERSION, 'i386');
 
 include { 'config/stratuslab/registration' };

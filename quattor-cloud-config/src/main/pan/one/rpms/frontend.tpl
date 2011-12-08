@@ -36,6 +36,8 @@ variable STRATUSLAB_USER_CLI_VERSION           ?= error('STRATUSLAB_USER_CLI_VER
 
 '/software/packages' = pkg_repl('rubygem-bunny','0.6.0-1.fc14','noarch');
 
+'/software/packages' = pkg_repl('rubygem-stomp','1.1.6-1.fc14','noarch');
+
 # Not included in rhel5 and fedora14
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 

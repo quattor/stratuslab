@@ -21,6 +21,5 @@ unique template marketplace/rpms/daemon;
 
 include { 'default/stratuslab/package-versions' };
 
-variable MARKETPLACE_VERSION ?= error('MARKETPLACE_VERSION variable undefined');
-
-'/software/packages'=pkg_repl('stratuslab-marketplace', MARKETPLACE_VERSION, 'noarch');
+variable STRATUSLAB_MARKETPLACE_VERSION ?= error('STRATUSLAB_MARKETPLACE_VERSION variable undefined');
+'/software/packages'=pkg_repl('stratuslab-marketplace', STRATUSLAB_MARKETPLACE_VERSION, 'noarch');
