@@ -6,7 +6,7 @@
   <artifactId>libvirtd</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.19-SNAPSHOT</version>
+  <version>1.19</version>
   <name>libvirtd configuration</name>
 
   <properties>
