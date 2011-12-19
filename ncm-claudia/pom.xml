@@ -6,7 +6,7 @@
   <artifactId>claudia</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.17</version>
+  <version>1.18-SNAPSHOT</version>
   <name>Component to configure Claudia</name>
 
   <properties>
