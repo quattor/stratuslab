@@ -6,7 +6,7 @@
   <artifactId>one_proxy</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.23-SNAPSHOT</version>
+  <version>1.23</version>
   <name>authentication proxy configuration</name>
 
   <properties>
