@@ -33,8 +33,19 @@ include {'components/chkconfig/config'};
 #
 include { 'components/filecopy/config' };
 
+variable ONE_NFS_OPTIONS ?= 'async,no_subtree_check,rw,no_root_squash';
+
 variable ONE_NFS_FLAGS = 
-  ONE_NFS_WILDCARD + '(async,no_subtree_check,rw,no_root_squash)' + "\n";
+    if( is_list(ONE_NFS_WILDCARD) ) {
+        flags = '';
+        foreach(idx; wildcard; ONE_NFS_WILDCARD) {
+            flags = flags + wildcard + '(' + ONE_NFS_OPTIONS + ') ';
+        };
+        flags = flags + "\n";
+        return(flags);
+    } else {
+        return(ONE_NFS_WILDCARD + '(' + ONE_NFS_OPTIONS + ")\n");
+    };
 
 variable ONE_NFS_EXPORT_CONTENTS =
 '/var/lib/one ' + ONE_NFS_FLAGS +
