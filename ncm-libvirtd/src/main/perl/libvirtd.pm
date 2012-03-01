@@ -17,7 +17,7 @@ use CAF::FileWriter;
 use CAF::Process;
 use LC::File qw (makedir);
 
-our $VERSION = q{${version}};
+our $VERSION = q{${project.version}};
 
 use Readonly;
 Readonly::Scalar my $SPACE => q{ };

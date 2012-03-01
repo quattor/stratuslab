@@ -91,7 +91,7 @@
 
     <BUILD_INFO>
 #
-# ${artifactId}, ${project.version}, ${maven.build.timestamp}
+# ${project.artifactId}, ${project.version}, ${maven.build.timestamp}
 #
 </BUILD_INFO>
 

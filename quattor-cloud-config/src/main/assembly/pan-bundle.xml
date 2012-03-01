@@ -10,7 +10,7 @@
   <fileSets>
     <fileSet>
       <directory>target/pan</directory>
-      <outputDirectory>${artifactId}</outputDirectory>
+      <outputDirectory>${project.artifactId}</outputDirectory>
     </fileSet>
   </fileSets>
   
