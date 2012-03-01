@@ -67,4 +67,16 @@
     </developer>
   </developers>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.quattor.pan</groupId>
+          <artifactId>panc-maven-plugin</artifactId>
+          <version>9.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 </project>
