@@ -19,17 +19,6 @@
 
 unique template machine-types/pdisk;
 
-variable NEW_NETWORK_CONF ?= true;
-
-include { 'machine-types/nfs' };
-
-include { 'pdisk/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-
-include { 'config/os/updates' };
+# THIS TEMPLATE IS DEPRECATED
+include { 'machine-types/stratuslab/pdisk' };
 

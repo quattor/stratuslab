@@ -44,27 +44,27 @@ include { 'components/oned/config' };
 '/software/components/oned/mads/im_kvm' = nlist(
     'manager', 'IM',
     'executable', 'one_im_ssh',
-    'arguments', 'kvm'
+    'arguments', '-r 0 -t 15 kvm'
   );
 
 '/software/components/oned/mads/vmm_kvm' = nlist(
     'manager', 'VM',
-    'executable', 'one_vmm_ssh',
-    'arguments', 'kvm',
-    'default', 'vmm_ssh/vmm_ssh_kvm.conf',
+    'executable', 'one_vmm_exec',
+    'arguments', '-t 15 -r 0 kvm',
+    'default', 'vmm_exec/vmm_exec_kvm.conf',
     'type', 'kvm'
   );
 
-'/software/components/oned/mads/tm_nfs' = nlist(
+'/software/components/oned/mads/tm_stratuslab' = nlist(
     'manager', 'TM',
     'executable', 'one_tm',
-    'arguments', 'tm_nfs/tm_nfs.conf'
+    'arguments', 'tm_stratuslab/tm_stratuslab.conf'
   );
 
-'/software/components/oned/mads/tm_ssh' = nlist(
+'/software/components/oned/mads/tm_shared' = nlist(
     'manager', 'TM',
     'executable', 'one_tm',
-    'arguments', 'tm_ssh/tm_ssh.conf'
+    'arguments', 'tm_shared/tm_shared.conf'
   );
 
 '/software/components/oned/mads/hm' = nlist(
@@ -72,15 +72,37 @@ include { 'components/oned/config' };
     'executable', 'one_hm'
   );
 
+'/software/components/oned/mads/image' = nlist(
+   'manager', 'IMAGE',
+   'executable', 'one_image',
+   'arguments', 'fs -t 15',
+);
+
 '/software/components/oned/mads/auth' = nlist(
     'manager', 'AUTH',
-    'executable', 'one_external_authn_mad'
+    'executable', 'one_auth_mad',
+    'arguments', '--authz quota --authn dummy,plain',
   );
 
-'/software/components/oned/hooks/image' = nlist(
+'/software/components/oned/hooks/done' = nlist(
     'on', 'DONE',
-    'command', '/usr/share/one/hooks/image.rb',
-    'arguments', '$VMID'
+    'command', '/usr/share/one/hooks/notify.rb',
+    'arguments', '$VMID DONE',
+    'remote', 'NO',
+  );
+
+'/software/components/oned/hooks/create' = nlist(
+    'on', 'CREATE',
+    'command', '/usr/share/one/hooks/notify.rb',
+    'arguments', '$VMID CREATE',
+    'remote', 'NO',
+  );
+
+'/software/components/oned/hooks/running' = nlist(
+    'on', 'RUNNING',
+    'command', '/usr/share/one/hooks/notify.rb',
+    'arguments', '$VMID RUNNING',
+    'remote', 'NO',
   );
 
 

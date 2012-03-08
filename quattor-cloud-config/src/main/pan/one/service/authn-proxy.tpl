@@ -23,7 +23,7 @@ unique template one/service/authn-proxy;
 # Grid security environment is required.
 #
 include { 'common/security/cas' };
-include { 'common/security/crl' };
+include { 'common/fetch-crl/config' };
 
 #
 # Include the necessary rpms. 
@@ -61,7 +61,7 @@ prefix '/software/components/one_proxy/config';
     'name', 'eu.stratuslab.authn.CertLoginModule', 
     'flag', 'requisite',
 #    'options', nlist('file', '${jetty.home}/etc/login/login-cert.properties')
-    'options', nlist('file', '/etc/stratuslab/one-proxy/login-cert.properties')
+    'options', nlist('file', '/etc/stratuslab/authn/login-cert.properties')
   );
 
 #
@@ -71,7 +71,7 @@ prefix '/software/components/one_proxy/config';
   nlist(
     'name', 'org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule', 
     'flag', 'sufficient',
-    'options', nlist('file', '/etc/stratuslab/one-proxy/login-pswd.properties')
+    'options', nlist('file', '/etc/stratuslab/authn/login-pswd.properties')
 #    'options', nlist('file', '${jetty.home}/etc/login/login-pswd.properties')
   );
 

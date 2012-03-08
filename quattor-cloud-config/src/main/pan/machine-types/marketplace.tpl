@@ -19,17 +19,5 @@
 
 unique template machine-types/marketplace;
 
-variable NEW_NETWORK_CONF ?= true;
-
-include { 'machine-types/nfs' };
-
-include { 'marketplace/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-
-include { 'config/os/updates' };
-
+# THIS TEMPLATE IS DEPRECATED
+include { 'machine-types/stratuslab/marketplace' };

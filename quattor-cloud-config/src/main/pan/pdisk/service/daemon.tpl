@@ -45,3 +45,50 @@ include { 'components/filecopy/config' };
         'restart','service pdisk restart',
         'perms','0644');
 
+#
+# Add pdisk user
+#
+include { 'components/one_proxy/config' };
+
+prefix '/software/components/one_proxy/config';
+'users_by_pswd/'=nlist(STRATUSLAB_PDISK_SUPER_USER,nlist('password',STRATUSLAB_PDISK_SUPER_USER_PWD));
+
+#
+# Add iptables configuration
+#
+include { 'components/iptables/config' };
+
+'/software/components/iptables/filter/rules' = {
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', '8445',
+        'target', 'ACCEPT'
+    ));
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', '2181',
+        'target', 'ACCEPT'
+    ));
+  append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'udp',
+        'match', 'udp',
+        'dst_port', '3260',
+        'target', 'ACCEPT'
+    ));
+  append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', '3260',
+        'target', 'ACCEPT'
+    ));
+};

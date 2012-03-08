@@ -19,6 +19,8 @@
 
 unique template one/service/common-config;
 
+variable DISK_GROUP ?= 'disk';
+
 include { 'machine-types/nfs' };
 
 # Create the 'oneadmin' user and 'cloud' group for OpenNebula.
@@ -29,7 +31,7 @@ include { 'components/accounts/config' };
   );
   SELF['users'][ONE_USER] = nlist(
     'uid', ONE_USER_ID,
-    'groups', list(ONE_GROUP),
+    'groups', list(ONE_GROUP,DISK_GROUP),
     'homeDir', '/home/' + ONE_USER,
     'createHome', false,
     'createKeys', false

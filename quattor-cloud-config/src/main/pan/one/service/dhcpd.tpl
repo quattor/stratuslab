@@ -167,4 +167,40 @@ include { 'components/chkconfig/config' };
 "/software/components/chkconfig/service/dhcpd/on" = "";
 "/software/components/chkconfig/service/dhcpd/startstop" = true;
 
+include { 'components/iptables/config' };
 
+'/software/components/iptables/filter/rules' = {
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'udp',
+        'match', 'udp',
+        'dst_port', '67',
+        'target', 'ACCEPT'
+    ));
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'udp',
+        'match', 'udp',
+        'dst_port', '68',
+        'target', 'ACCEPT'
+    ));
+   append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', '67',
+        'target', 'ACCEPT'
+    ));
+    append(nlist(
+        'command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'dst_port', '68',
+        'target', 'ACCEPT'
+    ));
+
+};

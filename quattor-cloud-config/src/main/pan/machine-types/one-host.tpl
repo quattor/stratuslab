@@ -19,51 +19,6 @@
 
 unique template machine-types/one-host;
 
-variable NEW_NETWORK_CONF ?= true;
-
-include { 'machine-types/nfs' };
-
-#
-# Define the parameters for the OpenNebula setup.
-# **CHANGE** the values in this file for your setup.
-#
-include { 'one/service/parameters' };
-
-#
-# Setup oneadmin account, libvirtd, and networking
-#
-include { 'one/service/common-config' };
-include { 'one/service/node-config' };
-
-#
-# DEBUG DEBUG DEBUG DEBUG DEBUG
-#
-include { 'pdisk/service/host' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-#
-# Import the common areas from the OpenNebula server.
-#
-include { 'one/service/nfs-imports' };
-
-#
-# Include the packages (RPMs) for the node.
-#
-include { 'one/rpms/node' };
-include { 'one/rpms/devel' };
-
-#
-# Include the packages (RPMs) for iscsi-initiator.
-#
-include { 'iscsi/rpms/initiator' };
-
-# Add git to the machine, but git-svn is not needed.
-include { 'config/os/git' };
-'/software/packages' = pkg_del('git-svn');
-
-include { 'config/os/updates' };
+# THIS TEMPLATE IS DEPRECATED
+include { 'machine-types/stratuslab/one-host' };
 

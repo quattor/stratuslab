@@ -33,19 +33,20 @@ include {'components/chkconfig/config'};
 #
 include { 'components/filecopy/config' };
 
-variable ONE_NFS_OPTIONS ?= 'async,no_subtree_check,rw,no_root_squash';
-
-variable ONE_NFS_FLAGS = 
-    if( is_list(ONE_NFS_WILDCARD) ) {
-        flags = '';
-        foreach(idx; wildcard; ONE_NFS_WILDCARD) {
-            flags = flags + wildcard + '(' + ONE_NFS_OPTIONS + ') ';
+variable ONE_NFS_FLAGS = {
+   ok = first(ONE_NFS_WILDCARD,k,v);
+   one_nfs_flags = "";
+   while (ok) {
+        if ( one_nfs_flags == "" ) {
+          one_nfs_flags =  v +'(async,no_subtree_check,rw,no_root_squash)';
+        } else {
+          one_nfs_flags =  one_nfs_flags + " " + v +'(async,no_subtree_check,rw,no_root_squash)';
         };
-        flags = flags + "\n";
-        return(flags);
-    } else {
-        return(ONE_NFS_WILDCARD + '(' + ONE_NFS_OPTIONS + ")\n");
-    };
+        ok = next(ONE_NFS_WILDCARD, k, v);
+   };
+   return (one_nfs_flags+ "\n");
+ # ONE_NFS_WILDCARD + '(async,no_subtree_check,rw,no_root_squash)' + "\n";
+};
 
 variable ONE_NFS_EXPORT_CONTENTS =
 '/var/lib/one ' + ONE_NFS_FLAGS +

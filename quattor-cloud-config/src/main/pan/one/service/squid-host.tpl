@@ -20,7 +20,7 @@
 unique template one/service/squid-host;
 
 variable CONTENTS = <<EOF;
-acl all src 0.0.0.0/0.0.0.0
+acl all src all
 acl manager proto cache_object
 acl localhost src 127.0.0.1/255.255.255.255
 acl to_localhost dst 127.0.0.0/8
@@ -61,7 +61,6 @@ refresh_pattern ^gopher:	1440	0%	1440
 refresh_pattern .		0	20%	4320
 store_avg_object_size 2 GB
 acl apache rep_header Server ^Apache
-broken_vary_encoding allow apache
 coredump_dir /var/spool/squid
 EOF
 
@@ -81,3 +80,15 @@ include { 'components/chkconfig/config' };
 include { 'components/profile/config' };
 
 '/software/components/profile/env/http_proxy' = 'http://127.0.0.1:3128';
+
+include { 'components/iptables/config' };
+
+'/software/components/iptables/filter/rules' = append(
+  nlist('command', '-A',
+        'chain', 'INPUT',
+        'protocol', 'tcp',
+        'match', 'tcp',
+        'source', '127.0.0.1',
+        'dst_port', '3128',
+        'target', 'accept'));
+

@@ -17,8 +17,17 @@
 # limitations under the License.
 #
 
-template machine-types/stratuslab-benchmarks;
+unique template machine-types/stratuslab/pdisk;
 
-# THIS TEMPLATE IS DEPRECATED
-include { 'machine-types/stratuslab/stratuslab-benchmarks' };
+include { 'machine-types/stratuslab/base' };
+
+include { 'pdisk/service/daemon' };
+
+#
+# Ganglia for the monitoring of machines and hosts
+#
+include { 'ganglia/config' };
+
+
+include { 'config/os/updates' };
 
