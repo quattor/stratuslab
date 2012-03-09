@@ -247,7 +247,7 @@ sub get_existing_vnets {
     my @lines = split("^", $output);
     foreach my $line (@lines) {
 	chomp($line);
-	my ($d1, $d2, $d3, $vnet_name) = split("\\s+", $line);
+	my ($d1, $d2, $d3, $d4, $vnet_name) = split("\\s+", $line);
 	$info{$vnet_name} = 1;
     }
 
@@ -264,6 +264,7 @@ sub create_vnet {
 #    my $output = $proc->output();
 
     my $fname = "/home/oneadmin/$name.net";
+    my %info;
 
     # Write out the contents of the configuration file.
     my $fh = CAF::FileWriter->open($fname);
@@ -271,6 +272,17 @@ sub create_vnet {
     $fh->close();
 
     my $output = `su - oneadmin --command "onevnet create $fname"`;
+    print $output;
+    my @id = split("\\s+",$output);
+    $output = `su - oneadmin --command "oneuser list"`;
+    my @lines = split("^",$output);
+    foreach my $line (@lines) {
+        chomp($line);
+        my ($d1, $id,$group,$d2 ,$d3) = split("\\s+",$line);
+        $info{$group}= $id;
+    }
+    my $gid = $info{'users'};
+    $output = `su - oneadmin --command "onevnet chgrp $id[1] $gid"`;
 
     return;
 }

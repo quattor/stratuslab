@@ -73,7 +73,7 @@ type structure_hook = {
 type structure_one_host = {
     'enabled' : boolean = true
     'im_mad' : string = 'im_kvm'
-    'tm_mad' : string = 'tm_nfs' 
+    'tm_mad' : string = 'tm_stratuslab' 
     'vm_mad' : string = 'vmm_kvm'
 };
 

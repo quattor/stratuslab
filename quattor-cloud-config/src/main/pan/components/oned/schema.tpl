@@ -11,7 +11,7 @@
 
 # 
 # # 
-# oned, 1.4, 20110303.1802.09
+# oned, 1.25-SNAPSHOT, 20120309.1102.15
 #
 
 declaration template components/oned/schema;
@@ -21,12 +21,14 @@ include {'quattor/schema'};
 include {'pan/types'};
 
 type structure_daemon = {
+    'MANAGER_TIMER' ? long(1..)
     'HOST_MONITORING_INTERVAL' : long(1..) = 600
     'VM_POLLING_INTERVAL' : long(0..) = 600
     'VM_DIR' ? string
     'PORT' : type_port = 2633
     'VNC_BASE_PORT' : type_port = 5000
     'DEBUG_LEVEL' : long(0..3) = 2
+    'SCRIPTS_REMOTE_DIR' : string = '/var/tmp/one'
 };
 
 type structure_db = {
@@ -82,7 +84,7 @@ type structure_hook = {
 type structure_one_host = {
     'enabled' : boolean = true
     'im_mad' : string = 'im_kvm'
-    'tm_mad' : string = 'tm_nfs' 
+    'tm_mad' : string = 'tm_stratuslab' 
     'vm_mad' : string = 'vmm_kvm'
 };
 

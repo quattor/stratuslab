@@ -26,6 +26,7 @@ include { 'pdisk/rpms/daemon' };
 #
 include { 'components/chkconfig/config' };
 '/software/components/chkconfig/service/pdisk/on'  = '';
+'/software/components/chkconfig/service/tgtd/on'  = '';
 
 #
 # Write the configuration file with filecopy for the moment.
