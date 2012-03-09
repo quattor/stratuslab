@@ -6,7 +6,7 @@
   <artifactId>one_proxy</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.25-SNAPSHOT</version>
+  <version>1.25</version>
   <name>authentication proxy configuration</name>
 
   <properties>
@@ -49,7 +49,7 @@
     <groupId>org.quattor.maven</groupId>
     <artifactId>build-profile</artifactId>
     <version>1.15</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <licenses>

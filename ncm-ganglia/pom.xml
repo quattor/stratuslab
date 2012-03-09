@@ -6,7 +6,7 @@
   <artifactId>ganglia</artifactId>
 
   <packaging>pom</packaging>
-  <version>1.0.20-SNAPSHOT</version>
+  <version>1.0.20</version>
   <name>Ganglia components</name>
 
   <properties>
@@ -49,7 +49,7 @@
     <groupId>org.quattor.maven</groupId>
     <artifactId>build-profile</artifactId>
     <version>1.15</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <licenses>
