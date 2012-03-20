@@ -45,7 +45,7 @@ variable STRATUSLAB_USER_CLI_VERSION           ?= error('STRATUSLAB_USER_CLI_VER
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 
 # Include the benchmarks.
-include { 'machine-types/stratuslab-benchmarks' };
+include { 'machine-types/stratuslab/stratuslab-benchmarks' };
 
 # StratusLab web monitor.
 '/software/packages' = pkg_repl('stratuslab-web-monitor', STRATUSLAB_WEB_MONITOR_VERSION, 'noarch');

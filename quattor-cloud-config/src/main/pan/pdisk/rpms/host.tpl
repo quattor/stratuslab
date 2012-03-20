@@ -21,7 +21,7 @@ unique template pdisk/rpms/host;
 
 include { 'default/stratuslab/package-versions' };
 
-variable PDISK_VERSION ?= error('PDISK_VERSION variable undefined');
-'/software/packages'=pkg_repl('pdisk-host', PDISK_VERSION, 'noarch');
+variable STRATUSLAB_PDISK_VERSION ?= error('STRATUSLAB_PDISK_VERSION variable undefined');
+'/software/packages'=pkg_repl('pdisk-host', STRATUSLAB_PDISK_VERSION, 'noarch');
 variable STRATUSLAB_AUTHN_CONFIG_VERSION ?= error('STRATUSLAB_AUTHN_CONFIG_VERSION variable undefined');
 '/software/packages'=pkg_repl('stratuslab-authn-config', STRATUSLAB_AUTHN_CONFIG_VERSION ,'noarch');

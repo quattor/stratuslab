@@ -19,33 +19,9 @@
 
 unique template one/service/iptables-frontend;
 
-include { 'components/iptables/config' };
-
-# Use a secure policy by default for inbound connections. That's why following
-# filter rules should not target reject rules.
-'/software/components/iptables/filter/preamble/input' = 'DROP [0:0]';
-'/software/components/iptables/filter/preamble/forward' = 'DROP [0:0]';
-'/software/components/iptables/filter/preamble/output' = 'ACCEPT [0:0]';
-'/software/components/iptables/filter/epilogue' = 'COMMIT';
+include { 'common/iptables/base' };
 
 '/software/components/iptables/filter/rules' = {
-# Common rules
-  append(nlist(
-    'command', '-A',
-    'chain', 'INPUT',
-    'match', 'state',
-    'state', 'RELATED,ESTABLISHED',
-    'target', 'ACCEPT',
-  ));
-# SSH port
-  append(nlist(
-    'command', '-A',
-    'chain', 'INPUT',
-    'protocol', 'tcp',
-    'match', 'tcp',
-    'dst_port', '22',
-    'target', 'ACCEPT',
-  ));
 # HTTP port (e.g. webmonitor/appliancesRepository)
   append(nlist(
     'command', '-A',
@@ -75,4 +51,3 @@ include { 'components/iptables/config' };
     'target', 'ACCEPT',
   ));
 };
-

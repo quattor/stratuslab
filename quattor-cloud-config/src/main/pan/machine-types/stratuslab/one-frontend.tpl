@@ -43,7 +43,7 @@ include { 'rpms/web_server' };
 # Define the parameters for the OpenNebula setup.
 # **CHANGE** the values in this file for your setup.
 #
-include { 'one/service/parameters' };
+include { 'stratuslab/default/parameters' };
 
 #
 # Setup common and specific configurations.
@@ -65,8 +65,8 @@ include { 'ganglia/config' };
 #
 # Define the three areas to be exported to all nodes.
 #
-include { 'one/service/nfs-exports' };
-include { 'one/service/nfs-imports' };
+include { 'common/nfs/nfs-exports' };
+include { 'common/nfs/nfs-imports' };
 
 #
 # Setup the ssh keys and configuration for oneadmin account.
@@ -82,6 +82,11 @@ include { 'one/service/daemon' };
 # Setup the OpenNebula networking.
 #
 include { 'one/service/onevnet-config' };
+
+#
+# Setup the OpenNebula hypervisor
+#
+include { 'one/server/node-config' };
 
 #
 # Setup mysql if we want use mysql backend
@@ -120,7 +125,7 @@ include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
 # Authentication proxy
-include { 'one/service/authn-proxy' };
+include { 'stratuslab/one-proxy/config' };
 
 # Add private interface
 include { 'one/service/private-network' };
@@ -153,4 +158,11 @@ include { 'config/os/updates' };
 
 # Add configuration for tftp server
 #include { 'one/service/tftp' };
+
+#
+# DHCP Configuration part
+#
+
+include { 'one/service/dhcpd' };
+
 

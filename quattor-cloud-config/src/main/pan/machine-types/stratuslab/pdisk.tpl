@@ -21,13 +21,10 @@ unique template machine-types/stratuslab/pdisk;
 
 include { 'machine-types/stratuslab/base' };
 
-include { 'pdisk/service/daemon' };
+include { 'pdisk/server/config' };
 
 #
 # Ganglia for the monitoring of machines and hosts
 #
 include { 'ganglia/config' };
-
-
-include { 'config/os/updates' };
 

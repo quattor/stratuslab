@@ -19,12 +19,9 @@
 
 unique template one/service/iptables-bridging;
 
-include { 'components/iptables/config' };
+variable STRATUSLAB_IPTABLES_ENABLE ?= false;
 
-'/software/components/iptables/filter/preamble/input' = 'ACCEPT [0:0]';
-'/software/components/iptables/filter/preamble/forward' = 'ACCEPT [0:0]';
-'/software/components/iptables/filter/preamble/output' = 'ACCEPT [0:0]';
-'/software/components/iptables/filter/epilogue' = 'COMMIT';
+include { 'common/iptables/base' };
 
 #
 # INPUT chain for the virbr0 interface (private NAT'ed ports).

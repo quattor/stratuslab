@@ -19,6 +19,7 @@
 
 unique template registration/service/daemon;
 
+include { 'registration/variables' };
 include { 'registration/rpms/daemon' };
 
 # 
@@ -52,6 +53,48 @@ mail.debug=true
 EOF
 
 '/software/components/filecopy/services/{/etc/stratuslab/registration.cfg}' =
-  nlist('config', STRATUSLAB_REGISTRATION_CONFIG,
+  nlist('config', format(file_contents('registration/service/daemon.cfg'),
+                                  STRATUSLAB_REGISTRATION_LDAP_MANAGER_PWD,
+                                  STRATUSLAB_REGISTRATION_ADMIN_EMAIL,
+                                  STRATUSLAB_REGISTRATION_MAIL_HOST,
+                                  STRATUSLAB_REGISTRATION_MAIL_PORT,
+                                  STRATUSLAB_REGISTRATION_MAIL_USER,
+                                  STRATUSLAB_REGISTRATION_MAIL_USER_PWD,
+                                  STRATUSLAB_REGISTRATION_MAIL_SSL,
+                                  STRATUSLAB_REGISTRATION_MAIL_DEBUG,
+                  ),
         'restart', 'service registration restart',
         'perms', '0644');
+
+
+include { 'common/iptables/base' };
+
+'/software/components/iptables/filter/rules' = {
+# Registration service
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '8444',
+    'target', 'ACCEPT',
+  ));
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'source', '127.0.0.1',
+    'match', 'tcp',
+    'dst_port', '32000',
+    'target', 'ACCEPT',
+  ));
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '10389',
+    'target', 'ACCEPT',
+  ));
+
+};

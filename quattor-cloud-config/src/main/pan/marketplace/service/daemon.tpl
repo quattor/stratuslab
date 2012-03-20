@@ -21,6 +21,9 @@ unique template marketplace/service/daemon;
 
 include { 'marketplace/rpms/daemon' };
 
+include { 'marketplace/variables' };
+
+include { 'marketplace/service/mysql' };
 #
 # Activate the daemon at boot.
 #
@@ -30,10 +33,48 @@ include { 'components/chkconfig/config' };
 #
 # Write the configuration file with filecopy for the moment.
 #
+
 include { 'components/filecopy/config' };
 '/software/components/filecopy/services/{/etc/stratuslab/marketplace.cfg}' = 
-  nlist('config',file_contents('marketplace/service/daemon.cfg'),
+  nlist('config',format(file_contents('marketplace/service/daemon.cfg'),
+                                      STRATUSLAB_MARKETPLACE_ADMIN_EMAIL,
+                                      STRATUSLAB_MARKETPLACE_MAIL_HOST,
+                                      STRATUSLAB_MARKETPLACE_MAIL_PORT,
+                                      STRATUSLAB_MARKETPLACE_MAIL_USER,
+                                      STRATUSLAB_MARKETPLACE_MAIL_PWD,
+                                      STRATUSLAB_MARKETPLACE_MAIL_SSL,
+                                      STRATUSLAB_MARKETPLACE_MAIL_DEBUG,
+                                      STRATUSLAB_MARKETPLACE_DATA_DIR,
+                                      STRATUSLAB_MARKETPLACE_PENDING_DIR,
+                                      STRATUSLAB_MARKETPLACE_VALIDATE_EMAIL,
+                                      STRATUSLAB_MARKETPLACE_DB_NAME,
+                                      STRATUSLAB_MARKETPLACE_DB_USER,
+                                      STRATUSLAB_MARKETPLACE_DB_USER_PWD,
+                 ),
         'restart','service marketplace restart',
         'perms','0644');
 
 
+include { 'components/iptables/config' };
+
+'/software/components/iptables/filter/rules' = {
+# SSH port
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'dst_port', '8081',
+    'target', 'ACCEPT',
+  ));
+# OpenNebula port
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'source', '127.0.0.1',
+    'dst_port', '3306',
+    'target', 'ACCEPT'
+  ));
+};

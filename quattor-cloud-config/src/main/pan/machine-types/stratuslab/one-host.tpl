@@ -25,7 +25,7 @@ include { 'machine-types/stratuslab/base' };
 # Define the parameters for the OpenNebula setup.
 # **CHANGE** the values in this file for your setup.
 #
-include { 'one/service/parameters' };
+include { 'stratuslab/default/parameters' };
 
 #
 # Setup oneadmin account, libvirtd, and networking
@@ -36,7 +36,7 @@ include { 'one/service/node-config' };
 #
 # DEBUG DEBUG DEBUG DEBUG DEBUG
 #
-include { 'pdisk/service/host' };
+include { 'pdisk/host/config' };
 
 #
 # Ganglia for the monitoring of machines and hosts
@@ -46,7 +46,7 @@ include { 'ganglia/config' };
 #
 # Import the common areas from the OpenNebula server.
 #
-include { 'one/service/nfs-imports' };
+include { 'common/nfs/nfs-imports' };
 
 #
 # Include the packages (RPMs) for the node.

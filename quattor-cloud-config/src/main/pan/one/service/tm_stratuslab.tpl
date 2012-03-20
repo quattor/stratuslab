@@ -1,10 +1,9 @@
 unique template one/service/tm_stratuslab;
 
-variable STRATUSLAB_PDISK_HOST ?= error("STRATUSLAB_PDISK_HOST must be declared");
-variable STRATUSLAB_PDISK_SUPER_USER ?= 'pdisk';
-variable STRATUSLAB_PDISK_SUPER_USER_PWD ?= error("STRATUSLAB_PDISK_SUPER_USER_PWD must be declared");
-variable STRATUSLAB_PDISK_DEVICE ?= error('STRATUSLAB_PDISK_DEVICE must be declared');
-variable STRATUSLAB_PDISK_TMP_DIR ?= '/var/lib/one/images/';
+#
+# Pdisk variables is needed to configure tm_stratuslab
+#
+include { 'pdisk/variables' };
 
 include { 'components/filecopy/config' };
 

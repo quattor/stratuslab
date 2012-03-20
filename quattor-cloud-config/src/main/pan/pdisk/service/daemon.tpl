@@ -19,6 +19,7 @@
 
 unique template pdisk/service/daemon;
 
+include { 'pdisk/variables' };
 include { 'pdisk/rpms/daemon' };
 
 #
@@ -31,28 +32,30 @@ include { 'components/chkconfig/config' };
 #
 # Write the configuration file with filecopy for the moment.
 #
-#include { 'components/filecopy/config' };
-#'/software/components/filecopy/services/{/etc/stratuslab/pdisk.cfg}' = 
-#  nlist('config',file_contents('pdisk/service/daemon.cfg'),
-#        'restart','service pdisk restart',
-#        'perms','0644');
-
-#
-# Write the configuration file with filecopy for the moment.
-#
 include { 'components/filecopy/config' };
-'/software/components/filecopy/services/{/etc/stratuslab/storage/pdisk/login.conf}' =
-  nlist('config',file_contents('pdisk/service/login.conf'),
+'/software/components/filecopy/services/{/etc/stratuslab/pdisk.cfg}' = 
+  nlist('config',format(file_contents('pdisk/service/daemon.cfg'),
+                 STRATUSLAB_PDISK_TYPE,
+                 STRATUSLAB_PDISK_USER_PER_PDISK,
+                 STRATUSLAB_PDISK_SSH_KEY,
+                 STRATUSLAB_PDISK_SSH_USER,
+                 STRATUSLAB_PDISK_VM_DIR,
+                 STRATUSLAB_PDISK_SUPER_USER,
+                 STRATUSLAB_PDISK_NFS_LOCATION,
+                 STRATUSLAB_PDISK_ISCSI_TYPE,
+                 STRATUSLAB_PDISK_ISCSI_FILE_LOCATION,
+                 STRATUSLAB_PDISK_ISCSI_CONF,
+                 STRATUSLAB_PDISK_ISCSI_ADMIN,
+                 STRATUSLAB_PDISK_DEVICE,
+                 STRATUSLAB_PDISK_LVM_VGDISPLAY,
+                 STRATUSLAB_PDISK_LVM_CREATE,
+                 STRATUSLAB_PDISK_LVM_REMOVE,
+                 STRATUSLAB_PDISK_LVM_CHANGE,
+                 STRATUSLAB_PDISK_LVM_DMSETUP,
+                 STRATUSLAB_PDISK_ZOOKEEPER_URI
+        ),
         'restart','service pdisk restart',
         'perms','0644');
-
-#
-# Add pdisk user
-#
-include { 'components/one_proxy/config' };
-
-prefix '/software/components/one_proxy/config';
-'users_by_pswd/'=nlist(STRATUSLAB_PDISK_SUPER_USER,nlist('password',STRATUSLAB_PDISK_SUPER_USER_PWD));
 
 #
 # Add iptables configuration
