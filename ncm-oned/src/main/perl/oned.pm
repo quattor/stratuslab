@@ -231,6 +231,14 @@ sub create_host {
     return;
 }
 
+sub create_group {
+	my ($self) = @_;
+
+	$self->info("creating group users");
+	my $output = `su - oneadmin --command "onegroup create users"`;
+
+	return;
+}
 
 # Extract the existing OpenNebula networks. 
 sub get_existing_vnets {
@@ -274,11 +282,11 @@ sub create_vnet {
     my $output = `su - oneadmin --command "onevnet create $fname"`;
     print $output;
     my @id = split("\\s+",$output);
-    $output = `su - oneadmin --command "oneuser list"`;
+    $output = `su - oneadmin --command "onegroup list"`;
     my @lines = split("^",$output);
     foreach my $line (@lines) {
         chomp($line);
-        my ($d1, $id,$group,$d2 ,$d3) = split("\\s+",$line);
+        my ($d1, $id,$group) = split("\\s+",$line);
         $info{$group}= $id;
     }
     my $gid = $info{'users'};
@@ -362,6 +370,11 @@ sub Configure {
 	    $self->create_host($desired_host, $desired_hosts->{$desired_host});
 	}
     }
+
+
+	# Create group users to be sure it exist before network creation
+    $self->create_group();
+
 
     # Also configure the networks.
     my $desired_vnets = $t->{'vnets'};
