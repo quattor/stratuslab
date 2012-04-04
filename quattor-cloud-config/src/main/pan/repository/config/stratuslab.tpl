@@ -8,6 +8,8 @@ required = no
 }
 variable STRATUSLAB_PACKAGE_REPOSITORIES ?= list('stratuslab');
 
+include { 'quattor/functions/repository' };
+
 # Add StratusLab repository
 '/software/repositories' = {
   if ( is_list(STRATUSLAB_PACKAGE_REPOSITORIES) ) {
