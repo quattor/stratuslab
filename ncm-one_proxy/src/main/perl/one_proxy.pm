@@ -2,7 +2,7 @@
 # ${developer-info}
 # ${author-info}
 # ${build-info}
-
+#
 package NCM::Component::one_proxy;
 
 use strict;
@@ -31,7 +31,7 @@ Readonly::Scalar my $PSWD_FILE => 'login-pswd.properties';
 Readonly::Scalar my $CERT_FILE => 'login-cert.properties';
 Readonly::Scalar my $JAAS_FILE => 'login.conf';
 
-Readonly::Scalar my $RESTART => '/etc/init.d/one-proxy restart';
+my @RESTART => ();
 
 our $EC=LC::Exception::Context->new->will_store_all;
 
@@ -63,7 +63,7 @@ sub format_cert_file_contents {
     my ($users) = @_;
 
     my $contents = '';
-    
+
     foreach my $user (sort keys %$users) {
 
 	my $entry = $users->{$user};
@@ -90,7 +90,7 @@ sub format_login_module_entry {
     $contents .= "  $name $flag";
 
     my $options = $login_module->{'options'};
-    
+
     foreach my $option (sort keys %$options) {
 	my $value = $options->{$option};
 	$contents .= "\n  $option=\"$value\"";
@@ -134,14 +134,16 @@ sub write_config_file {
     my $fh = CAF::FileWriter->open($fname);
     print $fh $contents;
     my $config_changed = $fh->close();
-    
+    chmod 0644, $fname; 
     return $config_changed;
 }
 
 # Restart the process.
 sub restart_daemon {
     my ($self) = @_;
-    CAF::Process->new([$RESTART], log => $self)->run();
+    foreach my $daemon (@RESTART) {
+        CAF::Process->new(['service '.$daemon.' restart'], log => $self)->run();
+    }
     return;
 }
 
@@ -153,6 +155,7 @@ sub Configure {
     my $t = $config->getElement($PATH)->getTree();
     my $params = $t->{'config'};
     my $config_dir = $t->{'dir'};
+    my $daemons = $t->{'daemon'};
 
     # Create the password configuration file.
     my $contents = format_pswd_file_contents($params->{'users_by_pswd'});
@@ -165,6 +168,11 @@ sub Configure {
     # Create the JAAS configuration file.
     $contents = format_jaas_file_contents($params->{'jaas'});
     my $jaas_changed = write_config_file($config_dir."/".$JAAS_FILE, $contents);
+
+    # List of daemon we must restart
+	 foreach my $daemon (@$daemons) {
+		@RESTART = ($daemon,@RESTART);
+	 }
 
     # Restart the daemon if necessary.
     if ($pswd_changed || $cert_changed || $jaas_changed) {

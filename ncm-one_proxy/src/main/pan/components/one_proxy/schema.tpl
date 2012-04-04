@@ -39,6 +39,7 @@ type one_proxy_config = {
 type component_one_proxy = {
     include structure_component
     'dir'    : string = '/etc/stratuslab/authn'
+	 'daemon' : string[] = list('one-proxy')
     'config' : one_proxy_config
 } = nlist();
 
