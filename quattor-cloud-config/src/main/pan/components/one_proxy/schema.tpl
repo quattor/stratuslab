@@ -11,7 +11,7 @@
 
 # 
 # # 
-# one_proxy, 1.10-SNAPSHOT, 20111202.1207.03
+# one_proxy, 1.26-SNAPSHOT, 20120329.1333.24
 #
 
 declaration template components/one_proxy/schema;
@@ -50,6 +50,7 @@ type one_proxy_config = {
 type component_one_proxy = {
     include structure_component
     'dir'    : string = '/etc/stratuslab/authn'
+	 'daemon' : string[] = list('one-proxy')
     'config' : one_proxy_config
 } = nlist();
 

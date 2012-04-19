@@ -31,6 +31,16 @@ include { 'common/iptables/base' };
     'dst_port', '80',
     'target', 'ACCEPT',
   ));
+# Sendmail port (needed to --save option)
+  append(nlist(
+    'command', '-A',
+    'chain', 'INPUT',
+    'protocol', 'tcp',
+    'match', 'tcp',
+    'source', '127.0.0.1',
+    'dst_port', '25',
+    'target', 'ACCEPT'
+  ));
 # OpenNebula port
   append(nlist(
     'command', '-A',

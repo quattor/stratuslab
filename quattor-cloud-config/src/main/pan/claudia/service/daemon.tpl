@@ -95,17 +95,6 @@ prefix '/software/components/claudia';
 'tcloud-config/onePassword' = '42d9d2622f862cd803d4395be2c1edd362213525';
 'tcloud-config/oneSshKey'   = 'ssh-rsa ';
 
-include { 'components/accounts/config' };
-# Create the 'oneadmin' user and 'cloud' group for OpenNebula.
-'/software/components/accounts/groups/activemq/gid' = 9001;
-'/software/components/accounts/users/activemq' = nlist(
-  'uid', 9001,
-  'groups', list('activemq'),
-  'homeDir', '/home/activemq',
-#  'createHome', false,
-#  'createKeys', false
-);
-
 include { 'components/chkconfig/config' };
 '/software/components/chkconfig/service/tcloudd/on'  = '';
 '/software/components/chkconfig/service/clothod/on'  = '';
@@ -128,4 +117,4 @@ EOF
               "restart","service activemq restart",
               "perms","0644"));
 
-
+include { if_exists('fixes/activemq-account') };

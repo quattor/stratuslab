@@ -20,6 +20,11 @@
 unique template one/service/daemon;
 
 #
+# Include script for sl6 support
+#
+include { 'one/service/vmm_exec_kvm_sl6' };
+
+#
 # Start the OpenNebula daemon (oned) at boot. 
 #
 include {'components/chkconfig/config'};
@@ -30,24 +35,25 @@ include {'components/chkconfig/config'};
 #
 include { 'components/oned/config' };
 
+prefix '/software/components/oned';
 #
 # Monitoring delays are appropriate for small/testing systems.
 # Change to longer delays for production systems.
 #
-'/software/components/oned/daemon/HOST_MONITORING_INTERVAL' = ONE_MONITOR_INTERVAL;
-'/software/components/oned/daemon/VM_POLLING_INTERVAL' = ONE_POLLING_INTERVAL;
+'daemon/HOST_MONITORING_INTERVAL' = ONE_MONITOR_INTERVAL;
+'daemon/VM_POLLING_INTERVAL' = ONE_POLLING_INTERVAL;
 
 #
 # Define all of the standard plug-ins for OpenNebula. 
 # Assumes that KVM is being used on the site.
 #
-'/software/components/oned/mads/im_kvm' = nlist(
+'mads/im_kvm' = nlist(
     'manager', 'IM',
     'executable', 'one_im_ssh',
     'arguments', '-r 0 -t 15 kvm'
   );
 
-'/software/components/oned/mads/vmm_kvm' = nlist(
+'mads/vmm_kvm' = nlist(
     'manager', 'VM',
     'executable', 'one_vmm_exec',
     'arguments', '-t 15 -r 0 kvm',
@@ -55,50 +61,58 @@ include { 'components/oned/config' };
     'type', 'kvm'
   );
 
-'/software/components/oned/mads/tm_stratuslab' = nlist(
+'mads/vmm_kvm_sl6' = nlist(
+    'manager', 'VM',
+    'executable', 'one_vmm_exec',
+    'arguments', '-t 15 -r 0 kvm',
+    'default', 'vmm_exec/vmm_exec_kvm_sl6.conf',
+    'type', 'kvm'
+);
+
+'mads/tm_stratuslab' = nlist(
     'manager', 'TM',
     'executable', 'one_tm',
     'arguments', 'tm_stratuslab/tm_stratuslab.conf'
   );
 
-'/software/components/oned/mads/tm_shared' = nlist(
+'mads/tm_shared' = nlist(
     'manager', 'TM',
     'executable', 'one_tm',
     'arguments', 'tm_shared/tm_shared.conf'
   );
 
-'/software/components/oned/mads/hm' = nlist(
+'mads/hm' = nlist(
     'manager', 'HM',
     'executable', 'one_hm'
   );
 
-'/software/components/oned/mads/image' = nlist(
+'mads/image' = nlist(
    'manager', 'IMAGE',
    'executable', 'one_image',
    'arguments', 'fs -t 15',
 );
 
-'/software/components/oned/mads/auth' = nlist(
+'mads/auth' = nlist(
     'manager', 'AUTH',
     'executable', 'one_auth_mad',
     'arguments', '--authz quota --authn dummy,plain',
   );
 
-'/software/components/oned/hooks/done' = nlist(
+'hooks/done' = nlist(
     'on', 'DONE',
     'command', '/usr/share/one/hooks/notify.rb',
     'arguments', '$VMID DONE',
     'remote', 'NO',
   );
 
-'/software/components/oned/hooks/create' = nlist(
+'hooks/create' = nlist(
     'on', 'CREATE',
     'command', '/usr/share/one/hooks/notify.rb',
     'arguments', '$VMID CREATE',
     'remote', 'NO',
   );
 
-'/software/components/oned/hooks/running' = nlist(
+'hooks/running' = nlist(
     'on', 'RUNNING',
     'command', '/usr/share/one/hooks/notify.rb',
     'arguments', '$VMID RUNNING',

@@ -11,7 +11,7 @@
 
 # 
 # # 
-# one_proxy, 1.10-SNAPSHOT, 20111202.1207.03
+# one_proxy, 1.26-SNAPSHOT, 20120329.1333.24
 #
 
 unique template components/one_proxy/config-rpm;
@@ -22,6 +22,6 @@ include { 'components/one_proxy/config-common' };
 prefix '/software/components/one_proxy';
 
 # Install Quattor configuration module via RPM package.
-'/software/packages' = pkg_repl('ncm-one_proxy','1.10-0.20111202.1207.03','noarch');
+'/software/packages' = pkg_repl('ncm-one_proxy','1.26-0.20120329.1333.24','noarch');
 'dependencies/pre' ?= list('spma');
 

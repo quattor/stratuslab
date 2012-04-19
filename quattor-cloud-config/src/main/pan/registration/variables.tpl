@@ -20,6 +20,8 @@ unique template registration/variables;
 
 include { 'stratuslab/default/parameters' };
 
+variable STRATUSLAB_REGISTRATION_HOST ?= '';
+
 variable STRATUSLAB_REGISTRATION_LDAP_MANAGER_PWD ?= 'changeme';
 variable STRATUSLAB_REGISTRATION_ADMIN_EMAIL ?= STRATUSLAB_MAIL_EMAIL;
 variable STRATUSLAB_REGISTRATION_MAIL_HOST ?= STRATUSLAB_MAIL_HOST;

@@ -83,6 +83,11 @@ variable ONE_CPU_QUOTA ?= 20.0;
 variable ONE_RAM_KB_QUOTA ?= 41943040;
 
 #
+# IPV6 Activation
+#
+variable STRATUSLAB_IPV6_ENABLE ?= false;
+
+#
 # Global variable definition
 #
 variable STRATUSLAB_MAIL_EMAIL ?= 'no-reply@example.org';

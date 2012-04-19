@@ -35,14 +35,14 @@ variable STRATUSLAB_USER_CLI_VERSION           ?= error('STRATUSLAB_USER_CLI_VER
 
 '/software/packages' = pkg_repl('quarantine-cleanup', STRATUSLAB_QUARANTINE_CLEANUP_VERSION, 'noarch');
 
-'/software/packages' = pkg_repl('rubygem-bunny','0.6.0-1.fc14','noarch');
-'/software/packages' = pkg_repl('rubygem-stomp','1.1.6-1.fc14','noarch');
-'/software/packages' = pkg_repl('qemu-img','0.13.0-0.7.rc1.fc14','x86_64');
-'/software/packages' = pkg_repl('ruby-sqlite3','1.2.4-5.fc12','x86_64');
-'/software/packages' = pkg_repl('rubygem-json','1.4.3-2.fc14','x86_64');
+#'/software/packages' = pkg_repl('rubygem-bunny','0.6.0-1.fc14','noarch');
+#'/software/packages' = pkg_repl('rubygem-stomp','1.1.6-1.fc14','noarch');
+#'/software/packages' = pkg_repl('qemu-img','0.13.0-0.7.rc1.fc14','x86_64');
+#'/software/packages' = pkg_repl('ruby-sqlite3','1.2.4-5.fc12','x86_64');
+#'/software/packages' = pkg_repl('rubygem-json','1.4.3-2.fc14','x86_64');
 
 # Not included in rhel5 and fedora14
-'/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
+#'/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 
 # Include the benchmarks.
 include { 'machine-types/stratuslab/stratuslab-benchmarks' };

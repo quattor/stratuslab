@@ -30,6 +30,8 @@ include {'components/libvirtd/config' };
 '/software/components/libvirtd/authn/auth_unix_ro' = 'none';
 '/software/components/libvirtd/authn/auth_unix_rw' = 'none';
 
+include { if_exists('fixes/qemu-kvm') };
+
 # Configure system properties.
 include { 'components/sysctl/config' };
 
@@ -53,11 +55,15 @@ include { 'components/network/config' };
   'netmask', NETWORK_PARAMS['netmask'],
 );
 
-'/system/network/interfaces/eth0' = nlist(
-  'device', 'eth0',
-  'set_hwaddr', true,
-  'onboot', 'yes',
-  'bridge', 'br0',
-  'bootproto', ' ' # component defaults to static but want nothing!
-);
+'/system/network/interfaces' = {
+	eth_name = boot_nic();
+	SELF[eth_name]=nlist(
+		'device', eth_name,
+		'set_hwaddr', true,
+		'onboot', 'yes',
+		'bridge', 'br0',
+		'bootproto', ' ' # component defaults to static but want nothing!
+		);
+	SELF;
+};
 

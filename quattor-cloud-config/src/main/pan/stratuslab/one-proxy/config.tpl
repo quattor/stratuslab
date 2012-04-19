@@ -24,7 +24,7 @@ include { 'stratuslab/one-proxy/variables' };
 #
 # Grid security environment is required.
 #
-include { 'common/security/cas' };
+include { 'security/cas' };
 include { 'common/fetch-crl/config' };
 
 #
@@ -57,6 +57,11 @@ include { 'components/one_proxy/config' };
 # Load pdisk variable, pdisk account must be added
 #
 include { 'pdisk/variables' };
+
+#
+# Add one-proxy to be restarted when a modification is applied
+#
+'/software/components/one_proxy/daemon'=append('one-proxy');
 
 prefix '/software/components/one_proxy/config';
 

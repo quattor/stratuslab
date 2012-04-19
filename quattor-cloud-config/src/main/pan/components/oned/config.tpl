@@ -11,14 +11,14 @@
 
 # 
 # # 
-# oned, 1.25-SNAPSHOT, 20120309.1102.15
+# oned, 1.26-SNAPSHOT, 20120323.2246.32
 #
 
 unique template components/oned/config;
 
 include {'components/oned/schema'};
 
-'/software/packages'=pkg_repl('ncm-oned','1.25-0.20120309.1102.15','noarch');
+'/software/packages'=pkg_repl('ncm-oned','1.26-0.20120323.2246.32','noarch');
 '/software/components/oned/dependencies/pre' ?=  list ('spma', 'accounts');
 
 '/software/components/oned/active' ?= true;

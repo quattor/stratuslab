@@ -33,6 +33,12 @@ include { 'common/nfs/nfs-exports' };
 include { 'common/nfs/nfs-imports' };
 
 #
+# Sudo configuration to allow --save option
+#
+
+include { 'pdisk/server/sudo' };
+
+#
 # Add StratusLab authentification service
 #
 include { 'stratuslab/one-proxy/config' };

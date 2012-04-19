@@ -65,8 +65,22 @@ include { 'ganglia/config' };
 #
 # Define the three areas to be exported to all nodes.
 #
-include { 'common/nfs/nfs-exports' };
-include { 'common/nfs/nfs-imports' };
+variable NFS_EXPORTS ?= true;
+include { 
+  if( NFS_EXPORTS ) {
+    'common/nfs/nfs-exports';
+  } else {
+    null;
+  };
+};
+variable NFS_IMPORTS ?= true;
+include {
+  if( NFS_IMPORTS ) {
+    'common/nfs/nfs-imports';
+  } else {
+    null;
+  };
+};
 
 #
 # Setup the ssh keys and configuration for oneadmin account.
@@ -164,5 +178,10 @@ include { 'config/os/updates' };
 #
 
 include { 'one/service/dhcpd' };
-
+include { if ( STRATUSLAB_IPV6_ENABLE ) {
+		'one/service/dhcpd6';
+	} else {
+		null;
+	}
+};
 

@@ -11,7 +11,7 @@
 
 # 
 # # 
-# one_proxy, 1.10-SNAPSHOT, 20111202.1207.03
+# one_proxy, 1.26-SNAPSHOT, 20120329.1333.24
 #
 
 unique template components/one_proxy/config-xml;

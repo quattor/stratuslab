@@ -19,6 +19,8 @@
 
 unique template config/stratuslab/node;
 
+include {'config/stratuslab/base'};
+
 # Readonly module for components.
 '/software/packages'=pkg_repl('perl-Readonly','1.03-11.el6','noarch');
 
@@ -29,9 +31,9 @@ unique template config/stratuslab/node;
 
 # Need newer version of Ruby (fix for missing REXML::Formatter)
 '/software/packages' =pkg_repl('ruby'      ,'1.8.7.299-7.el6','x86_64');
-#'/software/packages' =pkg_repl('ruby-irb'  ,'1.8.7.299-7.el6','noarch');
+'/software/packages' =pkg_repl('ruby-irb'  ,'1.8.7.299-7.el6','x86_64');
 '/software/packages' =pkg_repl('ruby-libs' ,'1.8.7.299-7.el6','x86_64');
-#'/software/packages' =pkg_repl('ruby-rdoc' ,'1.8.7.299-7.el6','noarch');
+'/software/packages' =pkg_repl('ruby-rdoc' ,'1.8.7.299-7.el6','x86_64');
 '/software/packages' =pkg_repl('ruby-ri'   ,'1.8.7.299-7.el6','x86_64');
 '/software/packages' =pkg_repl('ruby-tcltk','1.8.7.299-7.el6','x86_64');
 
@@ -42,7 +44,7 @@ unique template config/stratuslab/node;
 #'/software/packages' =pkg_repl('antlr3-C'                  ,'3.2-11.fc14'          ,'x86_64');
 #'/software/packages' =pkg_repl('apache-commons-codec'      ,'1.4-10.fc14'          ,'noarch');
 '/software/packages' =pkg_repl('jakarta-commons-httpclient','3.1-0.6.el6'           ,'x86_64');
-#'/software/packages' =pkg_repl('apache-commons-logging'    ,'1.1.1-11.fc14'        ,'noarch');
+'/software/packages' =pkg_repl('jakarta-commons-logging'   ,'1.0.4-10.el6'        ,'noarch');
 '/software/packages' =pkg_repl('junit',                     '3.8.2-6.5.el6'       ,'x86_64');
 '/software/packages' =pkg_repl('tomcat6-servlet-2.5-api',   '6.0.24-33.el6'      ,'noarch');
 

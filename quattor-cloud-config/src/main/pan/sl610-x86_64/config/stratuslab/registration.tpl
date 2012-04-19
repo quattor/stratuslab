@@ -17,10 +17,10 @@
 # limitations under the License.
 #
 
-template machine-types/stratuslab/stratuslab-benchmarks;
+unique template config/stratuslab/registration;
 
-include { 'default/stratuslab/package-versions' };
+'/software/packages'=pkg_repl('glibc'             ,'2.12-1.25.el6','i686');
+'/software/packages'=pkg_repl('openldap-clients'  ,'2.4.23-15.el6','x86_64');
+'/software/packages'=pkg_repl('nss-softokn-freebl','3.12.9-3.el6' ,'i686');
 
-# StratusLab benchmarks.
-'/software/packages' = pkg_repl('stratuslab-benchmarks',STRATUSLAB_BENCHMARKS_VERSION,'x86_64');
-include { 'config/stratuslab/benchmarks' };
+include { 'config/os/updates' };

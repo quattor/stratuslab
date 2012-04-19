@@ -46,7 +46,14 @@ include { 'ganglia/config' };
 #
 # Import the common areas from the OpenNebula server.
 #
-include { 'common/nfs/nfs-imports' };
+variable NFS_IMPORTS ?= true;
+include {
+  if( NFS_IMPORTS ) {
+    'common/nfs/nfs-imports';
+  } else {
+    null;
+  };
+};
 
 #
 # Include the packages (RPMs) for the node.

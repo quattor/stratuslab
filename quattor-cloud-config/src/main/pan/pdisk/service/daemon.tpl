@@ -57,6 +57,10 @@ include { 'components/filecopy/config' };
         'restart','service pdisk restart',
         'perms','0644');
 
+include { 'components/one_proxy/config' };
+
+'/software/components/one_proxy/daemon'=append('pdisk');
+
 #
 # Add iptables configuration
 #
