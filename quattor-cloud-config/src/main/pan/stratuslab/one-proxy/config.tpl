@@ -24,7 +24,7 @@ include { 'stratuslab/one-proxy/variables' };
 #
 # Grid security environment is required.
 #
-include { 'security/cas' };
+include { 'common/security/cas' };
 include { 'common/fetch-crl/config' };
 
 #
