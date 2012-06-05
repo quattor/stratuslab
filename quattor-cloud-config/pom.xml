@@ -6,13 +6,13 @@
   <artifactId>quattor-cloud-config</artifactId>
   
   <packaging>pom</packaging>
-  <version>1.27-SNAPSHOT</version>
+  <version>2.0-SNAPSHOT</version>
   <name>quattor configuration for cloud</name>
 
   <parent>
     <groupId>eu.stratuslab.pkgs</groupId>
     <artifactId>quattor-tools</artifactId>
-    <version>1.27-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
   </parent>
 
   <build>
