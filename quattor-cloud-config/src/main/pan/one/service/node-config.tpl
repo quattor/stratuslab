@@ -30,6 +30,10 @@ include {'components/libvirtd/config' };
 '/software/components/libvirtd/authn/auth_unix_ro' = 'none';
 '/software/components/libvirtd/authn/auth_unix_rw' = 'none';
 
+include { 'components/chkconfig/config' };
+'/software/components/chkconfig/service/libvirtd/on' = '345';
+'/software/components/chkconfig/service/libvirtd/startstop' = true;
+
 include { if_exists('fixes/qemu-kvm') };
 
 # Configure system properties.
