@@ -34,6 +34,8 @@ variable CONTENTS = CONTENTS+"persistent_disk_cloud_service_user = "+STRATUSLAB_
 variable CONTENTS = CONTENTS+"persistent_disk_lvm_device = "+STRATUSLAB_PDISK_DEVICE+"\n";
 variable CONTENTS = CONTENTS+"[marketplace_client]\n";
 variable CONTENTS = CONTENTS+"marketplace_endpoint = http://"+STRATUSLAB_MARKETPLACE_HOST+"\n";
+variable CONTENTS = CONTENTS+"[quarantine]\n";
+variable CONTENTS = CONTENTS+"quarantine_period = "+STRATUSLAB_QUARANTINE_PERIOD+"\n";
 
 '/software/components/filecopy/services/{/etc/stratuslab/stratuslab.cfg}' =
   nlist('config',CONTENTS,
