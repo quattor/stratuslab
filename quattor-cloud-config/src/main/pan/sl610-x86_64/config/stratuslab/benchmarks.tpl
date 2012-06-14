@@ -22,7 +22,6 @@ unique template config/stratuslab/benchmarks;
 '/software/packages'=pkg_repl('blas-devel'         ,'3.2.1-4.el6'  ,'x86_64');
 '/software/packages'=pkg_repl('environment-modules','3.2.7b-6.el6' ,'x86_64');
 '/software/packages'=pkg_repl('plpa-libs'          ,'1.3.2-2.1.el6','x86_64');
-'/software/packages'=pkg_repl('plpa-libs'          ,'1.3.2-2.1.el6','i686');
 '/software/packages'=pkg_repl('gcc-gfortran'       ,'4.4.5-6.el6'  ,'x86_64');
 '/software/packages'=pkg_repl('gcc'                ,'4.4.5-6.el6'  ,'x86_64');
 
