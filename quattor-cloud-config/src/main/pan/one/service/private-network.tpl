@@ -25,6 +25,8 @@ variable PRIVATE_NETMASK    ?= '255.255.255.0';
 variable PRIVATE_MASTER_INT ?= 'br0';
 variable PRIVATE_INT_NAME   ?= 'privlan';
 
+include { 'components/network/config' };
+
 '/system/network/interfaces/' = {
     SELF[PRIVATE_MASTER_INT]['aliases'] = nlist(
         PRIVATE_INT_NAME, nlist(

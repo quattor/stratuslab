@@ -19,6 +19,8 @@
 
 unique template config/stratuslab/frontend;
 
+include {'config/stratuslab/base'};
+
 # Readonly module for components.
 '/software/packages'=pkg_repl('perl-Readonly','1.03-11.el6','noarch');
 
