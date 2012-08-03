@@ -225,7 +225,7 @@ sub create_host {
     my $vm_mad = $host_info->{'vm_mad'};
 
     $self->info("creating new host: $hostname");
-    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad'";
+    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad dummy'";
     my $output = `$cmd`;
 
     return;
@@ -290,6 +290,7 @@ sub create_vnet {
         $info{$group}= $id;
     }
     my $gid = $info{'users'};
+    $output = `su - oneadmin --command "onevnet chmod $id[1] 644"`;
     $output = `su - oneadmin --command "onevnet chgrp $id[1] $gid"`;
 
     return;
