@@ -1,94 +1,73 @@
 unique template one/service/site_parameters;
 
 #
-# Mail configuration used for services
-#
-
-variable STRATUSLAB_MAIL_EMAIL ?= '';
-variable STRATUSLAB_MAIL_HOST ?= '';
-variable STRATUSLAB_MAIL_USER ?= 'no-reply@stratuslab.eu';
-variable STRATUSLAB_MAIL_USER_PWD ?= '';
-
-#
-# Persistent disk variable (server host, super user pwd, storage device)
-#
-variable STRATUSLAB_PDISK_HOST ?= 'onehost-7.lal.in2p3.fr';
-variable STRATUSLAB_PDISK_SUPER_USER_PWD ?= '';
-variable STRATUSLAB_PDISK_DEVICE ?= '/dev/vg.02';
-
-#
-# ldap authentification based variable
-#
-variable STRATUSLAB_LDAP_HOST     ?= 'ldap.stratuslab.eu';
-variable STRATUSLAB_LDAP_BIND_PWD ?= 'jetty7109';
-
-#
 # Full hostname of NFS server, usually OpenNebula front-end.
 #
-variable ONE_NFS_SERVER ?= 'onehost-4.lal.in2p3.fr';
-variable ONE_NFS_SERVER_VAR ?= 'onehost-7.lal.in2p3.fr';
-variable ONE_NFS_WILDCARD ?= list('134.158.75.0/24');
+variable ONE_NFS_SERVER = 'onehost-2.lal.in2p3.fr';
+variable STRATUSLAB_PDISK_HOST ?= 'onehost-2.lal.in2p3.fr';
+variable STRATUSLAB_PDISK_SUPER_USER_PWD ?= 'mypassword';
+variable STRATUSLAB_PDISK_DEVICE ?= '/dev/vg.02';
+variable STRATUSLAB_PDISK_TYPE ?= 'iscsi';
+variable STRATUSLAB_PDISK_ISCSI_TYPE ?= 'lvm';
+
+variable STRATUSLAB_IPV6_ENABLE ?= true;
+variable STRATUSLAB_ONE_IPV6_PREFIX ?= '2001:660:3024:101::/64';
+
+#
+# An NFS wildcard that includes all of the OpenNebula nodes.
+#
+variable ONE_NFS_WILDCARD = list('134.158.75.0/24');
+
+variable STRATUSLAB_NODE_LIST ?= list(
+	'onehost-10.lal.in2p3.fr',
+);
 
 #
 # Ganglia variables
 #
-variable GANGLIA_MASTER ?= '134.158.75.4';
+variable GANGLIA_MASTER = '134.158.75.2';
 
-#
-# Marketplace endpoint
-#
-variable STRATUSLAB_MARKETPLACE_HOST ?= 'marketplace.stratuslab.eu';
-
-
-#
-# Local network configuration
-#
-variable PRIVATE_MASTER_INT ?= 'eth0';
-variable PRIVATE_NET        ?= '192.168.16.0/24';
-variable PRIVATE_IP         ?= '192.168.16.1';
-variable PRIVATE_NETMASK    ?= '255.255.255.0';
-
-#
-# Registration service configuration
-#
-variable STRATUSLAB_REGISTRATION_LDAP_MANAGER_PWD ?= '';
-
-#
-# Mysql configuration variables
-#
 variable ONE_SQL_BACKEND ?= 'mysql';
-variable MYSQL_PASSWORD ?= '';
+variable MYSQL_PASSWORD ?= 'root';
+variable STRATUSLAB_ONE_PASSWORD ?= 'Password_one_home_oneadmin_.one_oneauth';
 
-#
-# List of Stratuslab node
-#
-
-variable STRATUSLAB_NODE_LIST ?= list(
-	'onehost',
-);
-
-#########################
-# Network configuration #
-#########################
 variable ONE_NETWORK = nlist(
 'domain','lal.in2p3.fr',
 'nameserver', list('134.158.91.80'),
 'public', nlist(
-		 'interface', 'br0',
-		 'subnet', '134.158.75.0',
-		 'router', '134.158.75.1',
-		 'netmask', '255.255.255.0',
-		 'vms',nlist(
-			'onevm-239',nlist('mac-address','0a:0a:86:9e:49:ef','fixed-address','134.158.75.239','claudia','no'),
-			),
-		),
+     'interface', 'br0',
+     'subnet', '134.158.75.0',
+     'router', '134.158.75.1',
+     'netmask', '255.255.255.0',
+     'vms',nlist(
+      'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','134.158.75.32','claudia','no'),
+      'onevm-33',nlist('mac-address','0a:0a:86:9e:49:21','fixed-address','134.158.75.33','claudia','no'),
+      'onevm-34',nlist('mac-address','0a:0a:86:9e:49:22','fixed-address','134.158.75.34','claudia','no'),
+      'onevm-35',nlist('mac-address','0a:0a:86:9e:49:23','fixed-address','134.158.75.35','claudia','no'),
+      'onevm-36',nlist('mac-address','0a:0a:86:9e:49:24','fixed-address','134.158.75.36','claudia','dyn'),
+      'onevm-37',nlist('mac-address','0a:0a:86:9e:49:25','fixed-address','134.158.75.37','claudia','dyn'),
+      'onevm-38',nlist('mac-address','0a:0a:86:9e:49:26','fixed-address','134.158.75.38','claudia','dyn'),
+      'onevm-39',nlist('mac-address','0a:0a:86:9e:49:27','fixed-address','134.158.75.39','claudia','dyn'),
+#     'onevm-40',nlist('mac-address','0a:0a:86:9e:49:28','fixed-address','134.158.75.40','claudia','sta'),
+#     'onevm-41',nlist('mac-address','0a:0a:86:9e:49:29','fixed-address','134.158.75.41','claudia','sta')
+      ),
+    ),
 'local',nlist(
-		'interface', 'br0:privlan',
-		'subnet',  '192.168.16.0',
-		'router',  '192.168.16.4',
-		'netmask', '255.255.255.0',
-		'vms',nlist(
-			'onevmp-239',nlist('mac-address','0a:0a:86:9e:50:ef','fixed-address','192.168.16.239','claudia','no')
-			),
-		),
+    'interface', 'br0:privlan',
+    'subnet',  '172.17.16.0',
+    'router',  '172.17.16.1',
+    'netmask', '255.255.255.0',
+    'vms',nlist(
+      'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32','claudia','no'),
+            'onevmp-33',nlist('mac-address','0a:0b:86:9e:49:21','fixed-address','172.17.16.33','claudia','no'),
+            'onevmp-34',nlist('mac-address','0a:0b:86:9e:49:22','fixed-address','172.17.16.34','claudia','no'),
+            'onevmp-35',nlist('mac-address','0a:0b:86:9e:49:23','fixed-address','172.17.16.35','claudia','no'),
+            'onevmp-36',nlist('mac-address','0a:0b:86:9e:49:24','fixed-address','172.17.16.36','claudia','no'),
+            'onevmp-37',nlist('mac-address','0a:0b:86:9e:49:25','fixed-address','172.17.16.37','claudia','no'),
+            'onevmp-38',nlist('mac-address','0a:0b:86:9e:49:26','fixed-address','172.17.16.38','claudia','no'),
+            'onevmp-39',nlist('mac-address','0a:0b:86:9e:49:27','fixed-address','172.17.16.39','claudia','no'),
+#           'onevmp-40',nlist('mac-address','0a:0b:86:9e:49:28','fixed-address','172.17.16.40','claudia','dyn'),
+#           'onevmp-41',nlist('mac-address','0a:0b:86:9e:49:29','fixed-address','172.17.16.41','claudia','dyn')
+      ),
+    ),
 );
