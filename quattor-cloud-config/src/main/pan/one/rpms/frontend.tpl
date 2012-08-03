@@ -22,7 +22,7 @@ unique template one/rpms/frontend;
 include { 'default/stratuslab/package-versions' };
 
 variable STRATUSLAB_ONE_VERSION                ?= error('STRATUSLAB_ONE_VERSION variable undefined');
-variable STRATUSLAB_OPENNEBULA_VERSION         ?= '3.0';
+variable STRATUSLAB_OPENNEBULA_VERSION         ?= '3.2';
 variable STRATUSLAB_QUARANTINE_CLEANUP_VERSION ?= error('STRATUSLAB_QUARANTINE_CLEANUP_VERSION variable undefined');
 variable STRATUSLAB_WEB_MONITOR_VERSION        ?= error('STRATUSLAB_WEB_MONITOR_VERSION variable undefined');
 variable STRATUSLAB_SYSADMIN_CLI_VERSION       ?= error('STRATUSLAB_SYSADMIN_CLI_VERSION variable undefined');

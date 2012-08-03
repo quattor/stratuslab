@@ -13,7 +13,16 @@ include { 'components/filecopy/config' };
                     STRATUSLAB_PDISK_SUPER_USER_PWD,
                     STRATUSLAB_PDISK_CURL,
                     STRATUSLAB_PDISK_REGISTER_FILENAME,
+                    STRATUSLAB_PDISK_SCRIPT,
             ),
   'owner','root:root',
   'perms','0644',
+);
+
+'/software/components/filecopy/services/{/etc/stratuslab/pdisk-host.conf}'=nlist(
+  'config', format(file_contents('pdisk/host/pdisk-host.conf'),
+                    STRATUSLAB_PDISK_SUPER_USER,
+                    STRATUSLAB_PDISK_SUPER_USER_PWD,
+                    STRATUSLAB_PDISK_GET_TURL,
+           ),
 );

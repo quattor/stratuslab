@@ -98,7 +98,6 @@ variable STRATUSLAB_MAIL_USER_PWD ?= 'xxxxx';
 variable STRATUSLAB_MAIL_SSL ?= true;
 variable STRATUSLAB_MAIL_DEBUG ?= false;
 
-#
-# Quarantine variables.
-#
 variable STRATUSLAB_QUARANTINE_PERIOD ?= '15m';
+
+variable STRATUSLAB_ROOT_PRIVATE_KEY ?= '/root/.ssh/id_dsa';

@@ -95,7 +95,7 @@ prefix '/software/components/oned';
 'mads/auth' = nlist(
     'manager', 'AUTH',
     'executable', 'one_auth_mad',
-    'arguments', '--authz quota --authn dummy,plain',
+    'arguments', '--authz quota --authn dummy,plain,default',
   );
 
 'hooks/done' = nlist(

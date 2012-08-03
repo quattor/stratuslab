@@ -114,7 +114,7 @@ include {
 #
 # Setup claudia
 #
-include { 'claudia/service/daemon' };
+#include { 'claudia/service/daemon' };
 
 #
 # Include the packages (RPMs) for this node.
@@ -185,3 +185,10 @@ include { if ( STRATUSLAB_IPV6_ENABLE ) {
 	}
 };
 
+include { if ( STRATUSLAB_IPV6_ENABLE ) {
+		'common/network/ipv6/config';
+	} else {
+		null;
+	};
+
+};

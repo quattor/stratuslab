@@ -11,7 +11,7 @@
 
 # 
 # # 
-# oned, 1.26-SNAPSHOT, 20120323.2246.32
+# oned, 1.27-SNAPSHOT, 20120802.1133.41
 #
 
 declaration template components/oned/schema;

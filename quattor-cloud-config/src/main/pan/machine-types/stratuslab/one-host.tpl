@@ -72,3 +72,9 @@ include { 'config/os/git' };
 
 include { 'config/os/updates' };
 
+include { if (STRATUSLAB_IPV6_ENABLE) {
+		'common/network/ipv6/config';
+	} else {
+		null;
+	}
+};
