@@ -172,6 +172,8 @@ An nlist with the information for each host.
 
 =item * vm_mad (R 'vmm_kvm'): virtual machine manager name 
 
+=item * vnm_mad (R 'dummy'): virtual network manager name
+
 =back
 
 =head2 vnets

@@ -75,6 +75,7 @@ type structure_one_host = {
     'im_mad' : string = 'im_kvm'
     'tm_mad' : string = 'tm_stratuslab' 
     'vm_mad' : string = 'vmm_kvm'
+    'vnm_mad' : string = 'dummy'
 };
 
 type structure_one_vnet = {

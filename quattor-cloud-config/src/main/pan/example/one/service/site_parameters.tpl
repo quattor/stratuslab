@@ -18,6 +18,22 @@ variable STRATUSLAB_ONE_IPV6_PREFIX ?= '2001:660:3024:101::/64';
 #
 variable ONE_NFS_WILDCARD = list('134.158.75.0/24');
 
+#
+# StratusLab nodes definition.
+#
+# The variable STRATUSLAB_NODE_LIST can be either a list or a nlist. In
+# the first case, the default parameters will be applied to all nodes.
+# In the second case, node names are the keys and node parameters are
+# the values. Special value 'DEFAULT' can be used to applied default
+# parameters.
+#
+# For example:
+#   variable STRATUSLAB_NODE_LIST ?= nlist(
+#       'onehost-01.example.org', 'DEFAULT',
+#       'onehost-02.example.org', nlist('vnm_mad', '802.1Q'),
+#       'onehost-03.example.org', nlist('vnm_mad', '802.1Q', 'tm_mad', 'tm_ssh'),
+#   };
+#
 variable STRATUSLAB_NODE_LIST ?= list(
 	'onehost-10.lal.in2p3.fr',
 );

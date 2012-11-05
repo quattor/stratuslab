@@ -223,9 +223,10 @@ sub create_host {
     my $im_mad = $host_info->{'im_mad'};
     my $tm_mad = $host_info->{'tm_mad'};
     my $vm_mad = $host_info->{'vm_mad'};
+    my $vnm_mad = $host_info->{'vnm_mad'};
 
     $self->info("creating new host: $hostname");
-    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad dummy'";
+    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad $vnm_mad'";
     my $output = `$cmd`;
 
     return;
