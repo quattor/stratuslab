@@ -1,5 +1,5 @@
 unique template one/rpms/pat;
 
 
-include { 'config/stratuslab/pat' };
+include { if_exists('config/stratuslab/pat') };
 
