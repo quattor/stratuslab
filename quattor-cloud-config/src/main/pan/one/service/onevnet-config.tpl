@@ -93,14 +93,6 @@ variable STRATUSLAB_LOCAL_NETWORK_HEADER = configure_vlan();
 
 variable STRATUSLAB_LOCAL_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['local']['interface']+"\n\n";
 
-variable STRATUSLAB_PUBLIC_NETWORK_HEADER = <<EOF;
-NAME=public
-PUBLIC=YES
-TYPE=FIXED
-EOF
-
-variable STRATUSLAB_PUBLIC_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['public']['interface']+"\n\n";
-
 variable STRATUSLAB_LOCAL_NETWORK_BODY = {
         result = '';
         foreach (k;v;ONE_NETWORK['local']['vms']){
@@ -120,6 +112,8 @@ TYPE=FIXED
 EOF
 
 variable STRATUSLAB_PUBLIC_NETWORK_HEADER = configure_vlan();
+
+variable STRATUSLAB_PUBLIC_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['public']['interface']+"\n\n";
 
 variable STRATUSLAB_PUBLIC_NETWORK_BODY = {
         result = '';
