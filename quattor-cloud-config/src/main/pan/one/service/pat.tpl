@@ -117,6 +117,7 @@ variable ONE_HOOK_PAT_ARGS_ADD = {
 variable ONE_HOOK_PAT_ARGS_DEL = {
     args = "del '$VMID'";
     args = args + ' -a ' + join(ONE_HOOK_PAT_APORTS);
+    args = args + ' -b ' + join(ONE_HOOK_PAT_BPORTS);
     args = args + ' -v';
 };
 
