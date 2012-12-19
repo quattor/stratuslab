@@ -72,4 +72,7 @@ include {'config/stratuslab/base'};
 
 '/software/packages'=pkg_repl('qemu-img','0.12.1.2-2.160.el6','x86_64');
 
+# Need by stratuslab-openldap-support
+'/software/packages'=pkg_repl('cyrus-sasl-ldap','2.1.23-8.el6','x86_64');
+
 include { 'config/os/updates' };

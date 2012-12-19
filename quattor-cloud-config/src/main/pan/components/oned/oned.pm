@@ -11,7 +11,7 @@
 
 # 
 # # 
-# oned, 1.4, 20110303.1802.09
+# oned, 1.27-SNAPSHOT, 20120802.1133.41
 #
 
 package NCM::Component::oned;
@@ -28,7 +28,7 @@ use CAF::FileWriter;
 use CAF::Process;
 use LC::File qw (makedir);
 
-our $VERSION = q{1.4};
+our $VERSION = q{1.27-SNAPSHOT};
 
 use Readonly;
 Readonly::Scalar our $EMPTY => q{};
@@ -236,12 +236,20 @@ sub create_host {
     my $vm_mad = $host_info->{'vm_mad'};
 
     $self->info("creating new host: $hostname");
-    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad'";
+    my $cmd = "su - oneadmin --command 'onehost create $hostname $im_mad $vm_mad $tm_mad dummy'";
     my $output = `$cmd`;
 
     return;
 }
 
+sub create_group {
+	my ($self) = @_;
+
+	$self->info("creating group users");
+	my $output = `su - oneadmin --command "onegroup create users"`;
+
+	return;
+}
 
 # Extract the existing OpenNebula networks. 
 sub get_existing_vnets {
@@ -258,7 +266,7 @@ sub get_existing_vnets {
     my @lines = split("^", $output);
     foreach my $line (@lines) {
 	chomp($line);
-	my ($d1, $d2, $d3, $vnet_name) = split("\\s+", $line);
+	my ($d1, $d2, $d3, $d4, $vnet_name) = split("\\s+", $line);
 	$info{$vnet_name} = 1;
     }
 
@@ -275,6 +283,7 @@ sub create_vnet {
 #    my $output = $proc->output();
 
     my $fname = "/home/oneadmin/$name.net";
+    my %info;
 
     # Write out the contents of the configuration file.
     my $fh = CAF::FileWriter->open($fname);
@@ -282,6 +291,18 @@ sub create_vnet {
     $fh->close();
 
     my $output = `su - oneadmin --command "onevnet create $fname"`;
+    print $output;
+    my @id = split("\\s+",$output);
+    $output = `su - oneadmin --command "onegroup list"`;
+    my @lines = split("^",$output);
+    foreach my $line (@lines) {
+        chomp($line);
+        my ($d1, $id,$group) = split("\\s+",$line);
+        $info{$group}= $id;
+    }
+    my $gid = $info{'users'};
+    $output = `su - oneadmin --command "onevnet chmod $id[1] 644"`;
+    $output = `su - oneadmin --command "onevnet chgrp $id[1] $gid"`;
 
     return;
 }
@@ -361,6 +382,11 @@ sub Configure {
 	    $self->create_host($desired_host, $desired_hosts->{$desired_host});
 	}
     }
+
+
+	# Create group users to be sure it exist before network creation
+    $self->create_group();
+
 
     # Also configure the networks.
     my $desired_vnets = $t->{'vnets'};

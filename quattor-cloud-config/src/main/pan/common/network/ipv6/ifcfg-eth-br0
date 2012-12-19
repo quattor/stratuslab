@@ -1,0 +1,7 @@
+ONBOOT=yes
+NM_CONTROLLED='no'
+DEVICE=%s
+TYPE=Ethernet
+BRIDGE='br0'
+HWADDR=%s
+BOOTPROTO=

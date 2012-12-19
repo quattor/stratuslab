@@ -96,5 +96,6 @@ include { 'common/iptables/base' };
     'dst_port', '10389',
     'target', 'ACCEPT',
   ));
-
 };
+
+include { 'common/ldap/config' };

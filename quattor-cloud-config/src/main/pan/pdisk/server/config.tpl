@@ -57,6 +57,16 @@ prefix '/software/components/mysql';
   SELF;
 };
 
+include { 'components/symlink/config' };
+
+prefix '/software/components/symlink';
+
+'links'=push(nlist(
+  'name','/opt/stratuslab/storage/pdisk/cloud_node.key',
+  'target', '/home/oneadmin/.ssh/id_rsa',
+  'exists', false,
+  'replace', nlist('all','yes')
+));
 
 #
 # Sudo configuration to allow --save option

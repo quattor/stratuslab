@@ -8,52 +8,14 @@ unique template one/service/pat;
 
 include { 'one/rpms/pat' };
 
-# --- Variables --------------------------------------------------------
+# --- variables definition ---------------------------------------------
 
-variable PATHOOK_FILENAME ?= 'pathook.rb';
-variable PATCORE_FILENAME ?= 'patcore.rb';
-variable PATRESTORER_FILENAME ?= 'patrestorer.rb';
-
-variable ONE_RUBY_LIB_DIR ?= '/usr/lib/one/ruby';
-
-# Define the ports range used on the StratusLab front-end to translate
-# virtual machines ports.
+variable ONE_HOOK_PAT ?= 'pathook.rb';
 variable ONE_HOOK_PAT_MINPORT ?= '20000';
 variable ONE_HOOK_PAT_MAXPORT ?= '30000';
+variable ONE_HOOK_PAT_RPORTS ?= list(22, 80);
 
-# Define the authorized ports to be translated. Only these ports can be
-# translated on the StratusLab front-end.
-variable ONE_HOOK_PAT_APORTS ?= list(22);
-
-# Define the base ports to translate. These ports will be translated
-# whatever the appliance manifest indicates.
-variable ONE_HOOK_PAT_BPORTS ?= list(22);
-
-# --- Functions --------------------------------------------------------
-
-##
-# function      join
-# description   join a list of items
-# parameters    items - list of items
-#               separator - separator between items (default: ',')
-# return        string
-function join = {
-    if( ARGC < 1 || !is_list(ARGV[0]) ) error("require at least a list at first argument");
-    items = ARGV[0];
-    if( ARGC > 1 ) {
-        separator = ARGV[1];
-    } else {
-        separator = ',';
-    };
-
-    str = '';
-    foreach(k; v; items) {
-        str = str + separator + to_string(v);
-    };
-    substr(str, 1);
-};
-
-# --- Configuration ----------------------------------------------------
+# --- sudo configuration -----------------------------------------------
 
 include { 'components/sudo/config' };
 
@@ -73,32 +35,16 @@ include { 'components/sudo/config' };
     ),
 );
 
+
+# --- one configuration ------------------------------------------------
+
+variable ONE_HOOK_PAT_CONTENT ?= file_contents('one/hooks/pathook.rb');
+
 include { 'components/filecopy/config' };
 
-variable FILE_CONTENT = file_contents('one/pat/' + PATHOOK_FILENAME);
 '/software/components/filecopy/services' = npush(
-    escape(ONE_HOOKS_DIR + PATHOOK_FILENAME), nlist(
-        'config', FILE_CONTENT,
-        'owner', 'root',
-        'perms', '0755',
-        'restart', '/sbin/service ' + ONE_SERVICE + ' restart',
-    ),
-);
-
-variable FILE_CONTENT = file_contents('one/pat/' + PATCORE_FILENAME);
-'/software/components/filecopy/services' = npush(
-    escape(ONE_RUBY_LIB_DIR + '/' + PATCORE_FILENAME), nlist(
-        'config', FILE_CONTENT,
-        'owner', 'root',
-        'perms', '0755',
-        'restart', '/sbin/service ' + ONE_SERVICE + ' restart',
-    ),
-);
-
-variable FILE_CONTENT = file_contents('one/pat/' + PATRESTORER_FILENAME);
-'/software/components/filecopy/services' = npush(
-    escape('/usr/sbin/' + PATRESTORER_FILENAME), nlist(
-        'config', FILE_CONTENT,
+    escape(ONE_HOOKS_DIR + ONE_HOOK_PAT), nlist(
+        'config', ONE_HOOK_PAT_CONTENT,
         'owner', 'root',
         'perms', '0755',
         'restart', '/sbin/service ' + ONE_SERVICE + ' restart',
@@ -107,29 +53,33 @@ variable FILE_CONTENT = file_contents('one/pat/' + PATRESTORER_FILENAME);
 
 include { 'components/oned/config' };
 
+variable PATHOOK_RPORTS = {
+    content = '';
+    foreach(k; v; ONE_HOOK_PAT_RPORTS) {
+        content = content + to_string(v) + ',';
+    };
+    content;
+};
 variable ONE_HOOK_PAT_ARGS_ADD = {
-    args = "add '$VMID'";
-    args = args + ' -a ' + join(ONE_HOOK_PAT_APORTS);
-    args = args + ' -b ' + join(ONE_HOOK_PAT_BPORTS);
-    args = args + ' -r ' + ONE_HOOK_PAT_MINPORT + ':' + ONE_HOOK_PAT_MAXPORT ;
-    args = args + ' -v';
+    args = "add -i '$VMID' -r '$NIC[IP, Network=\\"local\\"]'";
+    args = args + ' -p ' + PATHOOK_RPORTS;
+    args = args + ' -n ' + ONE_HOOK_PAT_MINPORT + ':' + ONE_HOOK_PAT_MAXPORT ;
+    args = args + ' -l ' + DB_IP[escape(FULL_HOSTNAME)];
 };
 variable ONE_HOOK_PAT_ARGS_DEL = {
-    args = "del '$VMID'";
-    args = args + ' -a ' + join(ONE_HOOK_PAT_APORTS);
-    args = args + ' -b ' + join(ONE_HOOK_PAT_BPORTS);
-    args = args + ' -v';
+    args = "del -i '$VMID' -r '$NIC[IP, Network=\\"local\\"]'";
+    args = args + ' -l ' + DB_IP[escape(FULL_HOSTNAME)];
 };
 
 '/software/components/oned/hooks' = npush(
     'AddPortTranslation', nlist(
         'on', 'RUNNING',
-        'command', ONE_HOOKS_DIR + PATHOOK_FILENAME,
+        'command', ONE_HOOK_PAT,
         'arguments', ONE_HOOK_PAT_ARGS_ADD,
     ),
     'DelPortTranslation', nlist(
         'on', 'DONE',
-        'command', ONE_HOOKS_DIR + PATHOOK_FILENAME,
+        'command', ONE_HOOK_PAT,
         'arguments', ONE_HOOK_PAT_ARGS_DEL,
     ),
 );
