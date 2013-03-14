@@ -85,3 +85,12 @@ include { 'components/symlink/config' };
 	); } else {
 		SELF;
 };
+
+include { 'components/filecopy/config' };
+
+'/software/components/filecopy/services/{/etc/idmapd.conf}'= {
+  nlist('config',format(file_contents('common/nfs/idmapd.conf'),
+                  SITE_DOMAIN),
+  'owner','root:root',
+  'perms','0644',)
+};

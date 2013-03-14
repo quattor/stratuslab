@@ -101,17 +101,3 @@ variable STRATUSLAB_MAIL_DEBUG ?= false;
 variable STRATUSLAB_QUARANTINE_PERIOD ?= '15m';
 
 variable STRATUSLAB_ROOT_PRIVATE_KEY ?= '/root/.ssh/id_dsa';
-
-#
-# Automatically enable OpenNebula VLAN depending on network
-# configuration.
-#
-variable ONE_VLAN_ENABLE ?= {
-    enable = false;
-    foreach (network; params; ONE_NETWORK) {
-        if (is_defined(params['vlan']))
-            return(true);
-    };
-    return(false);
-};
-

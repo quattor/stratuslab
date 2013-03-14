@@ -26,7 +26,7 @@ include { 'stratuslab/one-proxy/variables' };
 #
 include { if_exists('common/security/cas') };
 include { if_exists('security/cas') };
-include { 'common/fetch-crl/config' };
+include { 'features/fetch-crl/config' };
 
 #
 # Include the necessary rpms. 
