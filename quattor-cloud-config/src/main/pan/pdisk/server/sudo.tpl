@@ -12,3 +12,12 @@ prefix '/software/components/sudo';
 	'cmd','ALL',
 	)
 );
+
+'privilege_lines' = append(nlist(
+	'user','root',
+	'run_as','ALL',
+	'host','ALL',
+	'options','NOPASSWD',
+	'cmd','ALL',
+	)
+);

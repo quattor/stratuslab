@@ -1,0 +1,4 @@
+SLAPD_LDAP=yes
+SLAPD_LDAPI=yes
+SLAPD_LDAPS=yes
+SLAPD_OPTIONS="-h \"ldap://0.0.0.0:10389 ldaps:/// ldapi:///\""
