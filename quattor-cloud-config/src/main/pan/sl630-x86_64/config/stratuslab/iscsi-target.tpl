@@ -17,13 +17,14 @@
 # limitations under the License.
 #
 
-unique template one/service/common-config;
+unique template config/stratuslab/iscsi-target;
 
-include { 
-if ( GLITE_DEPENDENCY) {
-  'machine-types/nfs' 
-  } else {
-    null;
-  };
-};
-include { 'common/accounts/default' };
+'/software/packages'=pkg_repl('perl-Config-General','2.44-1.el6',  'noarch');
+'/software/packages'=pkg_repl('scsi-target-utils',  '1.0.24-2.el6','x86_64');
+'/software/packages'=pkg_repl('libibverbs',         '1.1.4-2.el6', 'x86_64');
+'/software/packages'=pkg_repl('librdmacm',          '1.0.10-2.el6','x86_64');
+'/software/packages'=pkg_repl('libmthca',           '1.0.6-3.el6', 'x86_64');
+'/software/packages'=pkg_repl('sg3_utils-libs',     '1.28-4.el6',  'x86_64');
+'/software/packages'=pkg_repl('sg3_utils',          '1.28-4.el6',  'x86_64');
+
+include { 'config/os/updates' };

@@ -21,6 +21,7 @@ unique template marketplace/variables;
 include { 'stratuslab/default/parameters' };
 
 variable STRATUSLAB_MARKETPLACE_HOST        ?= '';
+variable STRATUSLAB_MARKETPLACE_PROTOCOL    ?= 'https';
 
 variable STRATUSLAB_MARKETPLACE_ADMIN_EMAIL ?= STRATUSLAB_MAIL_EMAIL;
 variable STRATUSLAB_MARKETPLACE_MAIL_HOST   ?= STRATUSLAB_MAIL_HOST;

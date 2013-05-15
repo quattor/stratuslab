@@ -6,9 +6,9 @@ values = list of template name, including namespace after repository/ (string)
 default = list('stratuslab')
 required = no
 }
-variable STRATUSLAB_PACKAGE_REPOSITORIES ?= list('stratuslab');
-
 include { 'quattor/functions/repository' };
+
+variable STRATUSLAB_PACKAGE_REPOSITORIES ?= list('stratuslab');
 
 # Add StratusLab repository
 '/software/repositories' = {

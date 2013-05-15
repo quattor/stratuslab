@@ -17,13 +17,8 @@
 # limitations under the License.
 #
 
-unique template one/service/common-config;
+unique template config/stratuslab/iscsi-initiator;
 
-include { 
-if ( GLITE_DEPENDENCY) {
-  'machine-types/nfs' 
-  } else {
-    null;
-  };
-};
-include { 'common/accounts/default' };
+'/software/packages' = pkg_repl('iscsi-initiator-utils','6.2.0.872-41.el6','x86_64');
+
+include { 'config/os/updates' };

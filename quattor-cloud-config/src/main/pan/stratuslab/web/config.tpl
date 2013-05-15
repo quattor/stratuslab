@@ -21,6 +21,7 @@ prefix '/software/components/filecopy';
 	'config', format(file_contents('stratuslab/web/stratuslab-user.cfg'),
 		STRATUSLAB_ONE_HOST,
 		STRATUSLAB_MARKETPLACE_HOST,
+  STRATUSLAB_MARKETPLACE_PROTOCOL,
 		STRATUSLAB_PDISK_HOST,
 		),
 );

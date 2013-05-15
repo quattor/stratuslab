@@ -42,7 +42,15 @@ include { 'components/filecopy/config' };
   'owner', 'oneadmin',
   'group', 'cloud',
   'perms', '0600',
-  'restart', SSH_SETUP_SCRIPT,
+  'backup', false,
+);
+
+'/software/components/filecopy/services/{/var/run/quattor/oneadmin-ssh.sh}' = nlist(
+  'config', "#!/bin/sh \n" + SSH_SETUP_SCRIPT,
+  'owner', 'root',
+  'group', 'root',
+  'perms', '0711',
+  'restart', '/var/run/quattor/oneadmin-ssh.sh',
   'backup', false,
   'forceRestart', false
 );

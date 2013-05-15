@@ -17,13 +17,6 @@
 # limitations under the License.
 #
 
-unique template one/service/common-config;
+unique template config/stratuslab/devel;
 
-include { 
-if ( GLITE_DEPENDENCY) {
-  'machine-types/nfs' 
-  } else {
-    null;
-  };
-};
-include { 'common/accounts/default' };
+include { 'config/os/updates' };

@@ -17,13 +17,10 @@
 # limitations under the License.
 #
 
-unique template one/service/common-config;
+unique template config/stratuslab/registration;
 
-include { 
-if ( GLITE_DEPENDENCY) {
-  'machine-types/nfs' 
-  } else {
-    null;
-  };
-};
-include { 'common/accounts/default' };
+'/software/packages'=pkg_repl('glibc'             ,'2.12-1.25.el6','i686');
+'/software/packages'=pkg_repl('openldap-clients'  ,'2.4.23-15.el6','x86_64');
+'/software/packages'=pkg_repl('nss-softokn-freebl','3.12.9-11.el6','i686');
+
+include { 'config/os/updates' };
