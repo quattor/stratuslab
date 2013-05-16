@@ -24,7 +24,6 @@ include { 'common/iptables/base'};
 #
 include { 'repository/config/stratuslab' };
 include { 'pdisk/service/daemon' };
-include { 'iscsi/rpms/target' };
 
 #
 # Include shared fs configuration
