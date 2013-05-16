@@ -4,4 +4,3 @@ unique template config/stratuslab/dhcpd;
 '/software/packages'=pkg_repl('tftp-server' ,'0.49-5.1.el6'    ,'x86_64');
 '/software/packages'=pkg_repl('genisoimage' ,'1.1.9-11.el6'    ,'x86_64');
 
-include { 'config/os/updates' };

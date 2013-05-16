@@ -21,4 +21,3 @@ unique template config/stratuslab/iscsi-initiator;
 
 '/software/packages' = pkg_repl('iscsi-initiator-utils','6.2.0.872-8.fc14','x86_64');
 
-include { 'config/os/updates' };

@@ -19,5 +19,5 @@
 
 unique template ganglia/rpms/host;
 
-variable GANGLIA_ARCH ?= 'x86_64';
-include { 'monitoring/ganglia/rpms/'+GANGLIA_ARCH+'/host' };
+#variable GANGLIA_ARCH ?= 'x86_64';
+#include { 'monitoring/ganglia/rpms/'+GANGLIA_ARCH+'/host' };

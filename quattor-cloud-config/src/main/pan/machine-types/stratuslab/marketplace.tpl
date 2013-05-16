@@ -29,5 +29,4 @@ include { 'marketplace/service/daemon' };
 include { 'ganglia/config' };
 
 
-include { 'config/os/updates' };
 

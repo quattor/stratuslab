@@ -67,4 +67,3 @@ unique template config/stratuslab/benchmarks;
 #'/software/packages'= pkg_repl( 'numactl'       , '2.0.3-8.fc13'  , 'x86_64' );
 #'/software/packages'= pkg_repl( 'numactl'       , '2.0.3-8.fc13'  , 'x86_64' );
 #'/software/packages'= pkg_repl( 'numactl'       , '2.0.3-8.fc13'  , 'x86_64' );
-include { 'config/os/updates' };

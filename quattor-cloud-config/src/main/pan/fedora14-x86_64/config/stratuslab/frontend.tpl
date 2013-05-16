@@ -65,4 +65,3 @@ unique template config/stratuslab/frontend;
 # Not included in rhel5 and fedora14
 '/software/packages' = pkg_repl('rubygem-sequel','3.20.0-1','noarch');
 
-include { 'config/os/updates' };

@@ -53,4 +53,3 @@ unique template config/stratuslab/node;
 # Install squid
 '/software/packages' = pkg_repl('squid','3.1.8-1.fc14','x86_64');
 
-include { 'config/os/updates' };

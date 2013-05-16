@@ -70,7 +70,6 @@ include { 'iscsi/rpms/initiator' };
 include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
-include { 'config/os/updates' };
 
 include { if (STRATUSLAB_IPV6_ENABLE) {
 		'common/network/ipv6/config';

@@ -23,4 +23,3 @@ unique template config/stratuslab/registration;
 '/software/packages'=pkg_repl('openldap-clients','2.4.22-7.fc14','x86_64');
 '/software/packages'=pkg_repl('nss-softokn-freebl','3.12.7-6.fc14','i686');
 
-include { 'config/os/updates' };

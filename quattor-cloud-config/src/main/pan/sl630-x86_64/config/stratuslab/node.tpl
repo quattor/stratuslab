@@ -56,4 +56,3 @@ include {'config/stratuslab/base'};
 # Install squid
 '/software/packages' = pkg_repl('squid','3.1.10-1.el6_2.4','x86_64');
 
-include { 'config/os/updates' };

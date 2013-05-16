@@ -29,5 +29,4 @@ include { 'registration/service/daemon' };
 include { 'ganglia/config' };
 
 
-include { 'config/os/updates' };
 

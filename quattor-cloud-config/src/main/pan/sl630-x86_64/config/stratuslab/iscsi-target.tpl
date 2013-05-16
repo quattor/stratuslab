@@ -27,4 +27,3 @@ unique template config/stratuslab/iscsi-target;
 '/software/packages'=pkg_repl('sg3_utils-libs',     '1.28-4.el6',  'x86_64');
 '/software/packages'=pkg_repl('sg3_utils',          '1.28-4.el6',  'x86_64');
 
-include { 'config/os/updates' };

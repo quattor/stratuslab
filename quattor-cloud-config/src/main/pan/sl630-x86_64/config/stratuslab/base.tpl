@@ -52,6 +52,3 @@ include {
 
 # Add YUM downloadonly extension
 "/software/packages"=pkg_repl("yum-plugin-downloadonly","1.1.30-14.el6","noarch");
-
-
-include { 'config/os/updates' };

@@ -24,16 +24,16 @@ include { 'stratuslab/one-proxy/variables' };
 #
 # Grid security environment is required.
 #
-include { if_exists('common/security/cas') };
-include { if_exists('security/cas') };
-include { 'features/fetch-crl/config' };
+# include { if_exists('common/security/cas') };
+# include { if_exists('security/cas') };
+#include { 'features/fetch-crl/config' };
 
 #
-# Include the necessary rpms. 
+# Include the necessary rpms.
 #
 include { 'stratuslab/one-proxy/rpms/config' };
 
-# 
+#
 # Ensure that jetty servlet container is started
 #
 include { 'components/chkconfig/config' };
@@ -70,7 +70,7 @@ prefix '/software/components/one_proxy/config';
 # Configuration for grid certificate and VOMS proxy authn.
 #
 'jaas/stratuslab-cert/login_modules' = append(
-    nlist('name',    'eu.stratuslab.authn.CertLoginModule', 
+    nlist('name',    'eu.stratuslab.authn.CertLoginModule',
           'flag',    'requisite',
           'options', nlist('file', '/etc/stratuslab/authn/login-cert.properties')
     )
@@ -80,13 +80,13 @@ prefix '/software/components/one_proxy/config';
 # Configuration for username/password authn. from a file.
 #
 'jaas/stratuslab-pswd/login_modules' = append(
-  nlist('name',    'org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule', 
+  nlist('name',    'org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule',
         'flag',    'sufficient',
         'options', nlist('file', '/etc/stratuslab/authn/login-pswd.properties')
   )
 );
 
-'users_by_pswd/'=npush(STRATUSLAB_PDISK_SUPER_USER,nlist('password',STRATUSLAB_PDISK_SUPER_USER_PWD));  
+'users_by_pswd/'=npush(STRATUSLAB_PDISK_SUPER_USER,nlist('password',STRATUSLAB_PDISK_SUPER_USER_PWD));
 
 #
 # Allow LDAP authentication.

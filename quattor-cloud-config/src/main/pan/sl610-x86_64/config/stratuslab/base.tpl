@@ -13,4 +13,3 @@ include {
 "/software/packages"=pkg_repl("yum-plugin-downloadonly","1.1.30-6.el6","noarch");
 
 
-include { 'config/os/updates' };

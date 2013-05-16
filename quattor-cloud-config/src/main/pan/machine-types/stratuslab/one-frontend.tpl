@@ -33,11 +33,6 @@ variable FILESYSTEM_LAYOUT_CONFIG_SITE ?= "site/filesystems/glite";
 
 include { 'machine-types/stratuslab/base' };
 
-#
-# Include web server for OpenNebula web monitoring.
-# Not yet included in standard installation.
-#
-include { 'rpms/web_server' };
 
 #
 # Define the parameters for the OpenNebula setup.
@@ -66,7 +61,7 @@ include { 'ganglia/config' };
 # Define the three areas to be exported to all nodes.
 #
 variable NFS_EXPORTS ?= true;
-include { 
+include {
   if( NFS_EXPORTS ) {
     'common/nfs/nfs-exports';
   } else {
@@ -134,10 +129,6 @@ include { 'one/rpms/devel' };
 #
 include { 'iscsi/rpms/target' };
 
-# Add git to the machine, but git-svn is not needed.
-include { 'config/os/git' };
-'/software/packages' = pkg_del('git-svn');
-
 # Authentication proxy
 include { 'stratuslab/one-proxy/config' };
 
@@ -165,7 +156,6 @@ include { 'one/service/iptables-frontend' };
 
 include { 'one/service/tm_stratuslab' };
 
-include { 'config/os/updates' };
 
 # Add support for pxe
 #include { 'one/service/pxe' };

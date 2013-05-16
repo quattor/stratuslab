@@ -1,11 +1,10 @@
 unique template machine-types/stratuslab/base-without-glite;
 
 # Include static information and derived global variables.
-variable SITE_DB_TEMPLATE ?= if_exists('pro_site_databases');
+#variable SITE_DB_TEMPLATE ?= if_exists('pro_site_databases');
 variable SITE_DB_TEMPLATE ?= 'site/databases';
 include { SITE_DB_TEMPLATE };
-variable SITE_GLOBAL_VARS_TEMPLATE ?=
-if_exists('pro_site_global_variables');
+#variable SITE_GLOBAL_VARS_TEMPLATE ?= #if_exists('pro_site_global_variables');
 variable SITE_GLOBAL_VARS_TEMPLATE ?= 'site/global_variables';
 include { SITE_GLOBAL_VARS_TEMPLATE };
 
@@ -31,19 +30,6 @@ include { 'components/grub/config' };
 #
 # hardware
 #
-include { 'hardware/functions' };
-"/hardware" = if ( exists(DB_MACHINE[escape(FULL_HOSTNAME)]) ) {
-                  create(DB_MACHINE[escape(FULL_HOSTNAME)]);
-              } else {
-                  error(FULL_HOSTNAME + " : hardware not found in machine database");
-              };
-variable MACHINE_PARAMS_CONFIG ?= undef;
-include { MACHINE_PARAMS_CONFIG };
-"/hardware" = if ( exists(MACHINE_PARAMS) && is_nlist(MACHINE_PARAMS) ) {
-                update_hw_params();
-              } else {
-                SELF;
-              };
 
 
 # Cluster specific configuration
@@ -124,12 +110,12 @@ include { if_exists(MONITORING_CONFIG_SITE) };
 
 
 #
-# AII component must be included after much of the other setup. 
+# AII component must be included after much of the other setup.
 #
 include { OS_NS_QUATTOR + 'aii' };
 
 
-# 
+#
 # Add local users if some configured
 #
 variable USER_CONFIG_INCLUDE = if ( exists(USER_CONFIG_SITE) && is_defined(USER_CONFIG_SITE) ) {
@@ -146,7 +132,7 @@ include { 'components/symlink/config' };
          "target","/.faketarget",
          "replace",  nlist("all","yes","link", "yes")));
 
-# Default repository configuration template 
+# Default repository configuration template
 variable PKG_REPOSITORY_CONFIG ?= 'repository/config';
 
 variable PAKITI_ENABLED ?= false;

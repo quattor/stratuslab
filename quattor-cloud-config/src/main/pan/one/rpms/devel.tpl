@@ -21,4 +21,3 @@ unique template one/rpms/devel;
 
 include { 'config/stratuslab/devel' };
 
-include { 'config/os/updates' };

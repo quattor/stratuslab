@@ -75,4 +75,3 @@ include {'config/stratuslab/base'};
 # Need by stratuslab-openldap-support
 '/software/packages'=pkg_repl('cyrus-sasl-ldap','2.1.23-8.el6','x86_64');
 
-include { 'config/os/updates' };

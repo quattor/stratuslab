@@ -21,4 +21,3 @@ unique template config/stratuslab/stratuslab-srv;
 
 '/software/packages'=pkg_repl('t1lib','5.1.2-6.fc14','x86_64');
 
-include { 'config/os/updates' };

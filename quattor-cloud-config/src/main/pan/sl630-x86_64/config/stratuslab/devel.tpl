@@ -19,4 +19,3 @@
 
 unique template config/stratuslab/devel;
 
-include { 'config/os/updates' };

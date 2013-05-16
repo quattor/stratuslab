@@ -118,7 +118,6 @@ include {'rpms/system_admin_tools'};#some RPMS were previously in base_x
 "/software/packages"=pkg_repl("yum-plugin-downloadonly","1.1.30-6.el6","noarch");
 
 # OS errata and site specific updates
-include { 'config/os/updates' };
 
 # Configure Java according to gLite/OS version
 include { OS_NS_OS + 'java' };
