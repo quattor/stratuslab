@@ -22,7 +22,7 @@ unique template one/service/private-network;
 variable PRIVATE_NET        ?= '172.17.16.0/24';
 variable PRIVATE_IP         ?= '172.17.16.1';
 variable PRIVATE_NETMASK    ?= '255.255.255.0';
-variable PRIVATE_MASTER_INT ?= 'br0';
+variable PRIVATE_MASTER_INT ?= boot_nic();
 variable PRIVATE_INT_NAME   ?= 'privlan';
 
 include { 'components/network/config' };
@@ -67,4 +67,3 @@ include { 'components/iptables/config' };
 # Enable IP forwarding
 include { 'components/sysctl/config' };
 '/software/components/sysctl/variables/net.ipv4.ip_forward' = '1';
-
