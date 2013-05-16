@@ -77,6 +77,7 @@ include {
   };
 };
 
+include 'one/rpms/frontend';
 #
 # Setup the ssh keys and configuration for oneadmin account.
 #
