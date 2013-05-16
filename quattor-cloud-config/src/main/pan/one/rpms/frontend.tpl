@@ -23,22 +23,16 @@ include { 'default/stratuslab/package-versions' };
 
 variable STRATUSLAB_ONE_VERSION                ?= error('STRATUSLAB_ONE_VERSION variable undefined');
 variable STRATUSLAB_OPENNEBULA_VERSION         ?= '3.2';
-variable STRATUSLAB_QUARANTINE_CLEANUP_VERSION ?= error('STRATUSLAB_QUARANTINE_CLEANUP_VERSION variable undefined');
-variable STRATUSLAB_SYSADMIN_CLI_VERSION       ?= error('STRATUSLAB_SYSADMIN_CLI_VERSION variable undefined');
-variable STRATUSLAB_USER_CLI_VERSION           ?= error('STRATUSLAB_USER_CLI_VERSION variable undefined');
 
 #
-# OpenNebula and its dependencies. 
+# OpenNebula and its dependencies.
 #
-'/software/packages' = pkg_repl('one-'+STRATUSLAB_OPENNEBULA_VERSION+'-StratusLab', STRATUSLAB_ONE_VERSION, 'x86_64');
-
-'/software/packages' = pkg_repl('quarantine-cleanup', STRATUSLAB_QUARANTINE_CLEANUP_VERSION, 'noarch');
-
-# Include the benchmarks.
-include { 'machine-types/stratuslab/stratuslab-benchmarks' };
-
-# StratusLab client commands.
-'/software/packages' = pkg_repl('stratuslab-cli-sysadmin', STRATUSLAB_SYSADMIN_CLI_VERSION, 'noarch');
-'/software/packages' = pkg_repl('stratuslab-cli-user', STRATUSLAB_USER_CLI_VERSION, 'noarch');
+'/software/packages' = {
+    SELF[escape('one-'+STRATUSLAB_OPENNEBULA_VERSION+'-StratusLab')] = nlist();
+    SELF[escape('quarantine-cleanup')] = nlist();
+    SELF[escape('stratuslab-cli-sysadmin')] = nlist();
+    SELF[escape('stratuslab-cli-user')] = nlist();
+    SELF;
+};
 
 include { 'config/stratuslab/frontend' };

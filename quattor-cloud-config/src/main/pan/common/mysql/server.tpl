@@ -92,3 +92,7 @@ include { 'components/etcservices/config' };
 # altlogrotate
 # ----------------------------------------------------------------------------
 #include { 'components/altlogrotate/config' };
+
+prefix "/software/packages";
+
+"{mysql-server}" = nlist();

@@ -77,3 +77,7 @@ include { if (STRATUSLAB_IPV6_ENABLE) {
 		null;
 	}
 };
+
+"/software/packages/{libvirt-client}" = nlist();
+"/software/packages/{libvirt}" = nlist();
+"/software/packages/{libvirt-python}" = nlist();
