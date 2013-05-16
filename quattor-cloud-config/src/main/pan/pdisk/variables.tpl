@@ -65,7 +65,7 @@ variable STRATUSLAB_PDISK_PROXY_SSHKEYS  ?= '/some/dir/key.rsa';
 variable STRATUSLAB_PDISK_PROXY_TYPE ?= 'local';
 variable STRATUSLAB_PDISK_PROXY_SECTIONS ?= {
     if (STRATUSLAB_PDISK_PROXY_TYPE == 'nfs') {
-	format("[local]\ntype=Nfs\nvolume_name=%s",
+	format("[local]\ntype=File\nvolume_name=%s",
 	       STRATUSLAB_NFS_MOUNT_POINT);
     } else {
 	"[local]\ntype=Lvm\nvolume_name=/dev/vg.02";
