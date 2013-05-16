@@ -64,11 +64,7 @@ include { 'one/rpms/devel' };
 #
 # Include the packages (RPMs) for iscsi-initiator.
 #
-include { 'iscsi/rpms/initiator' };
-
-# Add git to the machine, but git-svn is not needed.
-'/software/packages' = pkg_del('git-svn');
-
+#include { 'iscsi/rpms/initiator' };
 
 include { if (STRATUSLAB_IPV6_ENABLE) {
 		'common/network/ipv6/config';
