@@ -67,7 +67,6 @@ include { 'one/rpms/devel' };
 include { 'iscsi/rpms/initiator' };
 
 # Add git to the machine, but git-svn is not needed.
-include { 'config/os/git' };
 '/software/packages' = pkg_del('git-svn');
 
 

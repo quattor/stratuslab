@@ -136,7 +136,6 @@ variable OS_UNWANTED_DEFAULT_DAEMONS ?= list ("yum", "yum-updatesd", "avahi-daem
 };
 
 # Disable yum autoupdate
-include { 'config/os/yum-autoupdate' };
 
 # Local site OS configuration
 variable OS_BASE_CONFIG_SITE_INCLUDE = if ( exists(OS_BASE_CONFIG_SITE) && is_defined(OS_BASE_CONFIG_SITE) ) {

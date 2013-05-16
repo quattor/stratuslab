@@ -20,7 +20,6 @@
 unique template common/mysql/server;
 
 # Include RPMs for MySQL server
-#include { 'config/os/mysql' };
 
 
 # ----------------------------------------------------------------------------

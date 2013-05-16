@@ -114,7 +114,6 @@ include {
 #
 # Include the packages (RPMs) for this node.
 #
-include { 'one/rpms/frontend' };
 include {
   if(IS_VIRTUALIZATION_NODE) {
     'one/rpms/node';
@@ -122,13 +121,9 @@ include {
     null;
   };
 };
-include { 'one/rpms/devel' };
-
 #
 # Include the packages (RPMs) for iscsi-target.
 #
-include { 'iscsi/rpms/target' };
-
 # Authentication proxy
 include { 'stratuslab/one-proxy/config' };
 

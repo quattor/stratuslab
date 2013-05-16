@@ -19,6 +19,4 @@
 
 unique template one/rpms/node;
 
-include { 'config/os/java' };
-include { 'config/os/kvm' };
 include { 'config/stratuslab/node' };
