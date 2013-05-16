@@ -72,7 +72,7 @@ variable ONE_SQL_BACKEND ?= 'SQLite';
 # MySQL defaults.
 #
 variable MYSQL_USER ?= 'root';
-variable MYSQL_PASSWORD ?= undef;
+variable MYSQL_PASSWORD ?= 'root';
 variable MYSQL_HOST ?= 'localhost';
 variable MYSQL_ONEDB ?= 'ONEDB';
 
