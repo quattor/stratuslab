@@ -28,9 +28,25 @@ include { 'iscsi/rpms/target' };
 
 #
 # Include shared fs configuration
+
 #
-include { 'common/nfs/nfs-exports' };
-include { 'common/nfs/nfs-imports' };
+variable NFS_EXPORTS ?= true;
+include {
+  if( NFS_EXPORTS ) {
+    'common/nfs/nfs-exports';
+  } else {
+    null;
+  };
+};
+variable NFS_IMPORTS ?= true;
+include {
+  if( NFS_IMPORTS ) {
+    'common/nfs/nfs-imports';
+  } else {
+    null;
+  };
+};
+
 
 #
 # Configure MySQL database for Persistent Disk
@@ -53,7 +69,7 @@ prefix '/software/components/mysql';
   SELF[STRATUSLAB_PDISK_MYSQL_DATABASE]['tableOptions']['long_fields']['MAX_ROWS'] = '55000000';
   SELF[STRATUSLAB_PDISK_MYSQL_DATABASE]['tableOptions']['events']['MAX_ROWS'] = '175000000';
   SELF[STRATUSLAB_PDISK_MYSQL_DATABASE]['tableOptions']['states']['MAX_ROWS'] = '9500000';
-  
+
   SELF;
 };
 
@@ -78,4 +94,3 @@ include { 'pdisk/server/sudo' };
 # Add StratusLab authentification service
 #
 include { 'stratuslab/one-proxy/config' };
-
