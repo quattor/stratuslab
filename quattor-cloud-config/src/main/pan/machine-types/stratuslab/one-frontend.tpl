@@ -43,10 +43,10 @@ include { 'stratuslab/default/parameters' };
 #
 # Setup common and specific configurations.
 #
-include { 'one/service/common-config' };
+include { 'stratuslab/one/service/common-config' };
 include {
   if( IS_VIRTUALIZATION_NODE ) {
-    'one/service/node-config';
+    'stratuslab/one/service/node-config';
   } else {
     null;
   };
@@ -55,7 +55,7 @@ include {
 #
 # Ganglia for the monitoring of machines and hosts
 #
-include { 'ganglia/config' };
+include { 'common/ganglia/config' };
 
 #
 # Define the three areas to be exported to all nodes.
@@ -77,33 +77,33 @@ include {
   };
 };
 
-include 'one/rpms/frontend';
+include 'stratuslab/one/rpms/frontend';
 #
 # Setup the ssh keys and configuration for oneadmin account.
 #
-include { 'one/service/oneadmin-ssh-setup' };
+include { 'stratuslab/one/service/oneadmin-ssh-setup' };
 
 #
 # Setup the OpenNebula daemon itself.
 #
-include { 'one/service/daemon' };
+include { 'stratuslab/one/service/daemon' };
 
 #
 # Setup the OpenNebula networking.
 #
-include { 'one/service/onevnet-config' };
+include { 'stratuslab/one/service/onevnet-config' };
 
 #
 # Setup the OpenNebula hypervisor
 #
-include { 'one/server/node-config' };
+include { 'stratuslab/one/server/node-config' };
 
 #
 # Setup mysql if we want use mysql backend
 #
 include {
 	if ( ONE_SQL_BACKEND == 'mysql' ) {
-		'one/service/mysql';
+		'stratuslab/one/service/mysql';
 	};
 };
 
@@ -117,7 +117,7 @@ include {
 #
 include {
   if(IS_VIRTUALIZATION_NODE) {
-    'one/rpms/node';
+    'stratuslab/one/rpms/node';
   } else {
     null;
   };
@@ -129,12 +129,12 @@ include {
 include { 'stratuslab/one-proxy/config' };
 
 # Add private interface
-include { 'one/service/private-network' };
+include { 'stratuslab/one/service/private-network' };
 
 # Configure port address translations
 include {
   if(ENABLE_PAT) {
-    'one/service/pat';
+    'stratuslab/one/service/pat';
   } else {
     null;
   };
@@ -143,29 +143,29 @@ include {
 # Add firewall.
 include {
   if(IS_VIRTUALIZATION_NODE) {
-    'one/service/iptables-bridging';
+    'stratuslab/one/service/iptables-bridging';
   } else {
     null;
   };
 };
-include { 'one/service/iptables-frontend' };
+include { 'stratuslab/one/service/iptables-frontend' };
 
-include { 'one/service/tm_stratuslab' };
+include { 'stratuslab/one/service/tm_stratuslab' };
 
 
 # Add support for pxe
-#include { 'one/service/pxe' };
+#include { 'stratuslab/one/service/pxe' };
 
 # Add configuration for tftp server
-#include { 'one/service/tftp' };
+#include { 'stratuslab/one/service/tftp' };
 
 #
 # DHCP Configuration part
 #
 
-include { 'one/service/dhcpd' };
+include { 'stratuslab/one/service/dhcpd' };
 include { if ( STRATUSLAB_IPV6_ENABLE ) {
-		'one/service/dhcpd6';
+		'stratuslab/one/service/dhcpd6';
 	} else {
 		null;
 	}

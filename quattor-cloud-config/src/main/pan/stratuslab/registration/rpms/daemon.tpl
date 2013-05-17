@@ -17,16 +17,12 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/registration/rpms/daemon;
 
-include { 'machine-types/stratuslab/base' };
+variable STRATUSLAB_REGISTRATION_VERSION ?= error('STRATUSLAB_REGISTRATION_VERSION variable undefined');
+'/software/packages'=pkg_repl('stratuslab-registration', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
+'/software/packages'=pkg_repl('stratuslab-openldap-support', STRATUSLAB_REGISTRATION_VERSION, 'noarch');
+#variable APACHEDS_VERSION ?= error('APACHEDS_VERSION variable undefined');
+#'/software/packages'=pkg_repl('apacheds', APACHEDS_VERSION, 'i386');
 
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+include { 'config/stratuslab/registration' };

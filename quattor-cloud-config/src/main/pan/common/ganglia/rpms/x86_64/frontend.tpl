@@ -17,16 +17,14 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/rpms/x86_64/frontend;
 
-include { 'machine-types/stratuslab/base' };
+include { 'config/ganglia/frontend' };
 
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
+'/software/packages' = {
+  pkg_repl('ganglia-gmetad', GANGLIA_VERSION_NUM, 'x86_64');
+  pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'x86_64');
+  pkg_repl('ganglia-web', GANGLIA_VERSION_NUM, 'noarch');
+  pkg_repl('libganglia-3_1_0', GANGLIA_VERSION_NUM, 'x86_64');
+};
 

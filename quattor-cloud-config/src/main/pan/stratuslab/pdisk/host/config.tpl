@@ -17,16 +17,26 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/pdisk/host/config;
 
-include { 'machine-types/stratuslab/base' };
-
-include { 'stratuslab/registration/service/daemon' };
+include { 'stratuslab/pdisk/rpms/host' };
 
 #
-# Ganglia for the monitoring of machines and hosts
+# Modify sudo configuration to allow oneadmin to use the
+# scripts for mounting and unmouning iscsi volumes.
 #
-include { 'common/ganglia/config' };
+include { 'components/sudo/config' };
 
+#root    ALL=(ALL) ALL
+#tomcat  ALL=(GLEXEC_ACCOUNTS) NOPASSWD: GLEXEC_CMDS
+'/software/components/sudo/privilege_lines' =
+  append(
+    nlist('user'   , 'oneadmin',
+          'run_as' , 'ALL',
+          'host'   , 'ALL',
+          'options', 'NOPASSWD',
+ #         'cmd'    , '/sbin/iscsiadm, /usr/sbin/detach-persistent-disk.sh, /usr/bin/virsh, /usr/sbin/attach-persistent-disk.sh'),
+          'cmd'    , 'ALL'),
+  );
 
-
+  include { 'stratuslab/pdisk/host/config-file' };

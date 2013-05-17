@@ -17,16 +17,8 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/rpms/frontend;
 
-include { 'machine-types/stratuslab/base' };
-
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
+variable GANGLIA_ARCH ?= 'x86_64';
+include { 'monitoring/common/ganglia/rpms/'+GANGLIA_ARCH+'/frontend' };
 

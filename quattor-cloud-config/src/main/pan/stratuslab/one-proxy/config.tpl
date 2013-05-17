@@ -57,7 +57,7 @@ include { 'components/one_proxy/config' };
 #
 # Load pdisk variable, pdisk account must be added
 #
-include { 'pdisk/variables' };
+include { 'stratuslab/pdisk/variables' };
 
 #
 # Add one-proxy to be restarted when a modification is applied
@@ -117,4 +117,4 @@ prefix '/software/components/one_proxy/config';
 #    )
 #);
 
-include { 'one/service/users' };
+include { 'stratuslab/one/service/users' };

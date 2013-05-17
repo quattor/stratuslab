@@ -17,16 +17,11 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/rpms/i386/host;
 
-include { 'machine-types/stratuslab/base' };
+include { 'config/ganglia/host' };
 
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
+'/software/packages' = {
+  pkg_repl('ganglia-gmond', GANGLIA_VERSION_NUM, 'i386');
+};
 

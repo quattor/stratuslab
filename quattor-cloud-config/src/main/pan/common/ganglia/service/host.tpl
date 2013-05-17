@@ -1,4 +1,6 @@
-# ${BUILD_INFO}
+# #
+# quattor-cloud-config, 1.4, 20110303.1802.09
+#
 #
 # Created as part of the StratusLab project (http://stratuslab.eu)
 #
@@ -17,16 +19,7 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/service/host;
 
-include { 'machine-types/stratuslab/base' };
-
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+include { 'common/ganglia/service/gmond' };
+include { 'common/ganglia/rpms/host' };

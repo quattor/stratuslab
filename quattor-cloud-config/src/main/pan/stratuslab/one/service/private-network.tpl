@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-unique template one/service/private-network;
+unique template stratuslab/one/service/private-network;
 
 variable PRIVATE_NET        ?= '172.17.16.0/24';
 variable PRIVATE_IP         ?= '172.17.16.1';

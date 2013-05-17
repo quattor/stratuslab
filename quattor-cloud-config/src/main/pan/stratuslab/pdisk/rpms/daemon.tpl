@@ -17,16 +17,13 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/pdisk/rpms/daemon;
 
-include { 'machine-types/stratuslab/base' };
+include { 'default/stratuslab/package-versions' };
 
-include { 'stratuslab/registration/service/daemon' };
+prefix "/software/packages";
 
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+'{stratuslab-pdisk-server}' = nlist();
+'{stratuslab-pdisk-host}' = nlist();
+'{stratuslab-cli-user}' = nlist();
+'{stratuslab-authn-config}' = nlist();

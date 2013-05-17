@@ -38,6 +38,11 @@ variable ONE_NFS_SERVER_VARDIR ?= '/var/lib/one';
 variable ONE_NFS_SERVER_HOMEDIR ?= '/home/oneadmin';
 
 
+# include {
+#     if (STRATUSLAB_DO_AUTOFS) {
+# 	}
+# };
+
 '/software/components/autofs/maps/stratuslab/mapname' = '/etc/auto.stratuslab';
 '/software/components/autofs/maps/stratuslab/type' = 'file';
 '/software/components/autofs/maps/stratuslab/options' = '-rw,intr,noatime,hard';

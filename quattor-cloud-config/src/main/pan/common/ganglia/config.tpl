@@ -17,16 +17,23 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/config;
 
-include { 'machine-types/stratuslab/base' };
+variable GANGLIA_GRIDNAME ?= 'Stratuslab';
 
-include { 'stratuslab/registration/service/daemon' };
+include { if (exists('monitoring/common/ganglia/config')) {
+	null;
+} else {
+	'common/ganglia/service/variables';
+} };
 
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
+include { if (exists('monitoring/common/ganglia/config')) {
+	'monitoring/common/ganglia/config';
+} else {
+	if ((DB_IP[HOSTNAME] == GANGLIA_WEB_SERVER)||(FULL_HOSTNAME == GANGLIA_WEB_SERVER)) {
+	 	'common/ganglia/service/frontend';
+  	} else {
+		'common/ganglia/service/host';
+  	};
 
-
-
+} };

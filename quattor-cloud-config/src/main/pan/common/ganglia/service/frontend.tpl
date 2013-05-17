@@ -17,16 +17,13 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/service/frontend;
 
-include { 'machine-types/stratuslab/base' };
+include { 'common/ganglia/service/gmond' };
+include { 'common/ganglia/service/gmetad' };
 
-include { 'stratuslab/registration/service/daemon' };
+include { 'common/ganglia/rpms/frontend' };
 
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+include { 'components/chkconfig/config' };
+"/software/components/chkconfig/service/httpd/on" = "";
+"/software/components/chkconfig/service/httpd/startstop" = true;

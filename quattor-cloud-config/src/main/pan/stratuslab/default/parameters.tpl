@@ -19,7 +19,7 @@
 
 unique template stratuslab/default/parameters;
 
-include { if_exists('one/service/site_parameters') };
+include { if_exists('stratuslab/one/service/site_parameters') };
 
 #
 # OpenNebula user and group.

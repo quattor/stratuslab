@@ -17,16 +17,13 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/one/service/common-config;
 
-include { 'machine-types/stratuslab/base' };
-
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+include { 
+if ( GLITE_DEPENDENCY) {
+  'machine-types/nfs' 
+  } else {
+    null;
+  };
+};
+include { 'common/accounts/default' };

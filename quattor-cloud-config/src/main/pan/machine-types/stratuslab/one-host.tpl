@@ -30,18 +30,18 @@ include { 'stratuslab/default/parameters' };
 #
 # Setup oneadmin account, libvirtd, and networking
 #
-include { 'one/service/common-config' };
-include { 'one/service/node-config' };
+include { 'stratuslab/one/service/common-config' };
+include { 'stratuslab/one/service/node-config' };
 
 #
 # DEBUG DEBUG DEBUG DEBUG DEBUG
 #
-include { 'pdisk/host/config' };
+include { 'stratuslab/pdisk/host/config' };
 
 #
 # Ganglia for the monitoring of machines and hosts
 #
-include { 'ganglia/config' };
+include { 'common/ganglia/config' };
 
 #
 # Import the common areas from the OpenNebula server.
@@ -58,13 +58,13 @@ include {
 #
 # Include the packages (RPMs) for the node.
 #
-include { 'one/rpms/node' };
-include { 'one/rpms/devel' };
+include { 'stratuslab/one/rpms/node' };
+include { 'stratuslab/one/rpms/devel' };
 
 #
 # Include the packages (RPMs) for iscsi-initiator.
 #
-#include { 'iscsi/rpms/initiator' };
+#include { 'common/iscsi/rpms/initiator' };
 
 include { if (STRATUSLAB_IPV6_ENABLE) {
 		'common/network/ipv6/config';

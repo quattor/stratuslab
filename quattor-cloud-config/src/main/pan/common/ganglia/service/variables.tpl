@@ -17,16 +17,17 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template common/ganglia/service/variables;
 
-include { 'machine-types/stratuslab/base' };
+variable GANGLIA_VERSION_NUM ?= '3.1.7-2.fc14';
+variable GANGLIA_GRIDNAME ?= 'StratusLab Ganglia';
+variable GANGLIA_DATA_SOURCES ?= nlist('DEFAULT','localhost');
 
-include { 'stratuslab/registration/service/daemon' };
+variable GANGLIA_MASTER ?= undef;
+variable GANGLIA_CLUSTER_NAME ?= undef;
+variable GANGLIA_WEB_SERVER ?= GANGLIA_MASTER;
 
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
+variable GANGLIA_GMETAD_XPORT ?= '8651';
+variable GANGLIA_GMETAD_IPORT ?= '8652';
+variable GANGLIA_GMOND_PORT ?= '8649';
 

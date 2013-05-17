@@ -17,16 +17,6 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/one/rpms/node;
 
-include { 'machine-types/stratuslab/base' };
-
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+include { 'config/stratuslab/node' };

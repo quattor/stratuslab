@@ -16,17 +16,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+unique template stratuslab/registration/variables;
 
-unique template machine-types/stratuslab/registration;
+include { 'stratuslab/default/parameters' };
 
-include { 'machine-types/stratuslab/base' };
+variable STRATUSLAB_REGISTRATION_HOST ?= '';
 
-include { 'stratuslab/registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'common/ganglia/config' };
-
-
-
+variable STRATUSLAB_REGISTRATION_LDAP_MANAGER_PWD ?= 'changeme';
+variable STRATUSLAB_REGISTRATION_ADMIN_EMAIL ?= STRATUSLAB_MAIL_EMAIL;
+variable STRATUSLAB_REGISTRATION_MAIL_HOST ?= STRATUSLAB_MAIL_HOST;
+variable STRATUSLAB_REGISTRATION_MAIL_PORT ?= STRATUSLAB_MAIL_PORT;
+variable STRATUSLAB_REGISTRATION_MAIL_USER ?= STRATUSLAB_MAIL_USER;
+variable STRATUSLAB_REGISTRATION_MAIL_USER_PWD ?= STRATUSLAB_MAIL_USER_PWD;
+variable STRATUSLAB_REGISTRATION_MAIL_SSL ?= STRATUSLAB_MAIL_SSL;
+variable STRATUSLAB_REGISTRATION_MAIL_DEBUG ?= STRATUSLAB_MAIL_DEBUG;

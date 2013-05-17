@@ -1,8 +1,8 @@
-unique template stratuslab/web/variables;
+unique template stratuslab/stratuslab/web/variables;
 
 include { 'stratuslab/default/parameters' };
 
 include { 'marketplace/variables' };
-include { 'registration/variables' };
-include { 'one/variables' };
-include { 'pdisk/variables' };
+include { 'stratuslab/registration/variables' };
+include { 'stratuslab/one/variables' };
+include { 'stratuslab/pdisk/variables' };

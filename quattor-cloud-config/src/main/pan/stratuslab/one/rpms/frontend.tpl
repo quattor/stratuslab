@@ -17,16 +17,22 @@
 # limitations under the License.
 #
 
-unique template machine-types/stratuslab/registration;
+unique template stratuslab/one/rpms/frontend;
 
-include { 'machine-types/stratuslab/base' };
+include { 'default/stratuslab/package-versions' };
 
-include { 'stratuslab/registration/service/daemon' };
+variable STRATUSLAB_ONE_VERSION                ?= error('STRATUSLAB_ONE_VERSION variable undefined');
+variable STRATUSLAB_OPENNEBULA_VERSION         ?= '3.2';
 
 #
-# Ganglia for the monitoring of machines and hosts
+# OpenNebula and its dependencies.
 #
-include { 'common/ganglia/config' };
+'/software/packages' = {
+    SELF[escape('one-'+STRATUSLAB_OPENNEBULA_VERSION+'-StratusLab')] = nlist();
+    SELF[escape('quarantine-cleanup')] = nlist();
+    SELF[escape('stratuslab-cli-sysadmin')] = nlist();
+    SELF[escape('stratuslab-cli-user')] = nlist();
+    SELF;
+};
 
-
-
+include { 'config/stratuslab/frontend' };
