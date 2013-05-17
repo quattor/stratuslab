@@ -21,38 +21,41 @@ unique template config/stratuslab/node;
 
 include {'config/stratuslab/base'};
 
+prefix "/software/packages";
+
 # Readonly module for components.
-'/software/packages'=pkg_repl('perl-Readonly','1.03-11.el6','noarch');
+'{perl-Readonly}' = nlist();
 
 # XMLRPC
 #'/software/packages' =pkg_repl('xmlrpc',        '2.0.1-6.6.fc13',       'x86_64');
-'/software/packages' =pkg_repl('xmlrpc-c',       '1.16.24-1209.1840.el6','x86_64');
-'/software/packages' =pkg_repl('xmlrpc-c-client','1.16.24-1209.1840.el6','x86_64');
+'{xmlrpc-c}' = nlist();
+'{xmlrpc-c-client}' = nlist();
 
 # Need newer version of Ruby (fix for missing REXML::Formatter)
-'/software/packages' =pkg_repl('ruby'      ,'1.8.7.352-7.el6_2','x86_64');
-'/software/packages' =pkg_repl('ruby-irb'  ,'1.8.7.352-7.el6_2','x86_64');
-'/software/packages' =pkg_repl('ruby-libs' ,'1.8.7.352-7.el6_2','x86_64');
-'/software/packages' =pkg_repl('ruby-rdoc' ,'1.8.7.352-7.el6_2','x86_64');
-'/software/packages' =pkg_repl('ruby-ri'   ,'1.8.7.352-7.el6_2','x86_64');
-'/software/packages' =pkg_repl('ruby-tcltk','1.8.7.352-7.el6_2','x86_64');
+'{ruby}' = nlist();
+'{ruby-irb}' = nlist();
+'{ruby-libs}' = nlist();
+'{ruby-rdoc}' = nlist();
+'{ruby-ri}' = nlist();
+'{ruby-tcltk}' = nlist();
 
-'/software/packages' =pkg_repl('readline',        '6.0-4.el6',   'x86_64');
-'/software/packages' =pkg_repl('compat-readline5','5.2-17.1.el6','x86_64');
+'{readline}' = nlist();
+'{compat-readline5}' = nlist();
 
 # Java Dependencies
 #'/software/packages' =pkg_repl('antlr3-C'                  ,'3.2-11.fc14'          ,'x86_64');
 #'/software/packages' =pkg_repl('apache-commons-codec'      ,'1.4-10.fc14'          ,'noarch');
-'/software/packages' =pkg_repl('jakarta-commons-httpclient','3.1-0.6.el6'           ,'x86_64');
-'/software/packages' =pkg_repl('jakarta-commons-logging'   ,'1.0.4-10.el6'        ,'noarch');
-'/software/packages' =pkg_repl('junit',                     '3.8.2-6.5.el6'       ,'x86_64');
-'/software/packages' =pkg_repl('tomcat6-servlet-2.5-api',   '6.0.24-45.el6'      ,'noarch');
+'{jakarta-commons-httpclient}' = nlist();
+'{jakarta-commons-logging}' = nlist();
+'{junit}' = nlist();
+'{tomcat6-servlet-2.5-api}' = nlist();
 
-'/software/packages' =pkg_repl('python-ldap','2.3.10-1.el6','x86_64');
+'{python-ldap}' = nlist();
 
 # Updated version of sqlite
-'/software/packages' = pkg_repl('sqlite','3.6.20-1.el6','x86_64');
+'{sqlite}' = nlist();
 
 # Install squid
-'/software/packages' = pkg_repl('squid','3.1.10-1.el6_2.4','x86_64');
+'{squid}' = nlist();
 
+include 'config/stratuslab/hypervisors/' + STRATUSLAB_HYPERVISOR_TYPE;
