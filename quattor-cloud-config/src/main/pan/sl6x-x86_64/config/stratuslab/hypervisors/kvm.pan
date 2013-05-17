@@ -4,4 +4,4 @@ prefix "/software/packages";
 
 "{qemu-kvm}" = nlist();
 "{qemu-kvm-tools}" = nlist();
-"{ipxe-roms-qemu}" = nlist();
+"{gpxe-roms-qemu}" = nlist();

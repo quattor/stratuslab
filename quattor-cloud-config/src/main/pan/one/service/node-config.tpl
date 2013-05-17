@@ -48,6 +48,8 @@ include { 'components/sysctl/config' };
 # Setup the networking.
 include { 'components/network/config' };
 
+variable STRATUSLAB_BR_INTERFACE ?= boot_nic();
+
 '/system/network/default_gateway' = NETWORK_PARAMS['gateway'];
 '/system/network/interfaces/br0' = nlist(
   'device', 'br0',
@@ -55,19 +57,17 @@ include { 'components/network/config' };
   'type', 'Bridge',
   'bootproto', 'static',
   'onboot', 'yes',
-  'ip', NETWORK_PARAMS['ip'],
-  'netmask', NETWORK_PARAMS['netmask'],
+  'ip', value("/system/network/interfaces/" + STRATUSLAB_BR_INTERFACE + "/ip"),
+  'netmask', value("/system/network/interfaces/" + STRATUSLAB_BR_INTERFACE + "/netmask"),
 );
 
 '/system/network/interfaces' = {
-	eth_name = boot_nic();
-	SELF[eth_name]=nlist(
-		'device', eth_name,
-		'set_hwaddr', true,
-		'onboot', 'yes',
-		'bridge', 'br0',
-		'bootproto', ' ' # component defaults to static but want nothing!
-		);
-	SELF;
+    SELF[STRATUSLAB_BR_INTERFACE]=nlist(
+	'device', STRATUSLAB_BR_INTERFACE,
+	'set_hwaddr', true,
+	'onboot', 'yes',
+	'bridge', 'br0',
+	'bootproto', ' ' # component defaults to static but want nothing!
+    );
+    SELF;
 };
-
