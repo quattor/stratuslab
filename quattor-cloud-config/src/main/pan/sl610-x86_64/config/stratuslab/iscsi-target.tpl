@@ -25,4 +25,3 @@ unique template config/stratuslab/iscsi-target;
 '/software/packages'=pkg_repl('librdmacm','1.0.10-2.el6','x86_64');
 '/software/packages'=pkg_repl('libmthca','1.0.5-7.el6','x86_64');
 
-include { 'config/os/updates' };

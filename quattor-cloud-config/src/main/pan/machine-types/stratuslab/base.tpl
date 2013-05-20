@@ -4,14 +4,15 @@ variable GLITE_DEPENDENCY ?= false;
 
 # StratusLab machine types are based on the so-called nfs machine types
 # but not NFS service is actually configured at this point
-include { 
-  if ( GLITE_DEPENDENCY) { 
-    'machine-types/nfs';
+variable STRATUSLAB_CORE_TEMPLATE ?= 'machine-types/stratuslab/base-without-glite';
+
+include {
+  if ( GLITE_DEPENDENCY) {
+      'machine-types/nfs';
   } else {
-    'machine-types/stratuslab/base-without-glite';
+      STRATUSLAB_CORE_TEMPLATE;
   };
 };
 
 # Default package repository for StratusLab components
 include { 'repository/config/stratuslab' };
-

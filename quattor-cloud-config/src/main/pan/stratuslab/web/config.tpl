@@ -1,6 +1,6 @@
 unique template stratuslab/web/config;
 
-include { 'stratuslab/web/variables' };
+include { 'stratuslab/stratuslab/web/variables' };
 
 include { 'components/filecopy/config' };
 

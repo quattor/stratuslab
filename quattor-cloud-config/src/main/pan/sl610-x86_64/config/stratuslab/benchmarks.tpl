@@ -41,4 +41,3 @@ unique template config/stratuslab/benchmarks;
 
 '/software/packages' = pkg_repl( 'dhcp'          , '4.1.1-19.P1.el6'  , 'x86_64' );
 
-include { 'config/os/updates' };

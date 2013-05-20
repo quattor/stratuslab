@@ -19,7 +19,7 @@
 
 unique template stratuslab/default/parameters;
 
-include { if_exists('one/service/site_parameters') };
+include { if_exists('stratuslab/one/service/site_parameters') };
 
 #
 # OpenNebula user and group.
@@ -76,7 +76,7 @@ variable MYSQL_PASSWORD ?= 'root';
 variable MYSQL_HOST ?= 'localhost';
 variable MYSQL_ONEDB ?= 'ONEDB';
 
-# 
+#
 # Quotas
 #
 variable ONE_CPU_QUOTA ?= 20.0;
@@ -101,3 +101,5 @@ variable STRATUSLAB_MAIL_DEBUG ?= false;
 variable STRATUSLAB_QUARANTINE_PERIOD ?= '15m';
 
 variable STRATUSLAB_ROOT_PRIVATE_KEY ?= '/root/.ssh/id_dsa';
+
+variable STRATUSLAB_HYPERVISOR_TYPE ?= error("Stratuslab hypervisor type must be defined");

@@ -29,7 +29,7 @@ unique template common/nfs/nfs-imports;
 #
 include { 'components/autofs/config' };
 
-variable STRATUSLAB_NFS_MOUNT_POINT = '/stratuslab_mnt';
+variable STRATUSLAB_NFS_MOUNT_POINT ?= '/stratuslab_mnt';
 
 variable ONE_NFS_SERVER_VAR ?= ONE_NFS_SERVER;
 variable ONE_NFS_SERVER_HOME ?= ONE_NFS_SERVER;
@@ -37,6 +37,11 @@ variable ONE_NFS_SERVER_HOME ?= ONE_NFS_SERVER;
 variable ONE_NFS_SERVER_VARDIR ?= '/var/lib/one';
 variable ONE_NFS_SERVER_HOMEDIR ?= '/home/oneadmin';
 
+
+# include {
+#     if (STRATUSLAB_DO_AUTOFS) {
+# 	}
+# };
 
 '/software/components/autofs/maps/stratuslab/mapname' = '/etc/auto.stratuslab';
 '/software/components/autofs/maps/stratuslab/type' = 'file';
@@ -48,8 +53,8 @@ variable ONE_NFS_SERVER_HOMEDIR ?= '/home/oneadmin';
 '/software/components/autofs/maps/stratuslab/entries/onevar' =
   nlist('location', ONE_NFS_SERVER_VAR + ':' + ONE_NFS_SERVER_VARDIR,
         'options', '');
-  
-'/software/components/autofs/maps/stratuslab/entries/oneadmin' = 
+
+'/software/components/autofs/maps/stratuslab/entries/oneadmin' =
    nlist('location', ONE_NFS_SERVER_HOME + ':' + ONE_NFS_SERVER_HOMEDIR,
         'options', '');
 
@@ -60,7 +65,7 @@ include { 'components/chkconfig/config' };
 
 # Ensure that accounts is run before autofs for correct ownership.
 include { 'components/accounts/config' };
-'/software/components/accounts/dependencies/pre' = append('autofs');    
+'/software/components/accounts/dependencies/pre' = append('autofs');
 
 # Define symlinks to actual mount point
 include { 'components/symlink/config' };
