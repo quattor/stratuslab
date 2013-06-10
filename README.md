@@ -56,28 +56,28 @@ To configure Persistent disk service, some variable must be put
 
 To configure OpenNebula, you must provide a list of network OpenNebula will manage
 * ONE_NETWORK
-variable ONE_NETWORK = nlist(
-'domain','example.org',
-'nameserver', list('8.8.8.8'),
-'public', nlist(
-     'interface', 'br0',
-     'subnet', '1.1.1.0',
-     'router', '1.1.1.1',
-     'netmask', '255.255.255.0',
-     'vms',nlist(
-      'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','1.1.1.32','claudia','no'),
-      ),
-    ),
-'local',nlist(
-    'interface', 'br0:privlan',
-    'subnet',  '172.17.16.0',
-    'router',  '172.17.16.1',
-    'netmask', '255.255.255.0',
-    'vms',nlist(
-      'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32','claudia','no'),
-      ),
-    ),
-);
+    variable ONE_NETWORK = nlist(
+    'domain','example.org',
+    'nameserver', list('8.8.8.8'),
+    'public', nlist(
+         'interface', 'br0',
+         'subnet', '1.1.1.0',
+         'router', '1.1.1.1',
+         'netmask', '255.255.255.0',
+         'vms',nlist(
+                 'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','1.1.1.32','claudia','no'),
+               ) ,
+       ),
+    'local',nlist(
+        'interface', 'br0:privlan',
+        'subnet',  '172.17.16.0',
+        'router',  '172.17.16.1',
+        'netmask', '255.255.255.0',
+        'vms',nlist(
+                'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32','claudia','no'),
+              ),
+        ),
+    );
 
 After installation, you need to modify STRATUSLAB_ONE_PASSWORD variable with the password you will find
 on /home/oneadmin/.one/one_auth ( oneadmin:xxxx is xxxx )
