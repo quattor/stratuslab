@@ -65,7 +65,7 @@ To configure OpenNebula, you must provide a list of network OpenNebula will mana
          'router', '1.1.1.1',
          'netmask', '255.255.255.0',
          'vms',nlist(
-                 'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','1.1.1.32','claudia','no'),
+                 'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','1.1.1.32',),
                ) ,
        ),
     'local',nlist(
@@ -74,7 +74,7 @@ To configure OpenNebula, you must provide a list of network OpenNebula will mana
         'router',  '172.17.16.1',
         'netmask', '255.255.255.0',
         'vms',nlist(
-                'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32','claudia','no'),
+                'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32',),
               ),
         ),
     );
