@@ -55,7 +55,7 @@ To configure Persistent disk service, some variable must be put
   you will put your persistent disk device [default : /dev/vg.02]
 
 To configure OpenNebula, you must provide a list of network OpenNebula will manage
-* ONE_NETWORK
+```
     variable ONE_NETWORK = nlist(
     'domain','example.org',
     'nameserver', list('8.8.8.8'),
@@ -78,6 +78,7 @@ To configure OpenNebula, you must provide a list of network OpenNebula will mana
               ),
         ),
     );
+```
 
 After installation, you need to modify STRATUSLAB_ONE_PASSWORD variable with the password you will find
 on /home/oneadmin/.one/one_auth ( oneadmin:xxxx is xxxx )
