@@ -49,9 +49,7 @@ variable STRATUSLAB_PUBLIC_NETWORK_BRIDGE = 'BRIDGE='+ONE_NETWORK['public']['int
 variable STRATUSLAB_LOCAL_NETWORK_BODY = {
         result = '';
         foreach (k;v;ONE_NETWORK['local']['vms']){
-                if (v['claudia'] == 'no') {
-                        result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
-                };
+           result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
         };
         result;
 };
@@ -67,9 +65,7 @@ EOF
 variable STRATUSLAB_PUBLIC_NETWORK_BODY = {
         result = '';
         foreach (k;v;ONE_NETWORK['public']['vms']){
-                if (v['claudia'] == 'no') {
-                        result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
-                };
+            result = result+'LEASES=[ IP='+v['fixed-address']+', MAC='+v['mac-address']+" ]\n";
         };
         result;
 };
