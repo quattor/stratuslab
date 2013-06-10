@@ -19,6 +19,7 @@
 
 unique template common/nfs/nfs-exports;
 
+include { 'common/nfs/variables' };
 #
 # Start the NFS daemons at boot. 
 #
@@ -34,7 +35,7 @@ include {'components/chkconfig/config'};
 include { 'components/filecopy/config' };
 
 variable ONE_NFS_FLAGS = {
-   ok = first(ONE_NFS_WILDCARD,k,v);
+   ok = first(STRATUSLAB_NFS_WILDCARD,k,v);
    one_nfs_flags = "";
    while (ok) {
         if ( one_nfs_flags == "" ) {
@@ -42,10 +43,10 @@ variable ONE_NFS_FLAGS = {
         } else {
           one_nfs_flags =  one_nfs_flags + " " + v +'(async,no_subtree_check,rw,no_root_squash)';
         };
-        ok = next(ONE_NFS_WILDCARD, k, v);
+        ok = next(STRATUSLAB_NFS_WILDCARD, k, v);
    };
    return (one_nfs_flags+ "\n");
- # ONE_NFS_WILDCARD + '(async,no_subtree_check,rw,no_root_squash)' + "\n";
+ # STRATUSLAB_NFS_WILDCARD + '(async,no_subtree_check,rw,no_root_squash)' + "\n";
 };
 
 variable ONE_NFS_EXPORT_CONTENTS =

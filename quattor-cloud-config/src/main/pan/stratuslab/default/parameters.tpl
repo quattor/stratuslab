@@ -24,63 +24,52 @@ include { if_exists('one/service/site_parameters') };
 #
 # OpenNebula user and group.
 #
-variable ONE_USER ?= 'oneadmin';
-variable ONE_USER_ID ?= 9000;
-variable ONE_GROUP ?= 'cloud';
-variable ONE_GROUP_ID ?= 9000;
+variable STRATUSLAB_UNIX_USER_ACCOUNT ?= 'oneadmin';
+variable STRATUSLAB_UNIX_USER_ID      ?= 9000;
+variable STRATUSLAB_UNIX_GROUP        ?= 'cloud';
+variable STRATUSLAB_UNIX_GROUP_ID     ?= 9000;
+variable STRATUSLAB_UNIX_USER_HOME    ?= '/home';
 
 #
-# OpenNebula files and directories.
+# OpenNebula var directory
 #
-variable ONE_SERVICE ?= 'oned';
-variable ONE_HOOKS_DIR ?= '/usr/share/one/hooks/';
-
-#
-# Full hostname of NFS server, usually OpenNebula front-end.
-#
-variable ONE_NFS_SERVER ?= error('ONE_NFS_SERVER must be defined');
-
-#
-# An NFS wildcard that includes all of the OpenNebula nodes.
-#
-variable ONE_NFS_WILDCARD ?= error('ONE_NFS_WILDCARD must be defined');
-
-#
-# Monitoring internal in seconds.  Increase this value for
-# a production system.
-#
-variable ONE_MONITOR_INTERVAL ?= 30;
-
-#
-# VM polling interval in seconds.  Increase this value for
-# a production system.
-#
-variable ONE_POLLING_INTERVAL ?= 30;
-
-#
-# Ganglia variables
-#
-variable GANGLIA_MASTER ?= error('GANGLIA_MASTER must be defined');
-variable GANGLIA_CLUSTER_NAME ?= 'StratusLab';
-
-#
-# Backend variables
-#
-variable ONE_SQL_BACKEND ?= 'SQLite';
+variable STRATUSLAB_ONE_VARDIR ?= '/var/lib/one';
 
 #
 # MySQL defaults.
 #
-variable MYSQL_USER ?= 'root';
+variable MYSQL_USER     ?= 'root';
 variable MYSQL_PASSWORD ?= 'root';
-variable MYSQL_HOST ?= 'localhost';
-variable MYSQL_ONEDB ?= 'ONEDB';
+variable MYSQL_HOST     ?= 'localhost';
+variable MYSQL_ONEDB    ?= 'ONEDB';
 
-# 
-# Quotas
+
 #
-variable ONE_CPU_QUOTA ?= 20.0;
-variable ONE_RAM_KB_QUOTA ?= 41943040;
+# Global variable definition
+#
+variable STRATUSLAB_MAIL_EMAIL    ?= 'no-reply@example.org';
+variable STRATUSLAB_MAIL_HOST     ?= 'smtp.example.org';
+variable STRATUSLAB_MAIL_PORT     ?= 465;
+variable STRATUSLAB_MAIL_USER     ?= 'no-reply@example.org';
+variable STRATUSLAB_MAIL_USER_PWD ?= 'xxxxx';
+variable STRATUSLAB_MAIL_SSL      ?= true;
+variable STRATUSLAB_MAIL_DEBUG    ?= false;
+
+variable STRATUSLAB_QUARANTINE_PERIOD ?= '15m';
+
+variable STRATUSLAB_ROOT_PRIVATE_KEY ?= '/root/.ssh/id_dsa';
+
+#
+# Choose core OS templates
+#
+variable STRATUSLAB_CORE_OS_TEMPLATE ?= 'machine-types/core';
+
+#
+# If true configure NFS export / Import
+# If false assume that share FS is configure by another templates (gpfs / ... )
+# or NFS is not used
+#
+variable STRATUSLAB_NFS_ENABLE     ?= true;
 
 #
 # IPV6 Activation
@@ -88,16 +77,16 @@ variable ONE_RAM_KB_QUOTA ?= 41943040;
 variable STRATUSLAB_IPV6_ENABLE ?= false;
 
 #
-# Global variable definition
+# Activate DHCP on frontend
 #
-variable STRATUSLAB_MAIL_EMAIL ?= 'no-reply@example.org';
-variable STRATUSLAB_MAIL_HOST ?= 'smtp.example.org';
-variable STRATUSLAB_MAIL_PORT ?= 465;
-variable STRATUSLAB_MAIL_USER ?= 'no-reply@example.org';
-variable STRATUSLAB_MAIL_USER_PWD ?= 'xxxxx';
-variable STRATUSLAB_MAIL_SSL ?= true;
-variable STRATUSLAB_MAIL_DEBUG ?= false;
+variable STRATUSLAB_DHCPD_ENABLE ?= true;
 
-variable STRATUSLAB_QUARANTINE_PERIOD ?= '15m';
+#
+# Ganglia configuration enabled
+#
+variable STRATUSLAB_GANGLIA_ENABLE ?= false;
 
-variable STRATUSLAB_ROOT_PRIVATE_KEY ?= '/root/.ssh/id_dsa';
+#
+# Define which version of spma
+#
+variable STRATUSLAB_SPMA_VERSION ?= 'spma2';

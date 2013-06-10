@@ -21,13 +21,5 @@ unique template machine-types/stratuslab/marketplace;
 
 include { 'machine-types/stratuslab/base' };
 
-include { 'marketplace/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-
-include { 'config/os/updates' };
+include { 'stratuslab/marketplace/service/daemon' };
 

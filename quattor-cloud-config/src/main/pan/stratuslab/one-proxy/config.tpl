@@ -31,7 +31,7 @@ include { 'features/fetch-crl/config' };
 #
 # Include the necessary rpms. 
 #
-include { 'stratuslab/one-proxy/rpms/config' };
+include { 'stratuslab/one-proxy/rpms/'+STRATUSLAB_SPMA_VERSION+'/config' };
 
 # 
 # Ensure that jetty servlet container is started
@@ -57,7 +57,7 @@ include { 'components/one_proxy/config' };
 #
 # Load pdisk variable, pdisk account must be added
 #
-include { 'pdisk/variables' };
+include { 'stratuslab/pdisk/variables' };
 
 #
 # Add one-proxy to be restarted when a modification is applied

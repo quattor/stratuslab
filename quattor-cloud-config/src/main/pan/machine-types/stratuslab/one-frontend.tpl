@@ -29,9 +29,10 @@ variable IS_VIRTUALIZATION_NODE ?= false;
 #
 variable ENABLE_PAT ?= false;
 
-variable FILESYSTEM_LAYOUT_CONFIG_SITE ?= "site/filesystems/glite";
-
 include { 'machine-types/stratuslab/base' };
+
+include { 'stratuslab/one/server/config' };
+include { 'stratuslab/pdisk/host/config' };
 
 #
 # Include web server for OpenNebula web monitoring.
@@ -40,155 +41,30 @@ include { 'machine-types/stratuslab/base' };
 include { 'rpms/web_server' };
 
 #
-# Define the parameters for the OpenNebula setup.
-# **CHANGE** the values in this file for your setup.
-#
-include { 'stratuslab/default/parameters' };
-
-#
-# Setup common and specific configurations.
-#
-include { 'one/service/common-config' };
-include {
-  if( IS_VIRTUALIZATION_NODE ) {
-    'one/service/node-config';
-  } else {
-    null;
-  };
-};
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-#
-# Define the three areas to be exported to all nodes.
-#
-variable NFS_EXPORTS ?= true;
-include { 
-  if( NFS_EXPORTS ) {
-    'common/nfs/nfs-exports';
-  } else {
-    null;
-  };
-};
-variable NFS_IMPORTS ?= true;
-include {
-  if( NFS_IMPORTS ) {
-    'common/nfs/nfs-imports';
-  } else {
-    null;
-  };
-};
-
-#
-# Setup the ssh keys and configuration for oneadmin account.
-#
-include { 'one/service/oneadmin-ssh-setup' };
-
-#
-# Setup the OpenNebula daemon itself.
-#
-include { 'one/service/daemon' };
-
-#
-# Setup the OpenNebula networking.
-#
-include { 'one/service/onevnet-config' };
-
-#
-# Setup the OpenNebula hypervisor
-#
-include { 'one/server/node-config' };
-
-#
-# Setup mysql if we want use mysql backend
-#
-include {
-	if ( ONE_SQL_BACKEND == 'mysql' ) {
-		'one/service/mysql';
-	};
-};
-
-#
-# Setup claudia
-#
-#include { 'claudia/service/daemon' };
-
-#
-# Include the packages (RPMs) for this node.
-#
-include { 'one/rpms/frontend' };
-include {
-  if(IS_VIRTUALIZATION_NODE) {
-    'one/rpms/node';
-  } else {
-    null;
-  };
-};
-include { 'one/rpms/devel' };
-
-#
-# Include the packages (RPMs) for iscsi-target.
-#
-include { 'iscsi/rpms/target' };
-
-# Add git to the machine, but git-svn is not needed.
-include { 'config/os/git' };
-'/software/packages' = pkg_del('git-svn');
-
-# Authentication proxy
-include { 'stratuslab/one-proxy/config' };
-
-# Add private interface
-include { 'one/service/private-network' };
-
-# Configure port address translations
-include {
-  if(ENABLE_PAT) {
-    'one/service/pat';
-  } else {
-    null;
-  };
-};
-
-# Add firewall.
-include {
-  if(IS_VIRTUALIZATION_NODE) {
-    'one/service/iptables-bridging';
-  } else {
-    null;
-  };
-};
-include { 'one/service/iptables-frontend' };
-
-include { 'one/service/tm_stratuslab' };
-
-include { 'config/os/updates' };
-
-# Add support for pxe
-#include { 'one/service/pxe' };
-
-# Add configuration for tftp server
-#include { 'one/service/tftp' };
-
-#
 # DHCP Configuration part
 #
 
-include { 'one/service/dhcpd' };
+include {
+  if ( STRATUSLAB_DHCPD_ENABLE ) {
+    'stratuslab/one/service/dhcpd';
+  } else {
+    null;
+  };
+};
+
+#
+# IPv6 Configuration
+#
 include { if ( STRATUSLAB_IPV6_ENABLE ) {
-		'one/service/dhcpd6';
-	} else {
-		null;
-	}
+    'stratuslab/one/service/dhcpd6';
+  } else {
+    null;
+  }
 };
 
 include { if ( STRATUSLAB_IPV6_ENABLE ) {
-		'common/network/ipv6/config';
-	} else {
-		null;
-	};
-
+    'common/network/ipv6/config';
+  } else {
+    null;
+  };
 };

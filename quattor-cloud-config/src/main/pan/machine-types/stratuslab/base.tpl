@@ -1,17 +1,25 @@
 unique template machine-types/stratuslab/base;
 
-variable GLITE_DEPENDENCY ?= false;
+include { 'stratuslab/default/parameters' };
+include { STRATUSLAB_CORE_OS_TEMPLATE };
 
-# StratusLab machine types are based on the so-called nfs machine types
-# but not NFS service is actually configured at this point
-include { 
-  if ( GLITE_DEPENDENCY) { 
-    'machine-types/nfs';
+ #
+# Ganglia for the monitoring of machines and hosts
+#
+include {
+  if (STRATUSLAB_GANGLIA_ENABLE) {
+    'monitoring/ganglia/config' 
   } else {
-    'machine-types/stratuslab/base-without-glite';
-  };
+    null; 
+  }; 
 };
+
+include { 'components/symlink/config' };
+
+"/software/components/symlink/links"=append(
+  nlist( "name", "/.fakelink",
+         "target","/.faketarget",
+         "replace",  nlist("all","yes","link", "yes")));
 
 # Default package repository for StratusLab components
 include { 'repository/config/stratuslab' };
-

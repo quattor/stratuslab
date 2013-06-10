@@ -21,13 +21,4 @@ unique template machine-types/stratuslab/registration;
 
 include { 'machine-types/stratuslab/base' };
 
-include { 'registration/service/daemon' };
-
-#
-# Ganglia for the monitoring of machines and hosts
-#
-include { 'ganglia/config' };
-
-
-include { 'config/os/updates' };
-
+include { 'stratuslab/registration/service/daemon' };

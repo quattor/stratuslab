@@ -11,25 +11,25 @@ function _ipv4tov6 = {
 };
 
 variable _STRATUSLAB_INTERFACE_NAME ?= {
-	if( exists('/system/network/interfaces/br0')) {
-		"br0";
-	} else {
-		boot_nic();
-	};
+  if( exists('/system/network/interfaces/br0')) {
+    "br0";
+  } else {
+    boot_nic();
+  };
 };
 
 variable _STRATUSLAB_IPV4_ADDRESS ?= {
-	DB_IP[escape(FULL_HOSTNAME)];
+  DB_IP[escape(FULL_HOSTNAME)];
 };
 
 variable _STRATUSLAB_IPV6_ADDRESS ?= {
-	_ipv4tov6(_STRATUSLAB_IPV4_ADDRESS);
+  _ipv4tov6(_STRATUSLAB_IPV4_ADDRESS);
 };
 
 variable _STRATUSLAB_HW_ADDRESS = value('/hardware/cards/nic/'+boot_nic()+'/hwaddr');
 
 variable _STRATUSLAB_IPV4_NETMASK ?= {
-	NETWORK_PARAMS['netmask']
+  NETWORK_PARAMS['netmask']
 };
 
 variable _STRATUSLAB_IPV4_GATEWAY ?= {

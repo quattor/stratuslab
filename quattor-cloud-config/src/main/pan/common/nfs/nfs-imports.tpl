@@ -19,6 +19,7 @@
 
 unique template common/nfs/nfs-imports;
 
+include { 'common/nfs/variables' };
 #
 # Import the image repository, VM state area, and oneadmin home.
 # Use autofs to do this to avoid mount problems at machine boot.
@@ -29,29 +30,28 @@ unique template common/nfs/nfs-imports;
 #
 include { 'components/autofs/config' };
 
-variable STRATUSLAB_NFS_MOUNT_POINT = '/stratuslab_mnt';
+prefix '/software/components/autofs/maps/stratuslab';
+'mapname' = '/etc/auto.stratuslab';
+'type' = 'file';
+'options' = '-rw,intr,noatime,hard';
+'mountpoint' = STRATUSLAB_NFS_MOUNT_POINT;
+'enabled' = true;
+'preserve' = false;
 
-variable ONE_NFS_SERVER_VAR ?= ONE_NFS_SERVER;
-variable ONE_NFS_SERVER_HOME ?= ONE_NFS_SERVER;
-
-variable ONE_NFS_SERVER_VARDIR ?= '/var/lib/one';
-variable ONE_NFS_SERVER_HOMEDIR ?= '/home/oneadmin';
-
-
-'/software/components/autofs/maps/stratuslab/mapname' = '/etc/auto.stratuslab';
-'/software/components/autofs/maps/stratuslab/type' = 'file';
-'/software/components/autofs/maps/stratuslab/options' = '-rw,intr,noatime,hard';
-'/software/components/autofs/maps/stratuslab/mountpoint' = STRATUSLAB_NFS_MOUNT_POINT;
-'/software/components/autofs/maps/stratuslab/enabled' = true;
-'/software/components/autofs/maps/stratuslab/preserve' = false;
-
-'/software/components/autofs/maps/stratuslab/entries/onevar' =
-  nlist('location', ONE_NFS_SERVER_VAR + ':' + ONE_NFS_SERVER_VARDIR,
-        'options', '');
+'entries' = {
+if ( STRATUSLAB_NFS_VARDIR_ENABLE ) {
+  SELF['onevar'] = nlist('location', format("%s:%s",STRATUSLAB_NFS_SERVER_VAR,
+                                                    STRATUSLAB_NFS_SERVER_VARDIR),
+                         'options', '');
+  } else {
+  SELF;
+  };
+  SELF[STRATUSLAB_UNIX_USER_ACCOUNT] = nlist('location', format("%s:%s",STRATUSLAB_NFS_SERVER_HOME,
+                                                                        STRATUSLAB_NFS_SERVER_HOMEDIR),
+                                             'options', '');
+  SELF;
+};
   
-'/software/components/autofs/maps/stratuslab/entries/oneadmin' = 
-   nlist('location', ONE_NFS_SERVER_HOME + ':' + ONE_NFS_SERVER_HOMEDIR,
-        'options', '');
 
 # Enable autofs as a service.
 include { 'components/chkconfig/config' };
@@ -65,25 +65,28 @@ include { 'components/accounts/config' };
 # Define symlinks to actual mount point
 include { 'components/symlink/config' };
 
-'/software/components/symlink/links' = if ( FULL_HOSTNAME != ONE_NFS_SERVER_VAR) {
-	append(
-  	nlist('name', '/var/lib/one',
-              'target', STRATUSLAB_NFS_MOUNT_POINT + '/onevar',
-              'exists', false,
-              'replace', nlist('all','yes'))
-	);
-	} else {
-		SELF;
+'/software/components/symlink/links' = 
+if ( FULL_HOSTNAME != STRATUSLAB_NFS_SERVER_VAR) {
+  append(
+    nlist('name',   STRATUSLAB_ONE_VARDIR,
+          'target', STRATUSLAB_NFS_MOUNT_POINT + '/onevar',
+          'exists', false,
+          'replace', nlist('all','yes'))
+  );
+} else {
+  SELF;
 };
 
-'/software/components/symlink/links' =  if ( FULL_HOSTNAME != ONE_NFS_SERVER_HOME) {
-	append(
-  	nlist('name', '/home/oneadmin',
-              'target', STRATUSLAB_NFS_MOUNT_POINT + '/oneadmin',
-              'exists', false,
-              'replace', nlist('all','yes'))
-	); } else {
-		SELF;
+'/software/components/symlink/links' =  
+if ( FULL_HOSTNAME != STRATUSLAB_NFS_SERVER_HOME) {
+  append(
+    nlist('name',   STRATUSLAB_NFS_SERVER_HOMEDIR,
+          'target', STRATUSLAB_NFS_MOUNT_POINT + '/' + STRATUSLAB_UNIX_USER_ACCOUNT,
+          'exists', false,
+          'replace', nlist('all','yes'))
+  ); 
+} else {
+  SELF;
 };
 
 include { 'components/filecopy/config' };
