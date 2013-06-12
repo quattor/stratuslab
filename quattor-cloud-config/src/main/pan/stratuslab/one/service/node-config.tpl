@@ -74,3 +74,10 @@ include { 'components/network/config' };
   SELF;
 };
 
+include {
+  if ( exists(ONE_VLAN_ENABLE) && ONE_VLAN_ENABLE ) {
+    'common/network/vlan/config';
+  } else {
+    null;
+  };
+};

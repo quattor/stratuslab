@@ -90,3 +90,17 @@ variable STRATUSLAB_GANGLIA_ENABLE ?= false;
 # Define which version of spma
 #
 variable STRATUSLAB_SPMA_VERSION ?= 'spma2';
+
+#
+# Automatically enable OpenNebula VLAN depending on network
+# configuration.
+#
+variable ONE_VLAN_ENABLE ?= {
+    enable = false;
+    foreach (network; params; ONE_NETWORK) {
+        if (is_defined(params['vlan']))
+            return(true);
+    };
+    return(false);
+};
+
