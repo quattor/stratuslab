@@ -63,7 +63,7 @@ variable CONTENTS = CONTENTS+"endpoint = "+FULL_HOSTNAME+"\n";
 variable CONTENTS = CONTENTS+"username = "+STRATUSLAB_PDISK_SUPER_USER+"\n";
 variable CONTENTS = CONTENTS+"password = "+STRATUSLAB_PDISK_SUPER_USER_PWD+"\n";
 variable CONTENTS = CONTENTS+"pdisk_endpoint = "+STRATUSLAB_PDISK_HOST+"\n";
-variable CONTENTS = CONTENTS+"markertplace_endpoint = "+STRATUSLAB_MARKETPLACE_PROTOCOL+"://"+STRATUSLAB_MARKETPLACE_HOST+"\n";
+variable CONTENTS = CONTENTS+"marketplace_endpoint = "+STRATUSLAB_MARKETPLACE_PROTOCOL+"://"+STRATUSLAB_MARKETPLACE_HOST+"\n";
 
 '/software/components/filecopy/services/{/home/oneadmin/.stratuslab/stratuslab-user.cfg}' =
   nlist('config',CONTENTS,
