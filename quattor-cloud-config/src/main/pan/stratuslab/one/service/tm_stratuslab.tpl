@@ -50,7 +50,7 @@ variable CONTENTS = CONTENTS+"marketplace_endpoint = http://"+STRATUSLAB_MARKETP
                           STRATUSLAB_PDISK_ROOT_PRIVATE_KEY,
                           STRATUSLAB_PDISK_TYPE,
                           STRATUSLAB_PDISK_NFS_DIRECTORY,
-                          'https://'+STRATUSLAB_MARKETPLACE_HOST,
+                          format('%s://%s', STRATUSLAB_MARKETPLACE_PROTOCOL, STRATUSLAB_MARKETPLACE_HOST),
                           STRATUSLAB_QUARANTINE_PERIOD,
                  ),
         'perms','0644');
