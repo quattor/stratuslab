@@ -56,16 +56,16 @@ variable ONE_NETWORK = nlist(
      'router', '134.158.75.1',
      'netmask', '255.255.255.0',
      'vms',nlist(
-      'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','134.158.75.32','claudia','no'),
-      'onevm-33',nlist('mac-address','0a:0a:86:9e:49:21','fixed-address','134.158.75.33','claudia','no'),
-      'onevm-34',nlist('mac-address','0a:0a:86:9e:49:22','fixed-address','134.158.75.34','claudia','no'),
-      'onevm-35',nlist('mac-address','0a:0a:86:9e:49:23','fixed-address','134.158.75.35','claudia','no'),
-      'onevm-36',nlist('mac-address','0a:0a:86:9e:49:24','fixed-address','134.158.75.36','claudia','dyn'),
-      'onevm-37',nlist('mac-address','0a:0a:86:9e:49:25','fixed-address','134.158.75.37','claudia','dyn'),
-      'onevm-38',nlist('mac-address','0a:0a:86:9e:49:26','fixed-address','134.158.75.38','claudia','dyn'),
-      'onevm-39',nlist('mac-address','0a:0a:86:9e:49:27','fixed-address','134.158.75.39','claudia','dyn'),
-#     'onevm-40',nlist('mac-address','0a:0a:86:9e:49:28','fixed-address','134.158.75.40','claudia','sta'),
-#     'onevm-41',nlist('mac-address','0a:0a:86:9e:49:29','fixed-address','134.158.75.41','claudia','sta')
+      'onevm-32',nlist('mac-address','0a:0a:86:9e:49:20','fixed-address','134.158.75.32'),
+      'onevm-33',nlist('mac-address','0a:0a:86:9e:49:21','fixed-address','134.158.75.33'),
+      'onevm-34',nlist('mac-address','0a:0a:86:9e:49:22','fixed-address','134.158.75.34'),
+      'onevm-35',nlist('mac-address','0a:0a:86:9e:49:23','fixed-address','134.158.75.35'),
+      'onevm-36',nlist('mac-address','0a:0a:86:9e:49:24','fixed-address','134.158.75.36'),
+      'onevm-37',nlist('mac-address','0a:0a:86:9e:49:25','fixed-address','134.158.75.37'),
+      'onevm-38',nlist('mac-address','0a:0a:86:9e:49:26','fixed-address','134.158.75.38'),
+      'onevm-39',nlist('mac-address','0a:0a:86:9e:49:27','fixed-address','134.158.75.39'),
+#     'onevm-40',nlist('mac-address','0a:0a:86:9e:49:28','fixed-address','134.158.75.40'),
+#     'onevm-41',nlist('mac-address','0a:0a:86:9e:49:29','fixed-address','134.158.75.41')
       ),
     ),
 'local',nlist(
@@ -74,16 +74,16 @@ variable ONE_NETWORK = nlist(
     'router',  '172.17.16.1',
     'netmask', '255.255.255.0',
     'vms',nlist(
-      'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32','claudia','no'),
-            'onevmp-33',nlist('mac-address','0a:0b:86:9e:49:21','fixed-address','172.17.16.33','claudia','no'),
-            'onevmp-34',nlist('mac-address','0a:0b:86:9e:49:22','fixed-address','172.17.16.34','claudia','no'),
-            'onevmp-35',nlist('mac-address','0a:0b:86:9e:49:23','fixed-address','172.17.16.35','claudia','no'),
-            'onevmp-36',nlist('mac-address','0a:0b:86:9e:49:24','fixed-address','172.17.16.36','claudia','no'),
-            'onevmp-37',nlist('mac-address','0a:0b:86:9e:49:25','fixed-address','172.17.16.37','claudia','no'),
-            'onevmp-38',nlist('mac-address','0a:0b:86:9e:49:26','fixed-address','172.17.16.38','claudia','no'),
-            'onevmp-39',nlist('mac-address','0a:0b:86:9e:49:27','fixed-address','172.17.16.39','claudia','no'),
-#           'onevmp-40',nlist('mac-address','0a:0b:86:9e:49:28','fixed-address','172.17.16.40','claudia','dyn'),
-#           'onevmp-41',nlist('mac-address','0a:0b:86:9e:49:29','fixed-address','172.17.16.41','claudia','dyn')
+      'onevmp-32',nlist('mac-address','0a:0b:86:9e:49:20','fixed-address','172.17.16.32'),
+            'onevmp-33',nlist('mac-address','0a:0b:86:9e:49:21','fixed-address','172.17.16.33'),
+            'onevmp-34',nlist('mac-address','0a:0b:86:9e:49:22','fixed-address','172.17.16.34'),
+            'onevmp-35',nlist('mac-address','0a:0b:86:9e:49:23','fixed-address','172.17.16.35'),
+            'onevmp-36',nlist('mac-address','0a:0b:86:9e:49:24','fixed-address','172.17.16.36'),
+            'onevmp-37',nlist('mac-address','0a:0b:86:9e:49:25','fixed-address','172.17.16.37'),
+            'onevmp-38',nlist('mac-address','0a:0b:86:9e:49:26','fixed-address','172.17.16.38'),
+            'onevmp-39',nlist('mac-address','0a:0b:86:9e:49:27','fixed-address','172.17.16.39'),
+#           'onevmp-40',nlist('mac-address','0a:0b:86:9e:49:28','fixed-address','172.17.16.40'),
+#           'onevmp-41',nlist('mac-address','0a:0b:86:9e:49:29','fixed-address','172.17.16.41')
       ),
     ),
 );

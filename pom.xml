@@ -19,10 +19,7 @@ StratusLab cloud.
   <packaging>pom</packaging>
 
   <modules>
-    <module>ncm-claudia</module>
     <module>ncm-one_proxy</module>
-    <module>ncm-ganglia</module>
-    <module>ncm-libvirtd</module>
     <module>ncm-oned</module>
     <module>quattor-cloud-config</module>
   </modules>

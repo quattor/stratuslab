@@ -19,6 +19,7 @@
 
 unique template stratuslab/one/service/node-config;
 
+include { 'stratuslab/default/parameters' };
 
 # Configure libvirtd.
 include {'components/libvirtd/config' };
@@ -30,6 +31,20 @@ prefix '/software/components/libvirtd';
 'socket/unix_sock_rw_perms' = '0770';
 'authn/auth_unix_ro'        = 'none';
 'authn/auth_unix_rw'        = 'none';
+
+variable QEMU_CONF = 'user = "' + STRATUSLAB_UNIX_USER_ACCOUNT + '"\n';
+variable QEMU_CONF = QEMU_CONF + 'group = "' + STRATUSLAB_UNIX_GROUP + '"\n';
+variable QEMU_CONF = QEMU_CONF + 'dynamic_ownership = 1\n';
+
+'/software/components/filecopy/services' = npush(
+	escape('/etc/libvirt/qemu.conf'), nlist(
+        'config', QEMU_CONF,
+		'owner', 'root',
+		'group', 'root',
+		'perms', '0644',
+		'restart', 'service libvirtd restart',
+    )
+);
 
 include { 'components/chkconfig/config' };
 prefix '/software/components/chkconfig/service';
