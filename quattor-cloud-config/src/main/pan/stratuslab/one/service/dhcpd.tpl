@@ -159,7 +159,7 @@ EOF
               "owner","root",
               "group","root",
               "perms","0644",
-              "restart","/usr/bin/killall -HUP dhcpd")
+              "restart","service dhcpd restart")
     );
 
 
