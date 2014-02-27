@@ -68,3 +68,11 @@ include { if ( STRATUSLAB_IPV6_ENABLE ) {
     null;
   };
 };
+
+#
+# PDisk backend configuration.
+#
+# The PDisk backend configuration is required on the frontend to create
+# new appliances.
+include { 'stratuslab/pdisk/service/pdisk-backend' };
+
