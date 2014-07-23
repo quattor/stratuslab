@@ -50,7 +50,7 @@ sub format_pswd_file_contents {
 	my $groups = $entry->{'groups'};
 	my $groups_value = join(',', @$groups);
 
-	$contents .= "$user=$pswd,$groups_value\n";
+	$contents .= unescape($user)."=$pswd,$groups_value\n";
     }
 
     return $contents;
