@@ -9,7 +9,6 @@ use strict;
 use warnings;
 use NCM::Component;
 use EDG::WP4::CCM::Property;
-use NCM::Check;
 use FileHandle;
 use File::Basename;
 
