@@ -1,3 +1,8 @@
+# This repository is non-longer maintained and is preserved purely for historical reference.
+The last StratusLab release was 14.06.0 in July 2014 and usage in the Quattor community has subsequently ceased.
+
+---
+
 StratusLab Quattor Configuration
 ================================
 
